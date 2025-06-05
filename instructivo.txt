@@ -1,0 +1,16 @@
+_________________________________________________A TENER EN CUENTA _____________________________________________
+
+1 Hacer uso de camelCase en las variables, tanto en el proyecto como en mysql
+2 Dejar comentarios en donde se hayan que hacer cambios,donde se consideren necesarios o para explicar el porqué de algo
+_______________________________________ !!!!!!!!!!!!!!!!IMPORTANTE¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡_________________________
+3 Hacer comentarios detallados a la hora de los commits para ahorrar tiempo al solucionar errores de versiones 
+4 No hacer merge ni rebase sin informar
+5 HACER GIT PULL CADA VEZ QUE VAYAN A ESCRIBIR CÓDIGO EN CUALQUIER RAMA, SI NO LO HACEN Y LA CAGAN, SE LLEVAN UNA PERRA GOLPIZA,AMÉN
+
+
+
+
+
+
+*  NO SER PROCRASTINADOR 
+* Tomen yogurt
