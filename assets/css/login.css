@@ -1,0 +1,249 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f2e8 0%, #ede7d6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Círculos decorativos de café */
+        .coffee-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            background: #8B4513;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            background: #A0522D;
+            top: 20%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .circle-3 {
+            width: 100px;
+            height: 100px;
+            background: #654321;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .circle-4 {
+            width: 60px;
+            height: 60px;
+            background: #D2691E;
+            bottom: 30%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .circle-5 {
+            width: 90px;
+            height: 90px;
+            background: #8B4513;
+            top: 50%;
+            left: 5%;
+            animation-delay: 3s;
+        }
+
+        .circle-6 {
+            width: 70px;
+            height: 70px;
+            background: #A0522D;
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Contenedor principal del login */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.1);
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        /* Header con ícono de café */
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .coffee-icon {
+            font-size: 48px;
+            color: #8B4513;
+            margin-bottom: 10px;
+            animation: steam 2s ease-in-out infinite;
+        }
+
+        @keyframes steam {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .login-title {
+            color: #654321;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .login-subtitle {
+            color: #A0522D;
+            font-size: 14px;
+        }
+
+        /* Formulario */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #A0522D;
+            font-size: 18px;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #D2691E;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e8e3d3;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #faf8f3;
+            transition: all 0.3s ease;
+            color: #654321;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #D2691E;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #A0522D;
+            opacity: 0.7;
+        }
+
+        /* Botón de login */
+        .login-btn {
+            background: linear-gradient(135deg, #D2691E 0%, #A0522D 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(210, 105, 30, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Enlaces adicionales */
+        .login-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password {
+            color: #A0522D;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #D2691E;
+        }
+
+        /* Responsivo */
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+            
+            .coffee-icon {
+                font-size: 40px;
+            }
+            
+            .login-title {
+                font-size: 24px;
+            }
+        }
+
+        /* Efectos adicionales */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #D2691E, #A0522D, #8B4513);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.1;
+        }
