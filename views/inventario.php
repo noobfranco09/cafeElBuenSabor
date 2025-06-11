@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
-    <title>Coffee Dashboard</title>
+    <title>Inventario - CoffeeShop Pro</title>
 </head>
 <body>
     <!-- Círculos decorativos -->
@@ -43,7 +43,6 @@
                     <div class="company-subtitle">Management System</div>
                 </div>
             </a>
-            <!-- Botón de cerrar sidebar en móvil -->
             <button class="close-sidebar-btn" onclick="closeSidebar()">
                 <span></span>
                 <span></span>
@@ -55,13 +54,13 @@
                 <h3 class="sidebar-title">Principal</h3>
                 <ul class="sidebar-menu">
                     <li class="sidebar-item">
-                        <a href="/views/dashboard.php" class="sidebar-link active">
+                        <a href="/views/dashboard.php" class="sidebar-link">
                             <span class="sidebar-icon">📊</span>
                             Dashboard
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/views/inventario.php" class="sidebar-link">
+                        <a href="/views/inventario.php" class="sidebar-link active">
                             <span class="sidebar-icon">📦</span>
                             Inventario
                         </a>
@@ -73,7 +72,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/views/ventas.php" class="sidebar-link">
+                        <a href="#" class="sidebar-link">
                             <span class="sidebar-icon">💰</span>
                             Ventas
                         </a>
@@ -110,74 +109,67 @@
     <!-- Layout principal -->
     <div class="dashboard-layout">
         <main class="main-content">
-            <!-- Tarjetas de estadísticas -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon">👥</div>
-                    </div>
-                    <div class="stat-value">2,345</div>
-                    <div class="stat-label">Usuarios Activos</div>
-                    <div class="stat-change positive">
-                        ↗️ +12% vs mes anterior
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon">💰</div>
-                    </div>
-                    <div class="stat-value">$45,678</div>
-                    <div class="stat-label">Ingresos Mensuales</div>
-                    <div class="stat-change positive">
-                        ↗️ +8% vs mes anterior
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon">📦</div>
-                    </div>
-                    <div class="stat-value">1,234</div>
-                    <div class="stat-label">Pedidos</div>
-                    <div class="stat-change negative">
-                        ↘️ -3% vs mes anterior
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <div class="stat-icon">⭐</div>
-                    </div>
-                    <div class="stat-value">4.8</div>
-                    <div class="stat-label">Satisfacción</div>
-                    <div class="stat-change positive">
-                        ↗️ +0.2 vs mes anterior
-                    </div>
-                </div>
+            <!-- Header de Inventario -->
+            <div class="inventory-header">
+                <h2 class="content-title">Inventario de Productos</h2>
+                <button class="action-button" id="addProductBtn">
+                    ➕ Agregar Producto
+                </button>
             </div>
 
-            <!-- Área de contenido principal -->
-            <div class="content-area">
-                <div class="content-header">
-                    <h2 class="content-title">Área de Contenido Principal</h2>
-                    <button class="action-button">
-                        ➕ Nueva Acción
-                    </button>
-                </div>
-                
-                <div class="content-placeholder">
-                    <div class="placeholder-icon">☕</div>
-                    <div class="placeholder-text">Aquí va tu contenido personalizado</div>
-                    <div class="placeholder-subtext">
-                        Este espacio está listo para que agregues tus secciones específicas
+            <!-- Grid de Productos -->
+            <div class="products-grid">
+                <!-- Ejemplo de Card de Producto -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/assets/images/products/coffee-beans.jpg" alt="Café Arábica">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Café Arábica Premium</h3>
+                        <div class="product-details">
+                            <span class="product-category">Granos de Café</span>
+                            <span class="product-price">$25.99</span>
+                        </div>
+                        <div class="product-stock">
+                            <span class="stock-label">Stock:</span>
+                            <span class="stock-value low-stock">5 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-product-btn">
+                                ✏️ Editar Producto
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Otro ejemplo de Card de Producto -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="/assets/images/products/coffee-maker.jpg" alt="Cafetera Express">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cafetera Express Pro</h3>
+                        <div class="product-details">
+                            <span class="product-category">Equipamiento</span>
+                            <span class="product-price">$299.99</span>
+                        </div>
+                        <div class="product-stock">
+                            <span class="stock-label">Stock:</span>
+                            <span class="stock-value">15 unidades</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="edit-product-btn">
+                                ✏️ Editar Producto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Puedes agregar más cards de productos aquí -->
             </div>
         </main>
     </div>
 
     <script src="/assets/js/dashboard.js"></script>
-
 </body>
-</html>
+</html> 
