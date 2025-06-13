@@ -23,11 +23,12 @@
             <p class="login-subtitle">Inicia sesión para continuar</p>
         </div>
 
-        <form class="login-form" method="POST" action="">
+        <form class="login-form" method="POST" action="../controller/admin/login.php">
             <div class="form-group">
                 <input 
                     type="email" 
-                    class="form-input" 
+                    class="form-input"
+                    name="correo"
                     placeholder="Correo electrónico"
                     required
                     id="email"
@@ -37,7 +38,8 @@
             <div class="form-group">
                 <input 
                     type="password" 
-                    class="form-input" 
+                    class="form-input"
+                    name="contraseña"
                     placeholder="Contraseña"
                     required
                     id="password"
