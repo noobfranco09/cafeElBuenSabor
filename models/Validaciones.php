@@ -15,8 +15,24 @@ class Validaciones{
         $errores = [];
         if(empty(trim($this->datos["correo"]??""))||
         empty(trim($this->datos["contraseña"]??""))){
-            return $errores["datosVacio"]="Enviaste datos vacios";
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
         }
+
+
+        $correo = $this->datos["correo"];
+        $contraseña=$this->datos["contraseña"];
+
+
+        if(!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$correo) || !filter_var($correo,FILTER_VALIDATE_EMAIL)){
+             $errores['errorCorreo']= 'El correo ingresado es invalido';
+
+             return $errores;
+        }
+
+
+        
+        
     }
 
 

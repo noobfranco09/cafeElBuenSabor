@@ -1,9 +1,20 @@
+<?php
+session_start();
+
+$errores = $_SESSION["errores"]??[];
+$old = $_SESSION["old"]??[];
+
+unset($_SESSION["old"],$_SESSION["errores"]);
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
     <title>Coffee Login</title>
 </head>
 <body>
@@ -25,21 +36,34 @@
 
         <form class="login-form" method="POST" action="../controller/admin/login.php">
             <div class="form-group">
+
                 <input 
                     type="email" 
                     class="form-input"
                     name="correo"
+                    <?php if(isset($old["correo"]) && !empty($old["correo"])):  ?>
+                    value="<?php echo $old["correo"]; ?>"
+                    <?php endif;  ?>
                     placeholder="Correo electrónico"
                     required
                     id="email"
                 >
+               
+                <?php if(isset($errores["errorCorreo"]) && !empty($errores["errorCorreo"])):  ?>
+                    <p class="text-start text-danger"><?php echo $errores["errorCorreo"]; ?></p>
+                    <?php endif;  ?>
             </div>
+             <!-- Aca se puede ver el error del correo -->
+            
 
             <div class="form-group">
                 <input 
                     type="password" 
                     class="form-input"
                     name="contraseña"
+                    <?php if(isset($old["contraseña"]) && !empty($old["contraseña"])):  ?>
+                    value="<?php echo $old["contraseña"]; ?>"
+                    <?php endif;  ?>
                     placeholder="Contraseña"
                     required
                     id="password"
