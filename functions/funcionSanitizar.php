@@ -1,9 +1,9 @@
 <?php
 
 
-     function  sanitizarFormulario($[])
+     function  sanitizarFormulario($arregloDeEntrada[])
 {
-    $arreglo=[];
+    $arregloDeSalida=[];
     if(trim(isset($nombre)) && trim(isset($cedula)) && trim(isset($cargo)) && trim(isset($area)) 
         && trim(isset($salario)) && trim(isset($fechaIngreso)) && trim(isset($correo)) && trim(isset($telefono)) )
     {
