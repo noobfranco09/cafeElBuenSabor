@@ -6,7 +6,7 @@ class MySQL
     private $ipServidor = "localhost"; // inicializamos la ip del servidor de nuestro motor de base de datos
     private $usuarioBase = "root"; // inicializamos el usuario base que tenemos registrado en nuestro motor de base de datos
     private $contrasena = ""; // inicializamos la contraseña que tengamos en nuestro motor de base de datos
-    private $nombreBaseDatos = ""; // inicializamos el nombre de la base de datos
+    private $nombreBaseDatos = "cafeelbuensabor"; // inicializamos el nombre de la base de datos
 
     private $conexion; // inicializamos la variable para inicializar la conexion
 
@@ -14,16 +14,14 @@ class MySQL
     public function conectar()
     {
         // le damos el valor a la variable que inicializamos para poder hacer la conexion con la base de datos
-        $this->conexion = mysqli_connect($this->ipServidor,$this->usuarioBase,$this->contrasena,$this->nombreBaseDatos);
+        $dns = "mysql:host=$this->ipServidor;dbname=$this->nombreBaseDatos;charset=utf8mb4";
 
-        // verificamos que la conexion funcione sin ningun error
-        if(!$this->conexion)
-        {
-            die("Error al conectar con la base de datos: ".mysqli_connect_error());
+        try{
+            $this->conexion = new PDO($dns,$this->usuarioBase,$this->contrasena);
+            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }catch(PDOException $e){
+            die("Error de conexión: " . $e->getMessage());
         }
-
-        // le aplicamos la configuracion utf8 para evitar los signos raros
-        mysqli_set_charset($this->conexion,"utf8");
 
     }
 
@@ -34,30 +32,8 @@ class MySQL
         if($this->conexion)
         {
             // cerramos la conexion
-            mysqli_close($this->conexion);
+            $this->conexion = null;
         }
-    }
-
-
-    // creamos la funcion para efectuar la consulta sql
-    public function ejecutarConsulta($consulta)
-    {
-        // verificamos que la consulta sea utf8 para poder ejecutar la consulta eliminando asi los caracteres raros
-        mysqli_query($this->conexion,"SET NAMES 'utf8'");
-        mysqli_query($this->conexion,"SET CHARACTER SET 'utf8'");
-
-        // creamos la variable para almacenar la consulta y mandarla a la base de datos
-        $resultado = mysqli_query($this->conexion,$consulta);
-
-        // verificamos que no haya ningun error
-        if(!$resultado)
-        {
-            echo "Error en la consulta: ".mysqli_error($this->conexion);
-        }
-
-        // retornamos el valor del resultado
-        return $resultado;
-
     }
     
     public function obtenerConexion()

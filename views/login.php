@@ -52,6 +52,9 @@ unset($_SESSION["old"],$_SESSION["errores"]);
                 <?php if(isset($errores["errorCorreo"]) && !empty($errores["errorCorreo"])):  ?>
                     <p class="text-start text-danger"><?php echo $errores["errorCorreo"]; ?></p>
                     <?php endif;  ?>
+                    <?php if(isset($errores["correoNoExiste"]) && !empty($errores["correoNoExiste"])):  ?>
+                    <p class="text-start text-danger"><?php echo $errores["correoNoExiste"]; ?></p>
+                    <?php endif;  ?>
             </div>
              <!-- Aca se puede ver el error del correo -->
             
@@ -62,12 +65,15 @@ unset($_SESSION["old"],$_SESSION["errores"]);
                     class="form-input"
                     name="contraseña"
                     <?php if(isset($old["contraseña"]) && !empty($old["contraseña"])):  ?>
-                    value="<?php echo $old["contraseña"]; ?>"
+                    value="<?php echo htmlspecialchars($old["contraseña"]); ?>"
                     <?php endif;  ?>
                     placeholder="Contraseña"
                     required
                     id="password"
                 >
+                <?php if(isset($errores["contraseñaIncorrecta"]) && !empty($errores["contraseñaIncorrecta"])):  ?>
+                    <p class="text-start text-danger"><?php echo $errores["contraseñaIncorrecta"]; ?></p>
+                    <?php endif;  ?>
                 <button type="button" class="password-toggle" onclick="togglePassword()">
                     🙈
                 </button>

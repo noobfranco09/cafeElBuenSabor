@@ -15,6 +15,8 @@ if(!empty($errores)){
     exit();
 }
 
+    header("location: ../../views/index.php");
+    exit();
 
 
 }

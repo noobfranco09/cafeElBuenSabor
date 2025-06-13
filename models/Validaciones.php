@@ -12,6 +12,11 @@ class Validaciones{
 
 
     public function validarDatos(){
+        include 'mySql.php';
+
+        $mysql = new MySQL();
+
+        
         $errores = [];
         if(empty(trim($this->datos["correo"]??""))||
         empty(trim($this->datos["contraseña"]??""))){
@@ -30,6 +35,34 @@ class Validaciones{
              return $errores;
         }
 
+        $mysql->conectar();
+
+
+
+        $consulta = "SELECT * FROM  usuario WHERE correo = :correo";
+
+        $stmt = $mysql->obtenerConexion()->prepare($consulta);
+        $stmt->bindParam(':correo',$correo,PDO::PARAM_STR);
+        $stmt->execute();
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $cantidadFilas = $stmt->rowCount();
+
+
+        if($cantidadFilas==0){
+            $errores["correoNoExiste"]="Este correo no existe";
+            return $errores;
+        }
+
+        if($resultado["contrseña"]!=$contraseña){
+            $errores["contraseñaIncorrecta"]="La contraseña es incorrecta";
+            return $errores;
+        }
+        //Para verfiicar roles pero despues
+        // if($resultado["idRoll"]!=1){
+
+        //     $errores["noAdmin"]= "";
+        // }
 
         
         
