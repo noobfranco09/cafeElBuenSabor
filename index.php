@@ -19,12 +19,6 @@
     <header>
         <nav>
             <div class="logo">El Buen Sabor</div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#menu">Menú</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
             <a href="#" class="cart">
                 🛒 Carrito
                 <span class="cart-count" id="cartCount">0</span>
