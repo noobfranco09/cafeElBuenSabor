@@ -996,3 +996,96 @@
                 min-width: 90px;
             }
         }
+
+        /* Estilos para el grid de gráficos */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .chart-container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.25rem;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        .chart-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chart-period {
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #4a5568;
+            background-color: #f8fafc;
+            cursor: pointer;
+        }
+
+        .chart-period:hover {
+            border-color: #cbd5e0;
+        }
+
+        .chart-body {
+            flex: 1;
+            position: relative;
+            min-height: 300px;
+        }
+
+        /* Responsive design para los gráficos */
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .chart-container {
+                height: 300px;
+            }
+            
+            .chart-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .chart-actions {
+                width: 100%;
+            }
+            
+            .chart-period {
+                width: 100%;
+            }
+        }

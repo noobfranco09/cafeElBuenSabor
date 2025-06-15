@@ -160,23 +160,85 @@
             <!-- Área de contenido principal -->
             <div class="content-area">
                 <div class="content-header">
-                    <h2 class="content-title">Área de Contenido Principal</h2>
-                    <button class="action-button">
-                        ➕ Nueva Acción
-                    </button>
+                    <h2 class="content-title">Análisis de Negocio</h2>
                 </div>
                 
-                <div class="content-placeholder">
-                    <div class="placeholder-icon">☕</div>
-                    <div class="placeholder-text">Aquí va tu contenido personalizado</div>
-                    <div class="placeholder-subtext">
-                        Este espacio está listo para que agregues tus secciones específicas
+                <!-- Grid de gráficos -->
+                <div class="charts-grid">
+                    <!-- Gráfico de Recaudo Mensual -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Recaudo Mensual</h3>
+                            <div class="chart-actions">
+                                <select class="chart-period">
+                                    <option value="6m">Últimos 6 meses</option>
+                                    <option value="1y">Último año</option>
+                                    <option value="2y">Últimos 2 años</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-body" id="monthlyRevenueChart">
+                            <!-- Aquí irá el gráfico de recaudo mensual -->
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Productos Más Vendidos -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Productos Más Vendidos</h3>
+                            <div class="chart-actions">
+                                <select class="chart-period">
+                                    <option value="week">Esta semana</option>
+                                    <option value="month">Este mes</option>
+                                    <option value="year">Este año</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-body" id="topProductsChart">
+                            <!-- Aquí irá el gráfico de productos más vendidos -->
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Ingresos por Empleado -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Ingresos por Empleado</h3>
+                            <div class="chart-actions">
+                                <select class="chart-period">
+                                    <option value="today">Hoy</option>
+                                    <option value="week">Esta semana</option>
+                                    <option value="month">Este mes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-body" id="employeeRevenueChart">
+                            <!-- Aquí irá el gráfico de ingresos por empleado -->
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Mesas Atendidas -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3 class="chart-title">Mesas Atendidas por Mesero</h3>
+                            <div class="chart-actions">
+                                <select class="chart-period">
+                                    <option value="today">Hoy</option>
+                                    <option value="week">Esta semana</option>
+                                    <option value="month">Este mes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-body" id="tablesServedChart">
+                            <!-- Aquí irá el gráfico de mesas atendidas -->
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Agregar Chart.js para las visualizaciones -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/assets/js/dashboard.js"></script>
 
 </body>
