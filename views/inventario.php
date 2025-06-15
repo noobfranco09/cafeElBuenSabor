@@ -121,6 +121,7 @@
             <div class="products-grid">
                 <!-- Ejemplo de Card de Producto -->
                 <div class="product-card">
+                    <div class="product-stock-badge stock-low">Stock bajo</div>
                     <div class="product-image">
                         <img src="/assets/images/products/coffee-beans.jpg" alt="Café Arábica">
                     </div>
@@ -144,6 +145,7 @@
 
                 <!-- Otro ejemplo de Card de Producto -->
                 <div class="product-card">
+                    <div class="product-stock-badge stock-ok">En stock</div>
                     <div class="product-image">
                         <img src="/assets/images/products/coffee-maker.jpg" alt="Cafetera Express">
                     </div>
