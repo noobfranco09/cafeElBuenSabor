@@ -26,6 +26,26 @@
         </nav>
     </header>
 
+    <!-- Barra de categorías móvil -->
+    <div class="mobile-categories-bar" id="mobileCategoriesBar">
+        <button class="category-btn active" data-category="todos">
+            <span class="category-icon">🍽️</span>
+            <span class="category-name">Todos</span>
+        </button>
+        <button class="category-btn" data-category="cafes">
+            <span class="category-icon">☕</span>
+            <span class="category-name">Cafés</span>
+        </button>
+        <button class="category-btn" data-category="bebidas">
+            <span class="category-icon">🥤</span>
+            <span class="category-name">Bebidas</span>
+        </button>
+        <button class="category-btn" data-category="postres">
+            <span class="category-icon">🧁</span>
+            <span class="category-name">Postres</span>
+        </button>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-content">
@@ -36,7 +56,7 @@
     </section>
 
     <!-- Categories -->
-    <section class="categories">
+    <section class="categories desktop-only">
         <h2>Nuestras Especialidades</h2>
         <div class="category-grid">
             <div class="category-card" onclick="filterProducts('todos')">
@@ -64,7 +84,7 @@
 
     <!-- Products -->
     <section class="products" id="menu">
-        <h2>Nuestro Menú Premium</h2>
+        <h2 class="desktop-only">Nuestro Menú Premium</h2>
         <div class="products-grid" id="productsGrid">
             <div class="product-card" data-category="cafes">
                 <div class="product-image">☕</div>
