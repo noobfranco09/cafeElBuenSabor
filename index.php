@@ -38,7 +38,8 @@
     <!-- Categories -->
     <section class="categories">
         <h2>Nuestras Especialidades</h2>
-        <div class="category-grid">
+        <a href="#menu">
+            <div class="category-grid">
             <div class="category-card" onclick="filterProducts('todos')">
                 <span class="category-icon">🍽️</span>
                 <h3>Todos los Productos</h3>
@@ -60,6 +61,7 @@
                 <p>Deliciosos acompañamientos que complementan perfectamente tu bebida favorita</p>
             </div>
         </div>
+        </a>
     </section>
 
     <!-- Products -->

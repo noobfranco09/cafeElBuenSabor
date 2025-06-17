@@ -12,7 +12,7 @@ class Validaciones{
 
 
     public function validarDatos(){
-        include 'mySql.php';
+        require_once '../../models/mySql.php';
 
         $mysql = new MySQL();
 
@@ -54,16 +54,15 @@ class Validaciones{
             return $errores;
         }
 
-        if($resultado["contrseña"]!=$contraseña){
+       
+        if($resultado["contraseña"]!=$contraseña){
             $errores["contraseñaIncorrecta"]="La contraseña es incorrecta";
             return $errores;
+
         }
-        //Para verfiicar roles pero despues
-        // if($resultado["idRoll"]!=1){
-
-        //     $errores["noAdmin"]= "";
-        // }
-
+        
+        $mysql->desconectar();
+        return $errores;
         
         
     }

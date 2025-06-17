@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION["id"])){
+    header("Location: ./login.php");
+    exit();
+    }
+
+    $nombre = $_SESSION["nombre"]??"Desconocido";
+    $rol = $_SESSION["rol"]??"Desconocido";
+    $icono = str_split($nombre)??"?";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,10 +37,10 @@
             </button>
             <div class="user-profile">
                 <div class="profile-info">
-                    <div class="profile-name">Juan Pérez</div>
-                    <div class="profile-role">Administrador</div>
+                    <div class="profile-name"><?php echo $nombre?></div>
+                    <div class="profile-role"><?php echo $rol ?></div>
                 </div>
-                <div class="profile-avatar">JP</div>
+                <div class="profile-avatar"><?php echo $icono[0]  ?></div>
             </div>
         </div>
     </header>
@@ -97,7 +109,8 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        
+                        <a href="../controller/admin/logout.php" class="sidebar-link">
                             <span class="sidebar-icon">🚪</span>
                             Cerrar Sesión
                         </a>
