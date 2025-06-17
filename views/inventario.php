@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/boostrap/bootstrap.min.css">
     <title>Inventario - CoffeeShop Pro</title>
 </head>
+
 <body>
     <!-- Círculos decorativos -->
     <div class="coffee-circle circle-1"></div>
@@ -112,7 +115,7 @@
             <!-- Header de Inventario -->
             <div class="inventory-header">
                 <h2 class="content-title">Inventario de Productos</h2>
-                <button class="action-button" id="addProductBtn">
+                <button class="action-button" data-bs-toggle="modal" data-bs-target="#AgregarModal">
                     ➕ Agregar Producto
                 </button>
             </div>
@@ -172,6 +175,37 @@
         </main>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="AgregarModal" tabindex="-1" aria-labelledby="AgregarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="AgregarModalLabel">Agregar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label"></label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Agregar</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/assets/js/dashboard.js"></script>
+    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+
 </body>
-</html> 
+
+</html>
