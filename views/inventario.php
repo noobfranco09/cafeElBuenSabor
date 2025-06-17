@@ -175,7 +175,7 @@
         </main>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Agregar -->
     <div class="modal fade" id="AgregarModal" tabindex="-1" aria-labelledby="AgregarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -184,19 +184,40 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
 
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label"></label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <form class="row g-3">
+                        <div class="col-12">
+                            <label for="nombreProducto" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" required>
                         </div>
-
+                        <div class="col-md-6">
+                            <label for="precioProducto" class="form-label">Precio</label>
+                            <input type="text" class="form-control" id="precioProducto" name="precioProducto" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="stockProducto" class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="stockProducto" name="stockProducto" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="categoriaProducto" class="form-label">Categoria</label>
+                            <input type="text" class="form-control" id="categoriaProducto" name="categoriaProducto" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="descripcionProducto" class="form-label">Descripcion</label>
+                            <input type="text" class="form-control" id="descripcionProducto" name="descripcionProducto" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="imagenProducto" class="form-label">Subir Imagen</label>
+                            <input type="file" class="form-control" name="imagenProducto" id="imagenProducto" required>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center">
+                            <img src="../assets/img/acidos.jpg" alt="" height="100px;" width="100px;">
+                        </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="button" class="btn btn-primary">Agregar</button>
                         </div>
-
                     </form>
                 </div>
             </div>
