@@ -1,7 +1,7 @@
 <?php
 
 
-     function  sanitizarFormulario($arregloDeEntrada[])
+     function  sanitizarFormulario(array $datos)
 {
     $arregloDeSalida=[];
     if(trim(isset($nombre)) && trim(isset($cedula)) && trim(isset($cargo)) && trim(isset($area)) 
