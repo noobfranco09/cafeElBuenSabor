@@ -38,10 +38,10 @@ if (!isset($_SESSION["id"])){
             <div class="user-profile">
                 <div class="profile-dropdown" onclick="toggleProfileMenu(event)">
                     <div class="profile-info">
-                        <div class="profile-name">Juan Pérez</div>
-                        <div class="profile-role">Administrador</div>
+                        <div class="profile-name"><?php echo $nombre ?></div>
+                        <div class="profile-role"><?php echo $rol ?></div>
                     </div>
-                    <div class="profile-avatar">JP</div>
+                    <div class="profile-avatar"><?php echo $icono[0] ?></div>
                     <div class="dropdown-arrow">▼</div>
                 </div>
                 <div class="profile-menu" id="profileMenu">
