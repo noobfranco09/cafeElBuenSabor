@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION["id"])){
+    header("Location: ./login.php");
+    exit();
+    }
+
+    $nombre = $_SESSION["nombre"]??"Desconocido";
+    $rol = $_SESSION["rol"]??"Desconocido";
+    $icono = str_split($nombre)??"?";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
