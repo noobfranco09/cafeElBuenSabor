@@ -35,6 +35,22 @@
         <div class="cart-items" id="cartItems">
             <!-- Los items del carrito se agregarán dinámicamente aquí -->
         </div>
+        <div class="cart-notes-section">
+            <h4>📝 Notas del Pedido</h4>
+            <div class="notes-container">
+                <textarea 
+                    id="orderNotes" 
+                    placeholder="Agrega notas especiales para tu pedido (ej: sin azúcar, extra caliente, sin hielo, etc.)"
+                    rows="3"
+                ></textarea>
+                <div class="notes-examples">
+                    <span class="note-example">☕ Sin azúcar</span>
+                    <span class="note-example">🔥 Extra caliente</span>
+                    <span class="note-example">🧊 Sin hielo</span>
+                    <span class="note-example">🥛 Leche de almendras</span>
+                </div>
+            </div>
+        </div>
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>

@@ -626,6 +626,75 @@
             color: #fff;
         }
 
+        /* Sección de notas del carrito */
+        .cart-notes-section {
+            padding: 20px;
+            border-top: 1px solid rgba(212, 145, 61, 0.3);
+            background: rgba(212, 145, 61, 0.05);
+        }
+
+        .cart-notes-section h4 {
+            color: #d4913d;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-container {
+            position: relative;
+        }
+
+        .notes-container textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(212, 145, 61, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        .notes-container textarea:focus {
+            outline: none;
+            border-color: #d4913d;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(212, 145, 61, 0.3);
+        }
+
+        .notes-container textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .notes-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .note-example {
+            background: rgba(212, 145, 61, 0.2);
+            color: #d4913d;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 145, 61, 0.3);
+        }
+
+        .note-example:hover {
+            background: rgba(212, 145, 61, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(212, 145, 61, 0.2);
+        }
+
         .cart-footer {
             padding: 20px;
             border-top: 1px solid rgba(212, 145, 61, 0.3);
@@ -774,6 +843,32 @@
             .checkout-btn, .clear-cart-btn {
                 padding: 12px;
                 font-size: 0.9rem;
+            }
+
+            /* Notas responsivas para móviles */
+            .cart-notes-section {
+                padding: 15px;
+            }
+
+            .cart-notes-section h4 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .notes-container textarea {
+                padding: 12px;
+                font-size: 0.85rem;
+                min-height: 70px;
+            }
+
+            .notes-examples {
+                gap: 6px;
+                margin-top: 10px;
+            }
+
+            .note-example {
+                padding: 5px 10px;
+                font-size: 0.75rem;
             }
         }
 
