@@ -19,12 +19,32 @@
     <header>
         <nav>
             <div class="logo">El Buen Sabor</div>
-            <a href="#" class="cart">
+            <a href="#" class="cart" onclick="toggleCart(event)">
                 🛒 Carrito
                 <span class="cart-count" id="cartCount">0</span>
             </a>
         </nav>
     </header>
+
+    <!-- Carrito deslizable -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Tu Carrito</h3>
+            <button class="close-cart" onclick="toggleCart(event)">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Los items del carrito se agregarán dinámicamente aquí -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
+            <button class="clear-cart-btn" onclick="clearCart()">Vaciar Carrito</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(event)"></div>
 
     <!-- Barra de categorías móvil -->
     <div class="mobile-categories-bar" id="mobileCategoriesBar">
