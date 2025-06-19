@@ -97,6 +97,12 @@
                             Reportes
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a href="/views/empleados.php" class="sidebar-link">
+                            <span class="sidebar-icon">👥</span>
+                            Empleados
+                        </a>
+                    </li>
                 </ul>
             </div>
 

@@ -1,21 +1,38 @@
+<?php
+session_start();
+if (!isset($_SESSION["id"])){
+    header("Location: ./login.php");
+    exit();
+}
+
+$nombre = $_SESSION["nombre"]??"Desconocido";
+$rol = $_SESSION["rol"]??"Desconocido";
+$icono = str_split($nombre)??"?";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
-    <title>Inventario - CoffeeShop Pro</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+    <style>
+        @media (max-width: 600px) {
+            .content-area {
+                padding: 5px !important;
+                max-width: 100vw !important;
+                min-width: 0 !important;
+            }
+        }
+    </style>
+    <title>Empleados</title>
 </head>
 <body>
-    <!-- Círculos decorativos -->
     <div class="coffee-circle circle-1"></div>
     <div class="coffee-circle circle-2"></div>
     <div class="coffee-circle circle-3"></div>
-
-    <!-- Overlay para cerrar sidebar en móvil -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-
-    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <button class="mobile-menu-btn" onclick="toggleSidebar()">
@@ -26,10 +43,10 @@
             <div class="user-profile">
                 <div class="profile-dropdown" onclick="toggleProfileMenu(event)">
                     <div class="profile-info">
-                        <div class="profile-name">Juan Pérez</div>
-                        <div class="profile-role">Administrador</div>
+                        <div class="profile-name"><?php echo $nombre ?></div>
+                        <div class="profile-role"><?php echo $rol ?></div>
                     </div>
-                    <div class="profile-avatar">JP</div>
+                    <div class="profile-avatar"><?php echo $icono[0] ?></div>
                     <div class="dropdown-arrow">▼</div>
                 </div>
                 <div class="profile-menu" id="profileMenu">
@@ -46,8 +63,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="#" class="company-logo">
@@ -62,7 +77,6 @@
                 <span></span>
             </button>
         </div>
-
         <div class="sidebar-content">
             <div class="sidebar-section">
                 <h3 class="sidebar-title">Principal</h3>
@@ -74,7 +88,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/views/inventario.php" class="sidebar-link active">
+                        <a href="/views/inventario.php" class="sidebar-link">
                             <span class="sidebar-icon">📦</span>
                             Inventario
                         </a>
@@ -98,14 +112,13 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="/views/empleados.php" class="sidebar-link">
+                        <a href="/views/empleados.php" class="sidebar-link active">
                             <span class="sidebar-icon">👥</span>
                             Empleados
                         </a>
                     </li>
                 </ul>
             </div>
-
             <div class="sidebar-section">
                 <h3 class="sidebar-title">Cuenta</h3>
                 <ul class="sidebar-menu">
@@ -125,8 +138,6 @@
             </div>
         </div>
     </aside>
-
-    <!-- Modal de confirmación de cierre de sesión -->
     <div class="logout-modal" id="logoutModal">
         <div class="modal-overlay" onclick="closeLogoutModal()"></div>
         <div class="modal-content">
@@ -148,73 +159,70 @@
             </div>
         </div>
     </div>
-
-    <!-- Layout principal -->
     <div class="dashboard-layout">
         <main class="main-content">
-            <!-- Header de Inventario -->
-            <div class="inventory-header">
-                <h2 class="content-title">Inventario de Productos</h2>
-                <button class="action-button" id="addProductBtn">
-                    ➕ Agregar Producto
-                </button>
-            </div>
-
-            <!-- Grid de Productos -->
-            <div class="products-grid">
-                <!-- Ejemplo de Card de Producto -->
-                <div class="product-card">
-                    <div class="product-stock-badge stock-low">Stock bajo</div>
-                    <div class="product-image">
-                        <img src="/assets/images/products/coffee-beans.jpg" alt="Café Arábica">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Café Arábica Premium</h3>
-                        <div class="product-details">
-                            <span class="product-category">Granos de Café</span>
-                            <span class="product-price">$25.99</span>
-                        </div>
-                        <div class="product-stock">
-                            <span class="stock-label">Stock:</span>
-                            <span class="stock-value low-stock">5 unidades</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="edit-product-btn">
-                                ✏️ Editar Producto
-                            </button>
-                        </div>
-                    </div>
+            <div class="content-area">
+                <div class="content-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2 class="content-title">Empleados</h2>
+                    <button class="action-button" style="margin-bottom: 10px;" onclick="alert('Funcionalidad para agregar empleados próximamente')">Agregar Empleado</button>
                 </div>
-
-                <!-- Otro ejemplo de Card de Producto -->
-                <div class="product-card">
-                    <div class="product-stock-badge stock-ok">En stock</div>
-                    <div class="product-image">
-                        <img src="/assets/images/products/coffee-maker.jpg" alt="Cafetera Express">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Cafetera Express Pro</h3>
-                        <div class="product-details">
-                            <span class="product-category">Equipamiento</span>
-                            <span class="product-price">$299.99</span>
-                        </div>
-                        <div class="product-stock">
-                            <span class="stock-label">Stock:</span>
-                            <span class="stock-value">15 unidades</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="edit-product-btn">
-                                ✏️ Editar Producto
-                            </button>
-                        </div>
-                    </div>
+                <div class="table-responsive" style="overflow-x:auto;">
+                    <table id="tablaEmpleados" class="display responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Juan Pérez</td>
+                                <td>2024-06-03 09:00:00</td>
+                                <td>555123456</td>
+                                <td>juan@example.com</td>
+                                <td>Administrador</td>
+                                <td>Activo</td>
+                                <td>
+                                    <button class="btn-editar">Editar</button>
+                                    <button class="btn-eliminar">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>María López</td>
+                                <td>2023-12-15 14:30:00</td>
+                                <td>555987654</td>
+                                <td>maria@example.com</td>
+                                <td>Empleado</td>
+                                <td>Inactivo</td>
+                                <td>
+                                    <button class="btn-editar">Editar</button>
+                                    <button class="btn-eliminar">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <!-- Puedes agregar más cards de productos aquí -->
             </div>
         </main>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tablaEmpleados').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
