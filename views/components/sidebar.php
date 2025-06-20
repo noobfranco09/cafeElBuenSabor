@@ -49,12 +49,7 @@
                         Ventas
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="/views/inventario.php" class="sidebar-link <?php echo ($activePage === 'inventario') ? 'active' : ''; ?>">
-                        <span class="sidebar-icon">🧂</span>
-                        Inventario
-                    </a>
-                </li>
+               
                 <li class="sidebar-item">
                     <a href="/views/reportes.php" class="sidebar-link <?php echo ($activePage === 'reportes') ? 'active' : ''; ?>">
                         <span class="sidebar-icon">📋</span>

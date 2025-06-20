@@ -3,6 +3,9 @@ session_start();
 session_destroy();
 session_unset();
 
-header("location: ../../views/login.php");
+echo json_encode([
+    "estado"=>"ok",
+    "redirecion"=>"../../views/login.php"
+])
 
 ?>

@@ -122,3 +122,18 @@ function closeLogoutModal() {
     const logoutModal = document.getElementById('logoutModal');
     logoutModal.classList.remove('active');
 }
+
+function confirmLogout(){
+    fetch("../../controller/admin/logout.php",{
+        method:"GET",
+        headers: {
+        'Content-Type': 'application/json'
+        }
+        
+    })
+    .then(response => response.json())
+    .then(response=>{
+         window.location.href=response.redirecion;
+    })
+  
+}

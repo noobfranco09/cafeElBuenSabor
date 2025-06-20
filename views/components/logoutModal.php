@@ -14,9 +14,11 @@
             <button class="modal-btn cancel-btn" onclick="closeLogoutModal()">
                 Cancelar
             </button>
-            <button class="modal-btn confirm-btn" onclick="confirmLogout()">
-                Sí, Cerrar Sesión
-            </button>
+            
+                <button  class="modal-btn confirm-btn" onclick="confirmLogout()">
+                    Sí, Cerrar Sesión
+                </button>
+            
         </div>
     </div>
 </div> 
