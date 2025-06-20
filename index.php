@@ -19,12 +19,48 @@
     <header>
         <nav>
             <div class="logo">El Buen Sabor</div>
-            <a href="#" class="cart">
+            <a href="#" class="cart" onclick="toggleCart(event)">
                 🛒 Carrito
                 <span class="cart-count" id="cartCount">0</span>
             </a>
         </nav>
     </header>
+
+    <!-- Carrito deslizable -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Tu Carrito</h3>
+            <button class="close-cart" onclick="toggleCart(event)">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Los items del carrito se agregarán dinámicamente aquí -->
+        </div>
+        <div class="cart-notes-section">
+            <h4>📝 Notas del Pedido</h4>
+            <div class="notes-container">
+                <textarea 
+                    id="orderNotes" 
+                    placeholder="Agrega notas especiales para tu pedido (ej: sin azúcar, extra caliente, sin hielo, etc.)"
+                    rows="3"
+                ></textarea>
+                <div class="notes-examples">
+                    <span class="note-example">☕ Sin azúcar</span>
+                    <span class="note-example">🔥 Extra caliente</span>
+                    <span class="note-example">🧊 Sin hielo</span>
+                    <span class="note-example">🥛 Leche de almendras</span>
+                </div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-amount" id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
+            <button class="clear-cart-btn" onclick="clearCart()">Vaciar Carrito</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(event)"></div>
 
     <!-- Barra de categorías móvil -->
     <div class="mobile-categories-bar" id="mobileCategoriesBar">
@@ -58,7 +94,8 @@
     <!-- Categories -->
     <section class="categories desktop-only">
         <h2>Nuestras Especialidades</h2>
-        <div class="category-grid">
+        <a href="#menu">
+            <div class="category-grid">
             <div class="category-card" onclick="filterProducts('todos')">
                 <span class="category-icon">🍽️</span>
                 <h3>Todos los Productos</h3>
@@ -80,6 +117,7 @@
                 <p>Deliciosos acompañamientos que complementan perfectamente tu bebida favorita</p>
             </div>
         </div>
+        </a>
     </section>
 
     <!-- Products -->

@@ -193,3 +193,20 @@ function adjustMobileCategoriesBarTop() {
 
 window.addEventListener('DOMContentLoaded', adjustMobileCategoriesBarTop);
 window.addEventListener('resize', adjustMobileCategoriesBarTop);
+
+// Función para mostrar/ocultar el carrito
+function toggleCart(event) {
+    event.preventDefault();
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    
+    cartSidebar.classList.toggle('open');
+    cartOverlay.classList.toggle('active');
+    
+    // Prevenir scroll del body cuando el carrito está abierto
+    if (cartSidebar.classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}

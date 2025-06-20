@@ -81,3 +81,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }, index * 100);
     });
 });
+
+// Funcionalidad del menú desplegable del perfil
+function toggleProfileMenu(event) {
+    event.stopPropagation();
+    const profileDropdown = document.querySelector('.profile-dropdown');
+    const profileMenu = document.getElementById('profileMenu');
+    
+    profileDropdown.classList.toggle('active');
+    profileMenu.classList.toggle('active');
+}
+
+// Cerrar menú al hacer clic fuera
+document.addEventListener('click', function(event) {
+    const profileDropdown = document.querySelector('.profile-dropdown');
+    const profileMenu = document.getElementById('profileMenu');
+    
+    if (!profileDropdown.contains(event.target)) {
+        profileDropdown.classList.remove('active');
+        profileMenu.classList.remove('active');
+    }
+});
+
+// Funciones para el modal de confirmación de cierre de sesión
+function showLogoutModal() {
+    const logoutModal = document.getElementById('logoutModal');
+    logoutModal.classList.add('active');
+    
+    // Cerrar menú desplegable si está abierto
+    const profileDropdown = document.querySelector('.profile-dropdown');
+    const profileMenu = document.getElementById('profileMenu');
+    profileDropdown.classList.remove('active');
+    profileMenu.classList.remove('active');
+    
+    // Cerrar sidebar si está abierto en móvil
+    closeSidebar();
+}
+
+function closeLogoutModal() {
+    const logoutModal = document.getElementById('logoutModal');
+    logoutModal.classList.remove('active');
+}
+
+function confirmLogout(){
+    fetch("../../controller/admin/logout.php",{
+        method:"GET",
+        headers: {
+        'Content-Type': 'application/json'
+        }
+        
+    })
+    .then(response => response.json())
+    .then(response=>{
+         window.location.href=response.redirecion;
+    })
+  
+}

@@ -1,3 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION["id"])){
+    header("Location: ./login.php");
+    exit();
+    }
+
+    $nombre = $_SESSION["nombre"]??"Desconocido";
+    $rol = $_SESSION["rol"]??"Desconocido";
+    $icono = str_split($nombre)??"?";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,97 +27,14 @@
     <!-- Overlay para cerrar sidebar en móvil -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <button class="mobile-menu-btn" onclick="toggleSidebar()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="user-profile">
-                <div class="profile-info">
-                    <div class="profile-name">Juan Pérez</div>
-                    <div class="profile-role">Administrador</div>
-                </div>
-                <div class="profile-avatar">JP</div>
-            </div>
-        </div>
-    </header>
+    <?php include './components/navbar.php'; ?>
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="#" class="company-logo">
-                <span class="company-icon">☕</span>
-                <div class="company-info">
-                    <div class="company-name">CoffeeShop Pro</div>
-                    <div class="company-subtitle">Management System</div>
-                </div>
-            </a>
-            <!-- Botón de cerrar sidebar en móvil -->
-            <button class="close-sidebar-btn" onclick="closeSidebar()">
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+    <?php 
+        $activePage = 'dashboard';
+        include './components/sidebar.php'; 
+    ?>
 
-        <div class="sidebar-content">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">Principal</h3>
-                <ul class="sidebar-menu">
-                    <li class="sidebar-item">
-                        <a href="/views/dashboard.php" class="sidebar-link active">
-                            <span class="sidebar-icon">📊</span>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="/views/inventario.php" class="sidebar-link">
-                            <span class="sidebar-icon">📦</span>
-                            Inventario
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="/views/pedidos.php" class="sidebar-link">
-                            <span class="sidebar-icon">🛒</span>
-                            Pedidos
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="/views/ventas.php" class="sidebar-link">
-                            <span class="sidebar-icon">💰</span>
-                            Ventas
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <span class="sidebar-icon">📋</span>
-                            Reportes
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">Cuenta</h3>
-                <ul class="sidebar-menu">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <span class="sidebar-icon">👤</span>
-                            Perfil
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
-                            <span class="sidebar-icon">🚪</span>
-                            Cerrar Sesión
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </aside>
+    <?php include './components/logoutModal.php'; ?>
 
     <!-- Layout principal -->
     <div class="dashboard-layout">
