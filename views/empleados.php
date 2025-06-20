@@ -8,6 +8,11 @@ if (!isset($_SESSION["id"])){
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
 $icono = str_split($nombre)??"?";
+
+
+$errores = $_SESSION["errores"]??[];
+$old = $_SESSION["old"]??[];
+unset($_SESSION["errores"],$_SESSION["old"]);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,6 +22,7 @@ $icono = str_split($nombre)??"?";
     <link rel="stylesheet" href="/assets/css/dashboard.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="../assets/css/boostrap/bootstrap.min.css">
     <title>Empleados</title>
 </head>
 <body>
@@ -39,7 +45,7 @@ $icono = str_split($nombre)??"?";
             <div class="content-area">
                 <div class="content-header" style="display: flex; justify-content: space-between; align-items: center;">
                     <h2 class="content-title">Empleados</h2>
-                    <button class="action-button" style="margin-bottom: 10px;" onclick="alert('Funcionalidad para agregar empleados próximamente')">Agregar Empleado</button>
+                    <button class="action-button" style="margin-bottom: 10px;" id="btnAgregar">Agregar Empleado</button>
                 </div>
                 <div class="table-responsive" style="overflow-x:auto;">
                     <table id="tablaEmpleados" class="display responsive nowrap" style="width:100%">
@@ -55,40 +61,90 @@ $icono = str_split($nombre)??"?";
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Juan Pérez</td>
-                                <td>2024-06-03 09:00:00</td>
-                                <td>555123456</td>
-                                <td>juan@example.com</td>
-                                <td>Administrador</td>
-                                <td>Activo</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
-                                    <button class="btn-eliminar">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>María López</td>
-                                <td>2023-12-15 14:30:00</td>
-                                <td>555987654</td>
-                                <td>maria@example.com</td>
-                                <td>Empleado</td>
-                                <td>Inactivo</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
-                                    <button class="btn-eliminar">Eliminar</button>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
+
+<div class="modal fade" id="mdlAgregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+    <form id="formAgregar" action="../controller/agregarEmpleado.php" method="POST" >
+       
+    <?php if(!empty($errores["datosVacios"]) && isset($errores["datosVacios"])): ?>
+        <p class="text-start text-danger"><?php echo $errores["datosVacios"] ?></p>
+    <?php endif; ?>
+
+
+    <!-- Nombre -->
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre"  required>
+    </div>
+
+
+      <!-- Fecha Ingreso -->
+    <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha Ingreso</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese la fecha" required>
+    </div>
+
+
+     <!-- Telefono -->
+    <div class="mb-3">
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono" required>
+    </div>
+
+
+     <!-- Correo -->
+    <div class="mb-3">
+        <label for="correo" class="form-label">Correo</label>
+        <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese el correo" required>
+    </div>
+
+
+      <!-- Rol -->
+    <div class="mb-3">
+        <label for="rol"  class="form-label">Rol</label>
+        <input type="text" class="form-control" id="rol" name="rol" placeholder="Ingrese el rol" required>
+    </div>
+
+     <!-- Contraseña -->
+    <div class="mb-3">
+        <label for="Contraseña"  class="form-label">Contraseña</label>
+        <input type="text" class="form-control" id="Contraseña" name="contraseña" placeholder="Ingrese la Contraseña " required>
+    </div>
+
+
+    
+
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-warning">Agregar Empleado</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+    
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
+    <script defer src="/assets/js/empleados.js"></script>
+    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#tablaEmpleados').DataTable({
