@@ -32,7 +32,7 @@ CREATE TABLE `categorias` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `estado` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -51,7 +51,7 @@ CREATE TABLE `mesas` (
   `idMesa` int NOT NULL,
   `numero` varchar(45) NOT NULL,
   `estado` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,7 @@ CREATE TABLE `pedidos` (
   `idMesa` int NOT NULL,
   `idUsuario` int NOT NULL,
   `estado` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -81,7 +81,7 @@ CREATE TABLE `productos` (
   `stock` int NOT NULL,
   `estado` varchar(50) NOT NULL,
   `idCategoria` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -103,7 +103,7 @@ CREATE TABLE `productos_has_pedidos` (
   `subTotal` decimal(15,2) NOT NULL,
   `precioVenta` int NOT NULL,
   `nota` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE `roles` (
   `nombre` varchar(100) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
   `estado` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -140,7 +140,7 @@ CREATE TABLE `usuario` (
   `idRoll` int NOT NULL,
   `contraseña` varchar(150) NOT NULL,
   `estado` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -160,7 +160,7 @@ CREATE TABLE `ventas` (
   `fecha` datetime DEFAULT NULL,
   `total` decimal(15,2) DEFAULT NULL,
   `pedidos_idPedido` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Índices para tablas volcadas
