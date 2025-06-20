@@ -67,7 +67,68 @@ class Validaciones{
         
     }
 
+    public function validarProducto(){
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["nombre"])) && empty(trim($this->datos["precio"])) && empty(trim($this->datos["stock"])) && empty(trim($this->datos["categoria"]))
+        && empty(trim($this->datos["estado"])) && empty(trim($this->datos["descripcion"])) )
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $nombre = $this->datos["nombre"];
+        $precio = $this->datos["precio"];
+        $stock = $this->datos["stock"];
+        $categoria = $this->datos["categoria"];
+        $estado = $this->datos["estado"];
+        $descripcion = $this->datos["descripcion"];
+
+        // Validar nombre (solo letras, espacios y acentos, longitud entre 2 y 100)
+        if (!preg_match("/^[\p{L}\s]{2,100}$/u",$nombre)) {
+            $errores["nombreInvalido"] = "El nombre no es válido.";
+            return $errores;
+        }
+
+        // Validar precio (número decimal positivo con hasta 2 decimales)
+        if (!preg_match("/^\d+(\.\d{1,2})?$/", $precio)) {
+            $errores["precioInvalido"] = "El precio no es válido.";
+            return $errores;
+        }
+
+        // Validar stock (solo números enteros positivos)
+        if (!preg_match("/^\d+$/", $stock)) {
+            $errores["stockInvalido"] = "El stock debe ser un número entero positivo.";
+            return $errores;
+        }
+
+        // Validar categoría (ID numérico entero positivo - llave foránea)
+        if (!preg_match("/^\d+$/", $categoria)) {
+            $errores["categoriaInvalida"] = "La categoría no es válida.";
+            return $errores;
+        }
+
+        // Validar estado (por ejemplo, solo "activo" o "inactivo")
+        if (!preg_match("/^(activo|inactivo)$/i", $estado)) {
+            $errores["estadoInvalido"] = "El estado debe ser 'activo' o 'inactivo'.";
+            return $errores;
+        }
+
+        // Validar descripción (texto libre, longitud opcionalmente limitada)
+        if (!preg_match("/^.{0,500}$/s", $descripcion)) {
+            $errores["descripcionInvalida"] = "La descripción no puede superar los 500 caracteres.";
+            return $errores;
+        }
+
+    }
 
 
 }
+
 ?>
