@@ -12,6 +12,8 @@ if(!empty($errores)){
     exit();
 }
 
+echo "sin errores";
+
 }else{
     header("Location: ../views/empleados.php");
     exit();

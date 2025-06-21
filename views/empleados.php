@@ -86,42 +86,85 @@ unset($_SESSION["errores"],$_SESSION["old"]);
 
     <!-- Nombre -->
     <div class="mb-3">
+         <?php if(!empty($errores["errorNombre"]) && isset($errores["errorNombre"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorNombre"] ?></p>
+        <?php endif; ?>
         <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre"  required>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" 
+        <?php if(isset($old["nombre"]) && !empty($old["nombre"])): ?>
+            value="<?php echo $old["nombre"] ?>"
+        <?php endif; ?>
+        required>
     </div>
 
 
       <!-- Fecha Ingreso -->
     <div class="mb-3">
+        <?php if(!empty($errores["errorFecha"]) && isset($errores["errorFecha"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorFecha"] ?></p>
+        <?php endif; ?>
         <label for="fecha" class="form-label">Fecha Ingreso</label>
-        <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese la fecha" required>
+        <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese la fecha"
+        <?php if(isset($old["fecha"]) && !empty($old["fecha"])): ?>
+            value="<?php echo $old["fecha"] ?>"
+        <?php endif; ?>
+        required>
     </div>
 
 
      <!-- Telefono -->
     <div class="mb-3">
+        <?php if(!empty($errores["errorTelefono"]) && isset($errores["errorTelefono"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorTelefono"] ?></p>
+        <?php endif; ?>
         <label for="telefono" class="form-label">Telefono</label>
-        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono" required>
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono"
+        <?php if(isset($old["telefono"]) && !empty($old["telefono"])): ?>
+            value="<?php echo $old["telefono"] ?>"
+        <?php endif; ?>
+        required>
     </div>
 
 
      <!-- Correo -->
     <div class="mb-3">
+        <?php if(!empty($errores["errorCorreo"]) && isset($errores["errorCorreo"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorCorreo"] ?></p>
+        <?php endif; ?>
+        <?php if(!empty($errores["correoEnUso"]) && isset($errores["correoEnUso"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["correoEnUso"] ?></p>
+        <?php endif; ?>
         <label for="correo" class="form-label">Correo</label>
-        <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese el correo" required>
+        <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese el correo"
+        <?php if(isset($old["correo"]) && !empty($old["correo"])): ?>
+            value="<?php echo $old["correo"] ?>"
+        <?php endif; ?>
+        required>
     </div>
 
 
       <!-- Rol -->
     <div class="mb-3">
+        <?php if(!empty($errores["errorRol"]) && isset($errores["errorRol"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorRol"] ?></p>
+        <?php endif; ?>
         <label for="rol"  class="form-label">Rol</label>
-        <input type="text" class="form-control" id="rol" name="rol" placeholder="Ingrese el rol" required>
+        <input type="text" class="form-control" id="rol" name="rol" placeholder="Ingrese el rol"
+        <?php if(isset($old["rol"]) && !empty($old["rol"])): ?>
+            value="<?php echo $old["rol"] ?>"
+        <?php endif; ?>
+        required>
     </div>
 
      <!-- Contraseña -->
     <div class="mb-3">
         <label for="Contraseña"  class="form-label">Contraseña</label>
-        <input type="text" class="form-control" id="Contraseña" name="contraseña" placeholder="Ingrese la Contraseña " required>
+        <input type="text" class="form-control" id="Contraseña" name="contraseña" placeholder="Ingrese la Contraseña "
+        <?php if(isset($old["contraseña"]) && !empty($old["contraseña"])): ?>
+            value="<?php echo $old["contraseña"] ?>"
+        <?php endif; ?>
+
+        required>
     </div>
 
 

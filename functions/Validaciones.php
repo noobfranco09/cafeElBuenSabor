@@ -90,26 +90,27 @@ class Validaciones{
         $contraseña = $this->datos["contraseña"];
 
 
-        if(!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$correo) && !filter_var($correo,FILTER_VALIDATE_EMAIL)){
+        if(!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$correo) ||
+        - !filter_var($correo,FILTER_VALIDATE_EMAIL)){
             $errores["errorCorreo"]="Este correo no es valido";
             return $errores;
         }
 
-        if(preg_match('/^[a-zA-Z0-9_]+$/',$nombre)){
+        if(!preg_match('/^[a-zA-Z0-9_]+$/',$nombre)){
             $errores["errorNombre"] = "Este nombre no es valido";
             return $errores;
         }
 
-        if(preg_match('/^[0-9\/]+$/',$fecha)){
+        if(!preg_match('/^[0-9\/-]+$/',$fecha)){
             $errores["errorFecha"] = "La fecha es invalida";
             return $errores;
         }
 
-        if(preg_match('/^[0-9]+$/',$telefono)){
+        if(!preg_match('/^[0-9]+$/',$telefono)){
             $errores["errorTelefono"]="Este telefono no es valido";
             return $errores;
         }
-        if(preg_match('/^[0-9]+$/',$rol)){
+        if(!preg_match('/^[0-9]+$/',$rol)){
             $errores["errorRol"]="Este rol no es valido";
             return $errores;
         }
