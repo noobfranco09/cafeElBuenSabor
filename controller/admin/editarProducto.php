@@ -6,7 +6,7 @@ $db=new MySQL();
 $db->conectar();
 $conexion=$db->obtenerConexion();
 
-
+$idProdcuto=$_POST['idProducto'];
 $nombre=$_POST['nombre'];
 $descripcion=$_POST['descripcion'];
 $precio=$_POST['precio'];
@@ -26,8 +26,9 @@ $datosSinSanitizar=[
 $datosSanitizados=verificarVariables($datosSinSanitizar);
 if($datosSanitizados!= false)
 {
-    $consulta=$conexion->prepare("insert into productos (nombre,descripcion,precio,stock,estado,idCategoria) 
-    values (:nombre,:descripcion,:precio,:stock,:estado,:idCategoria)");
+    $datosSanitizados['idProducto']=$idProdcuto;
+    $consulta=$conexion->prepare("update productos set nombre = :nombre,descripcion = :descripcion,precio = :precio,
+    stock= :stock,estado= :estado,idCategoria = :idCategoria where idProducto = :idProducto");
     $consulta->execute($datosSanitizados);
 
 }else
