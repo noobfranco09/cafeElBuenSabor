@@ -15,6 +15,8 @@ if (!isset($_SESSION["id"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
     <title>Coffee Dashboard</title>
 </head>
@@ -169,6 +171,7 @@ if (!isset($_SESSION["id"])){
     <!-- Agregar Chart.js para las visualizaciones -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/assets/js/dashboard.js"></script>
+    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
