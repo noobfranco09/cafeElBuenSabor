@@ -28,11 +28,12 @@ if($datosSanitizados!= false)
 {
     $datosSanitizados['idProducto']=$idProdcuto;
     $consulta=$conexion->prepare("update productos set nombre = :nombre,descripcion = :descripcion,precio = :precio,
-    stock= :stock,estado= :estado,idCategoria = :idCategoria where idProducto = :idProducto");
+    stock= :stock,estado= :estado,idCategoria = :idCategoria where idProducto = :idProducto")  ;
     $consulta->execute($datosSanitizados);
 
 }else
 {
     echo "¡Error! Por favor, llene los campos correctamente.";
 }
+$db->desconectar();
 ?>
