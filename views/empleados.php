@@ -14,6 +14,17 @@ $errores = $_SESSION["errores"]??[];
 $old = $_SESSION["old"]??[];
 $abrirModal = $_SESSION["abrirModal"]??false;
 unset($_SESSION["errores"],$_SESSION["old"],$_SESSION["abrirModal"]);
+
+//Para traer los datos de la BD
+
+require_once '../models/mySql.php';
+$mysql = new MySQL;
+$mysql->conectar();
+$consulta = "SELECT usuario.nombre,usuario.fechaIngreso,usuario.telefono,usuario.correo,usuario.estado,roles.nombre AS nombreRol FROM usuario
+JOIN roles ON roles.idRoll = usuario.idRoll 
+WHERE usuario.estado='Activo'";
+$stmt = $mysql->obtenerConexion()->query($consulta);
+$mysql->desconectar();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -63,7 +74,20 @@ unset($_SESSION["errores"],$_SESSION["old"],$_SESSION["abrirModal"]);
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <?php while($usuarios = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                            <tr>
+                                <td><?php echo $usuarios["nombre"] ?></td>
+                                <td><?php echo $usuarios["fechaIngreso"] ?></td>
+                                <td><?php echo $usuarios["telefono"] ?></td>
+                                <td><?php echo $usuarios["correo"] ?></td>
+                                <td><?php echo $usuarios["nombreRol"] ?></td>
+                                <td><?php echo $usuarios["estado"] ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm">Editar</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                                </td>
+                            </tr>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>

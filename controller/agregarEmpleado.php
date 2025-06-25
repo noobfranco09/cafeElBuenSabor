@@ -20,7 +20,7 @@ $telefono = $_POST["telefono"];
 $correo = $_POST["correo"];
 $rol = $_POST["rol"];
 $contraseña = $_POST["contraseña"];
-$estado = "activo";
+$estado = "Activo";
 
 $consulta = "INSERT INTO usuario (nombre,fechaIngreso,telefono,correo,idRoll,contraseña,estado) values (:nombre,:fecha,:telefono,:correo,:rol,:contrasena,:estado)";
 $mysql->conectar();
