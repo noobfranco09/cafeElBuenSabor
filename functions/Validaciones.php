@@ -123,7 +123,7 @@ class Validaciones{
         $consulta = "SELECT correo FROM  usuario WHERE correo = :correo";
 
         $stmt = $mysql->obtenerConexion()->prepare($consulta);
-        $stmt->bindParam("correo", $correo,PDO::PARAM_STR);
+        $stmt->bindParam(":correo", $correo,PDO::PARAM_STR);
         $stmt->execute();
         $cntFilas = $stmt->rowCount();
 

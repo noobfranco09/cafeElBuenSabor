@@ -12,7 +12,8 @@ $icono = str_split($nombre)??"?";
 
 $errores = $_SESSION["errores"]??[];
 $old = $_SESSION["old"]??[];
-unset($_SESSION["errores"],$_SESSION["old"]);
+$abrirModal = $_SESSION["abrirModal"]??false;
+unset($_SESSION["errores"],$_SESSION["old"],$_SESSION["abrirModal"]);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -199,5 +200,12 @@ unset($_SESSION["errores"],$_SESSION["old"]);
             });
         });
     </script>
+    
+    <?php if($abrirModal):?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {abrirModal()});
+        </script>
+    <?php endif;?>
+
 </body>
 </html> 
