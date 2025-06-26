@@ -1,9 +1,10 @@
 
 
 const btnAgregar = document.querySelector("#btnAgregar");
-const mdlAgregar = new bootstrap.Modal(document.getElementById('mdlAgregar'));
+
 btnAgregar.addEventListener('click',abrirModal)
 function abrirModal(){
+    const mdlAgregar = new bootstrap.Modal(document.getElementById('mdlAgregar'));
     mdlAgregar.show();
     
 }
@@ -54,3 +55,42 @@ function desactivarUsuario(id){
 }
 
 
+
+document.querySelectorAll(".btnEditar").forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        let id = btn.getAttribute('data-id');
+        obtenerUsuario(id)
+    
+    });
+});
+
+function obtenerUsuario(id){
+    fetch('../../functions/obtenerUsuario.php',{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify({idUsuario:id})
+    })
+    .then(response => response.json())
+    .then(data=>{
+        let usuario = data.datosUsuario
+        llenarModal(usuario);
+    });
+}
+
+function llenarModal(usuario){
+    const mdlEditar = new bootstrap.Modal(document.getElementById('mdlEditar'));
+    let id = usuario.idUsuario;
+    let nombre = usuario.nombre;
+    let fecha = usuario.fechaIngreso;
+    let telefono = usuario.telefono;
+    let correo = usuario.correo;
+    let rol = usuario.rol
+    let contraseña = usuario.contraseña
+    let estado = usuario.estado;    
+
+    
+
+    
+}

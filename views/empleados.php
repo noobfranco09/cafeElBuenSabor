@@ -23,6 +23,9 @@ $mysql->conectar();
 $consulta = "SELECT usuario.idUsuario,usuario.nombre,usuario.fechaIngreso,usuario.telefono,usuario.correo,usuario.estado,roles.nombre AS nombreRol FROM usuario
 JOIN roles ON roles.idRoll = usuario.idRoll";
 $stmt = $mysql->obtenerConexion()->query($consulta);
+
+$consultaRol = "SELECT * FROM roles";
+$stmtRol = $mysql->obtenerConexion()->query($consultaRol);
 $mysql->desconectar();
 ?>
 <!DOCTYPE html>
@@ -82,7 +85,7 @@ $mysql->desconectar();
                                 <td><?php echo $usuarios["nombreRol"] ?></td>
                                 <td><?php echo $usuarios["estado"] ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" data-id="<?php echo $usuarios["idUsuario"]?>" class="btn btn-warning btn-sm btnEditar"><i class="bi bi-pencil-square"></i></button>
                                     <?php if($usuarios["estado"]=="Activo"): ?>
                                     <button type="button" data-id="<?php echo $usuarios["idUsuario"] ?>" class="btn btn-danger btn-sm btnDesactivar"><i class="bi bi-trash"></i></button></a>
                                     <?php endif; ?>
@@ -97,12 +100,12 @@ $mysql->desconectar();
             </div>
         </main>
     </div>
-
+<!-- Agregar--------------- -->
 <div class="modal fade" id="mdlAgregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Empleado</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -178,11 +181,126 @@ $mysql->desconectar();
             <p class="text-start text-danger"><?php echo $errores["errorRol"] ?></p>
         <?php endif; ?>
         <label for="rol"  class="form-label">Rol</label>
-        <input type="text" class="form-control" id="rol" name="rol" placeholder="Ingrese el rol"
-        <?php if(isset($old["rol"]) && !empty($old["rol"])): ?>
-            value="<?php echo $old["rol"] ?>"
+            <select class="form-select" aria-label="Elije un rol" name="rol" id="rol">
+            <?php while($roles = $stmtRol->fetch(PDO::FETCH_ASSOC)): ?>
+                <option value="<?php echo $roles["idRoll"]?>"><?php echo $roles["nombre"]?></option>
+            <?php endwhile; ?>
+        </select>
+        
+    </div>
+
+     <!-- Contraseña -->
+    <div class="mb-3">
+        <label for="Contraseña"  class="form-label">Contraseña</label>
+        <input type="text" class="form-control" id="Contraseña" name="contraseña" placeholder="Ingrese la Contraseña "
+        <?php if(isset($old["contraseña"]) && !empty($old["contraseña"])): ?>
+            value="<?php echo $old["contraseña"] ?>"
+        <?php endif; ?>
+
+        required>
+    </div>
+
+
+    
+
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-warning">Agregar Empleado</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- EDITAR----------------------------- -->
+<div class="modal fade" id="mdlEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Empleado</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+    <form id="formAgregar" action="../controller/editarEmpleado.php" method="POST" >
+       
+    <?php if(!empty($errores["datosVacios"]) && isset($errores["datosVacios"])): ?>
+        <p class="text-start text-danger"><?php echo $errores["datosVacios"] ?></p>
+    <?php endif; ?>
+
+
+    <!-- Nombre -->
+    <div class="mb-3">
+         <?php if(!empty($errores["errorNombre"]) && isset($errores["errorNombre"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorNombre"] ?></p>
+        <?php endif; ?>
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" 
+        <?php if(isset($old["nombre"]) && !empty($old["nombre"])): ?>
+            value="<?php echo $old["nombre"] ?>"
         <?php endif; ?>
         required>
+    </div>
+
+
+      <!-- Fecha Ingreso -->
+    <div class="mb-3">
+        <?php if(!empty($errores["errorFecha"]) && isset($errores["errorFecha"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorFecha"] ?></p>
+        <?php endif; ?>
+        <label for="fecha" class="form-label">Fecha Ingreso</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese la fecha"
+        <?php if(isset($old["fecha"]) && !empty($old["fecha"])): ?>
+            value="<?php echo $old["fecha"] ?>"
+        <?php endif; ?>
+        required>
+    </div>
+
+
+     <!-- Telefono -->
+    <div class="mb-3">
+        <?php if(!empty($errores["errorTelefono"]) && isset($errores["errorTelefono"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorTelefono"] ?></p>
+        <?php endif; ?>
+        <label for="telefono" class="form-label">Telefono</label>
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono"
+        <?php if(isset($old["telefono"]) && !empty($old["telefono"])): ?>
+            value="<?php echo $old["telefono"] ?>"
+        <?php endif; ?>
+        required>
+    </div>
+
+
+     <!-- Correo -->
+    <div class="mb-3">
+        <?php if(!empty($errores["errorCorreo"]) && isset($errores["errorCorreo"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorCorreo"] ?></p>
+        <?php endif; ?>
+        <?php if(!empty($errores["correoEnUso"]) && isset($errores["correoEnUso"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["correoEnUso"] ?></p>
+        <?php endif; ?>
+        <label for="correo" class="form-label">Correo</label>
+        <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingrese el correo"
+        <?php if(isset($old["correo"]) && !empty($old["correo"])): ?>
+            value="<?php echo $old["correo"] ?>"
+        <?php endif; ?>
+        required>
+    </div>
+
+
+      <!-- Rol -->
+    <div class="mb-3">
+        <?php if(!empty($errores["errorRol"]) && isset($errores["errorRol"])): ?>
+            <p class="text-start text-danger"><?php echo $errores["errorRol"] ?></p>
+        <?php endif; ?>
+        <label for="rol"  class="form-label">Rol</label>
+            <select class="form-select" aria-label="Elije un rol" name="rol" id="rol">
+            <?php while($roles = $stmtRol->fetch(PDO::FETCH_ASSOC)): ?>
+                <option value="<?php echo $roles["idRoll"]?>"><?php echo $roles["nombre"]?></option>
+            <?php endwhile; ?>
+        </select>
+        
     </div>
 
      <!-- Contraseña -->
