@@ -20,9 +20,8 @@ unset($_SESSION["errores"],$_SESSION["old"],$_SESSION["abrirModal"]);
 require_once '../models/mySql.php';
 $mysql = new MySQL;
 $mysql->conectar();
-$consulta = "SELECT usuario.nombre,usuario.fechaIngreso,usuario.telefono,usuario.correo,usuario.estado,roles.nombre AS nombreRol FROM usuario
-JOIN roles ON roles.idRoll = usuario.idRoll 
-WHERE usuario.estado='Activo'";
+$consulta = "SELECT usuario.idUsuario,usuario.nombre,usuario.fechaIngreso,usuario.telefono,usuario.correo,usuario.estado,roles.nombre AS nombreRol FROM usuario
+JOIN roles ON roles.idRoll = usuario.idRoll";
 $stmt = $mysql->obtenerConexion()->query($consulta);
 $mysql->desconectar();
 ?>
@@ -83,8 +82,12 @@ $mysql->desconectar();
                                 <td><?php echo $usuarios["nombreRol"] ?></td>
                                 <td><?php echo $usuarios["estado"] ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm">Editar</button>
-                                    <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                                    <button type="button" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></button>
+                                    <?php if($usuarios["estado"]=="Activo"): ?>
+                                    <button type="button" data-id="<?php echo $usuarios["idUsuario"] ?>" class="btn btn-danger btn-sm btnDesactivar"><i class="bi bi-trash"></i></button></a>
+                                    <?php endif; ?>
+                                    
+                                    
                                 </td>
                             </tr>
                             <?php endwhile; ?>
@@ -209,6 +212,7 @@ $mysql->desconectar();
 
     
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="../assets\node_modules\sweetalert2\dist\sweetalert2.all.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
