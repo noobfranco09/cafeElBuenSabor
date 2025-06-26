@@ -58,20 +58,33 @@ agregarCarrito.addEventListener('click',function(){
     // Obtenemos los datos del producto para poder agregarlo al localStorage
 
     const idProducto = this.dataset.id;
+
+    fetch('../functions/obtenerProducto.php',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idProducto: idProducto})
+    })
+    .then(response => response.json())
+    .then(data => {
     
-    const cardProducto = this.closest('.product-card');
-    const nombre = cardProducto.querySelector('h3').textContent;
-    const precio = parseFloat(cardProducto.querySelector('.price').textContent);
+        const id = data.idProducto;
+        const nombre = data.nombre;
+        const precio = data.precio;
+        const stock = data.stock;
 
+        const producto = {
+            id: parseInt(id),
+            nombre,
+            precio,
+            cantidad: 1,
+            stock
+        };
 
-    const producto = {
-        id: parseInt(idProducto),
-        nombre,
-        precio,
-        cantidad: 1
-    };
+        agregarProducto(producto);
 
-    agregarProducto(producto);
+    })
 
 })
 
@@ -172,7 +185,7 @@ function mostrarProductos(productos)
         btnMenos.textContent = "-";
 
         btnMenos.addEventListener('click', () => {
-            disminuirCantidad(producto.id);
+            disminuirCantidad(producto.id, producto.stock);
         })
 
         const cantidad = document.createElement("span");
@@ -209,16 +222,22 @@ function mostrarProductos(productos)
 }
 
 // funcion para amentar la cantidad desde la vista del carrito
-function aumentarCantidad(id)
+function aumentarCantidad(id, stock)
 {
     const idExistente = localStorage.getItem(id);
 
     if (idExistente) 
     {
         const productoGuardado = JSON.parse(idExistente);
-        productoGuardado.cantidad += 1;
-        localStorage.setItem(id, JSON.stringify(productoGuardado));
-        obtenerProductos();
+        if(productoGuardado.cantidad < productoGuardado.stock)
+        {
+            productoGuardado.cantidad += 1;
+            localStorage.setItem(id, JSON.stringify(productoGuardado));
+            obtenerProductos();
+        }
+        else{
+            alert('no puedes superar el stock del producto');
+        }
     }
 
 }
@@ -231,9 +250,15 @@ function disminuirCantidad(id)
     if (idExistente) 
     {
         const productoGuardado = JSON.parse(idExistente);
-        productoGuardado.cantidad -= 1;
-        localStorage.setItem(id, JSON.stringify(productoGuardado));
-        obtenerProductos();
+        if(productoGuardado.cantidad > 1)
+        {
+            productoGuardado.cantidad -= 1;
+            localStorage.setItem(id, JSON.stringify(productoGuardado));
+            obtenerProductos();
+        }
+        else{
+            alert('no puedes tener el stock negativo del producto');
+        }
     }
 }
 

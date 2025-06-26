@@ -77,7 +77,7 @@ $mysql->desconectar();
                 <span>Total:</span>
                 <span class="total-amount" id="cartTotal">$0</span>
             </div>
-            <button class="clear-cart-btn" onclick="clearCart()">Vaciar Carrito</button>
+            <button class="clear-cart-btn" id="vaciarCarrito">Vaciar Carrito</button>
             <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
         </div>
     </div>
