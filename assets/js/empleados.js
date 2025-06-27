@@ -81,6 +81,7 @@ function obtenerUsuario(id){
 
 function llenarModal(usuario){
     const mdlEditar = new bootstrap.Modal(document.getElementById('mdlEditar'));
+    const prpMdlEditar = document.getElementById('mdlEditar');
     let id = usuario.idUsuario;
     let nombre = usuario.nombre;
     let fecha = usuario.fechaIngreso;
@@ -90,6 +91,14 @@ function llenarModal(usuario){
     let contraseña = usuario.contraseña
     let estado = usuario.estado;    
 
+    const inputNombre = prpMdlEditar.querySelector("#nombreEditar").value=nombre;
+    const inputfecha = prpMdlEditar.querySelector("#fechaEditar").value=fecha;
+    const inputtelefono = prpMdlEditar.querySelector("#telefonoEditar").value=telefono;
+    const inputCorreo = prpMdlEditar.querySelector("#correoEditar").value=correo;
+    const inputContraseña = prpMdlEditar.querySelector("#contraseñaEditar").value=contraseña;   
+
+    console.log(fecha);
+    mdlEditar.show();
     
 
     
