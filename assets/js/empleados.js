@@ -9,34 +9,31 @@ function abrirModal(){
     
 }
 
-document.querySelectorAll(".btnDesactivar").forEach(btn=>{
-    btn.addEventListener('click',()=>{
-        let idUsuario = btn.getAttribute('data-id');
 
+document.querySelector("#tablaUsuarios").addEventListener("click", function (e) {
+    const boton = e.target.closest(".btnDesactivar");
+    if (boton) {
+        let idUsuario = boton.getAttribute("data-id");
         Swal.fire({
-            title: "Estas seguro?",
-            text: "Vas a desactivar al Id: "+idUsuario+"!",
+            title: "¿Estás seguro?",
+            text: "Vas a desactivar al ID: " + idUsuario + "!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#A67B5B",
             cancelButtonColor: "#B0B0B0",
-            confirmButtonText: "Desactivar!"
+            confirmButtonText: "¡Desactivar!"
         }).then((result) => {
-        if (result.isConfirmed) {
-            desactivarUsuario(idUsuario);
-            Swal.fire({
-            title: "Desactivado!",
-            text: "El usuario ah sido desactivado.",
-            icon: "success"
-            });
-            location.reload();
-        }
+            if (result.isConfirmed) {
+                desactivarUsuario(idUsuario);
+                
+            }
         });
-        
-
-
-    })
+    }
 });
+
+
+
+    
 
 function desactivarUsuario(id){
     fetch('../../controller/desactivarEmpleado.php',{
@@ -48,7 +45,15 @@ function desactivarUsuario(id){
     })
     .then(response => response.json())
     .then(data =>{
-        
+         Swal.fire({
+                    title: "Desactivado!",
+                    text: "El usuario ah sido desactivado.",
+                    icon: "success"
+                    });
+                    setTimeout(()=>{
+                        location.reload();
+                    },1000)
+                
     })
 
 
@@ -56,12 +61,12 @@ function desactivarUsuario(id){
 
 
 
-document.querySelectorAll(".btnEditar").forEach(btn=>{
-    btn.addEventListener('click',()=>{
-        let id = btn.getAttribute('data-id');
-        obtenerUsuario(id)
-    
-    });
+document.querySelector("#tablaUsuarios").addEventListener("click", function (e) {
+    const boton = e.target.closest(".btnEditar");
+    if (boton) {
+        let id = boton.getAttribute("data-id");
+        obtenerUsuario(id);
+    }
 });
 
 function obtenerUsuario(id){
@@ -87,17 +92,20 @@ function llenarModal(usuario){
     let fecha = usuario.fechaIngreso;
     let telefono = usuario.telefono;
     let correo = usuario.correo;
-    let rol = usuario.rol
+    let rol = usuario.idRoll
     let contraseña = usuario.contraseña
     let estado = usuario.estado;    
 
+    
+    const inputId = prpMdlEditar.querySelector("#idUsuario").value=id;
     const inputNombre = prpMdlEditar.querySelector("#nombreEditar").value=nombre;
     const inputfecha = prpMdlEditar.querySelector("#fechaEditar").value=fecha;
     const inputtelefono = prpMdlEditar.querySelector("#telefonoEditar").value=telefono;
     const inputCorreo = prpMdlEditar.querySelector("#correoEditar").value=correo;
+    const iptRol = prpMdlEditar.querySelector("#rolEditar").value=rol;
     const inputContraseña = prpMdlEditar.querySelector("#contraseñaEditar").value=contraseña;   
-
-    console.log(fecha);
+    const sltEstado = prpMdlEditar.querySelector("#estadoEditar").value=estado;
+    console.log(rol);
     mdlEditar.show();
     
 

@@ -14,7 +14,12 @@ $errores = $_SESSION["errores"]??[];
 $erroresEditar = $_SESSION["erroresEditar"]??[];
 $old = $_SESSION["old"]??[];
 $abrirModal = $_SESSION["abrirModal"]??false;
-unset($_SESSION["errores"],$_SESSION["old"],$_SESSION["abrirModal"]);
+$abrirMdlEditar = $_SESSION["abirMdlEditar"]??false;
+$idEditar = $_SESSION["idEditar"]??"";
+$usrActualizado = $_SESSION["usrActualizado"]??false;
+
+unset($_SESSION["errores"],$_SESSION["old"],$_SESSION["abrirModal"],$_SESSION["erroresEditar"],$_SESSION["abirMdlEditar"],$_SESSION["id
+Editar"],$_SESSION["usrActualizado"]);
 
 //Para traer los datos de la BD
 
@@ -30,6 +35,8 @@ $stmtRol = $mysql->obtenerConexion()->query($consultaRol);
 $stmtRolEditar = $mysql->obtenerConexion()->query($consultaRol);
 $mysql->desconectar();
 ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -77,7 +84,7 @@ $mysql->desconectar();
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tablaUsuarios">
                             <?php while($usuarios = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                             <tr>
                                 <td><?php echo $usuarios["nombre"] ?></td>
@@ -87,9 +94,9 @@ $mysql->desconectar();
                                 <td><?php echo $usuarios["nombreRol"] ?></td>
                                 <td><?php echo $usuarios["estado"] ?></td>
                                 <td>
-                                    <button type="button" data-id="<?php echo $usuarios["idUsuario"]?>" class="btn btn-warning btn-sm btnEditar"><i class="bi bi-pencil-square"></i></button>
+                                    <button type="button" data-id="<?php echo $usuarios["idUsuario"]?>" class="btn btn-warning btn-sm btnEditar"><i class="bi bi-pencil-square "></i></button>
                                     <?php if($usuarios["estado"]=="Activo"): ?>
-                                    <button type="button" data-id="<?php echo $usuarios["idUsuario"] ?>" class="btn btn-danger btn-sm btnDesactivar"><i class="bi bi-trash"></i></button></a>
+                                    <button type="button" data-id="<?php echo $usuarios["idUsuario"] ?>" class="btn btn-danger btn-sm btnDesactivar"><i class="bi bi-trash "></i></button></a>
                                     <?php endif; ?>
                                     
                                     
@@ -219,7 +226,7 @@ $mysql->desconectar();
 
 
 <!-- EDITAR----------------------------- -->
-<div class="modal fade" id="mdlEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="mdlEditar" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -233,6 +240,8 @@ $mysql->desconectar();
         <p class="text-start text-danger"><?php echo $erroresEditar["datosVacios"] ?></p>
     <?php endif; ?>
 
+
+    <input type="hidden" name="id" id="idUsuario" value="<?php echo $idEditar ?>">
 
     <!-- Nombre -->
     <div class="mb-3">
@@ -298,8 +307,8 @@ $mysql->desconectar();
     </div>
 
     <div class="mb-3">
-        <label for="estado"  class="form-label">Estado</label>
-        <select class="form-select" aria-label="Elije un rol" name="estado" id="rolEditar" required>
+        <label for="estadoEditar"  class="form-label">Estado</label>
+        <select class="form-select" aria-label="Elije un rol" name="estado" id="estadoEditar" required>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
         </select>
@@ -346,6 +355,22 @@ $mysql->desconectar();
             document.addEventListener('DOMContentLoaded', function () {abrirModal()});
         </script>
     <?php endif;?>
+    <?php if($abrirMdlEditar):?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {obtenerUsuario(<?php echo $idEditar?>)});
+        </script>
+    <?php endif;?>
+     <?php if($usrActualizado):?>
+        <script>
+            Swal.fire({
+                    title: "Actualizado con exito!",
+                    text: "El usuario ah sido actualizado.",
+                    icon: "success"
+                    });
+        </script>
+    <?php endif;?>
+
+
 
 </body>
 </html> 

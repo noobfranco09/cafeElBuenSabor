@@ -159,10 +159,11 @@ class Validaciones{
         $correo = $this->datos["correo"];
         $rol = $this->datos["rol"];
         $contraseña = $this->datos["contraseña"];
+        $id = $this->datos["id"];
 
 
         if(!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$correo) ||
-        - !filter_var($correo,FILTER_VALIDATE_EMAIL)){
+         !filter_var($correo,FILTER_VALIDATE_EMAIL)){
             $errores["errorCorreo"]="Este correo no es valido";
             return $errores;
         }
@@ -193,19 +194,22 @@ class Validaciones{
         $mysql = new MySQL();
 
         $mysql->conectar();
-        $consulta = "SELECT correo FROM  usuario WHERE correo = :correo";
+        $consulta = "SELECT * FROM  usuario WHERE correo = :correo";
 
         $stmt = $mysql->obtenerConexion()->prepare($consulta);
         $stmt->bindParam(":correo", $correo,PDO::PARAM_STR);
         $stmt->execute();
         $cntFilas = $stmt->rowCount();
+        $datos = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($cntFilas > 0){
+        
+
+        if($cntFilas > 0 && $datos["idUsuario"]!=$id){
           $errores["correoEnUso"]="Este correo ya esta en uso";
           return $errores;
         }
     
-        return $errores;
+        return  $errores;
     }
     
 
