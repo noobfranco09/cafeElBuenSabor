@@ -5,6 +5,10 @@ $errores = $_SESSION["errores"]??[];
 $old = $_SESSION["old"]??[];
 
 unset($_SESSION["old"],$_SESSION["errores"]);
+if(isset($_SESSION["id"])){
+    header("location:./dashboard.php");
+    exit;
+}
 ?>
 
 
@@ -15,6 +19,7 @@ unset($_SESSION["old"],$_SESSION["errores"]);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/login.css">
     <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <title>Coffee Login</title>
 </head>
 <body>

@@ -105,8 +105,8 @@ document.addEventListener('click', function(event) {
 
 // Funciones para el modal de confirmación de cierre de sesión
 function showLogoutModal() {
-    const logoutModal = document.getElementById('logoutModal');
-    logoutModal.classList.add('active');
+    const logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'))
+    logoutModal.show();
     
     // Cerrar menú desplegable si está abierto
     const profileDropdown = document.querySelector('.profile-dropdown');

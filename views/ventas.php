@@ -14,6 +14,8 @@ $icono = str_split($nombre)??"?";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
@@ -128,6 +130,7 @@ $icono = str_split($nombre)??"?";
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
+    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#tablaVentas').DataTable({
