@@ -1,6 +1,3 @@
-let cart = [];
-let cartCount = 0;
-
 // Page Loading
 window.addEventListener('load', function() {
     setTimeout(() => {
@@ -41,19 +38,241 @@ function createFloatingCoffee() {
     }, 3000);
 }
 
-// Add to cart function
-function addToCart(productName, price) {
-    cart.push({ name: productName, price: price });
+// ----------Logica para la agregacion al carrito------------------
+
+let cartCount = 0;
+
+document.querySelectorAll(".agregar-carrito").forEach(agregarCarrito => {
+agregarCarrito.addEventListener('click',function(){
+
     cartCount++;
     document.getElementById('cartCount').textContent = cartCount;
-    
+
     // Animation feedback
     const cartElement = document.querySelector('.cart');
     cartElement.style.transform = 'scale(1.1)';
     setTimeout(() => {
         cartElement.style.transform = 'scale(1)';
     }, 200);
+
+    // Obtenemos los datos del producto para poder agregarlo al localStorage
+
+    const idProducto = this.dataset.id;
+
+    fetch('../functions/obtenerProducto.php',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({idProducto: idProducto})
+    })
+    .then(response => response.json())
+    .then(data => {
+    
+        const id = data.idProducto;
+        const nombre = data.nombre;
+        const precio = data.precio;
+        const stock = data.stock;
+
+        const producto = {
+            id: parseInt(id),
+            nombre,
+            precio,
+            cantidad: 1,
+            stock
+        };
+
+        agregarProducto(producto);
+
+    })
+
+})
+
+// agregar el producto al localStorage
+
+function agregarProducto(producto)
+{
+
+    const id = producto.id.toString();
+    const idExistente = localStorage.getItem(id);
+
+    if (idExistente) 
+    {
+        const productoGuardado = JSON.parse(idExistente);
+        productoGuardado.cantidad += producto.cantidad;
+        localStorage.setItem(id, JSON.stringify(productoGuardado));
+        obtenerProductos();
+    }else{
+        localStorage.setItem(id, JSON.stringify(producto));
+        obtenerProductos();
+    }
+
 }
+
+})
+
+// mostrar los productos al carrito
+
+function obtenerProductos()
+{
+    const carrito = [];
+
+    for (let i = 0; i < localStorage.length; i++) {
+
+        const idProducto = localStorage.key(i);
+        const datosProducto = localStorage.getItem(idProducto);
+
+        try {
+            const producto = JSON.parse(datosProducto);
+
+            // Asegurar que es un producto válido (opcional pero recomendable)
+            if (producto && producto.id && producto.nombre && producto.cantidad) 
+            {
+                carrito.push(producto);
+            }
+        } catch (e) {
+            console.log("Json invalido");
+        }
+        
+    }
+
+    mostrarProductos(carrito);
+
+}
+
+// funcion para mostrar los productos en el carrito usando DOM
+
+function mostrarProductos(productos)
+{
+
+    const contenedorCarrito = document.querySelector("#cartItems");
+
+    contenedorCarrito.innerHTML = "";
+    
+    productos.forEach((producto) => {
+
+        // Contenedor principal
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+
+        // Icono
+        const icono = document.createElement("div");
+        icono.classList.add("cart-item-icon");
+        icono.textContent = "☕";
+
+        // Detalles
+        const detalles = document.createElement("div");
+        detalles.classList.add("cart-item-details");
+
+        const nombre = document.createElement("div");
+        nombre.classList.add("cart-item-name");
+        nombre.textContent = producto.nombre;
+
+        const precio = document.createElement("div");
+        precio.classList.add("cart-item-price");
+        precio.textContent = `$${producto.precio.toLocaleString("es-CO")}`;
+
+        detalles.append(nombre, precio);
+
+        // Acciones
+        const acciones = document.createElement("div");
+        acciones.classList.add("cart-item-actions");
+
+        const btnMenos = document.createElement("button");
+        btnMenos.classList.add("quantity-btn");
+        btnMenos.dataset.id = producto.id;
+        btnMenos.dataset.action = "decrease";
+        btnMenos.textContent = "-";
+
+        btnMenos.addEventListener('click', () => {
+            disminuirCantidad(producto.id, producto.stock);
+        })
+
+        const cantidad = document.createElement("span");
+        cantidad.classList.add("quantity-display");
+        cantidad.textContent = producto.cantidad;
+
+        const btnMas = document.createElement("button");
+        btnMas.classList.add("quantity-btn");
+        btnMas.dataset.id = producto.id;
+        btnMas.dataset.action = "increase";
+        btnMas.textContent = "+";
+
+        btnMas.addEventListener('click', () => {
+            aumentarCantidad(producto.id);
+        })
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.classList.add("remove-item");
+        btnEliminar.dataset.id = producto.id;
+        btnEliminar.textContent = "×";
+
+        btnEliminar.addEventListener('click', () => {
+            eliminarProducto(producto.id);
+        })
+
+        acciones.append(btnMenos, cantidad, btnMas, btnEliminar);
+
+        // Ensamblar todo
+        cartItem.append(icono, detalles, acciones);
+        contenedorCarrito.appendChild(cartItem);
+
+    })
+
+}
+
+// funcion para amentar la cantidad desde la vista del carrito
+function aumentarCantidad(id, stock)
+{
+    const idExistente = localStorage.getItem(id);
+
+    if (idExistente) 
+    {
+        const productoGuardado = JSON.parse(idExistente);
+        if(productoGuardado.cantidad < productoGuardado.stock)
+        {
+            productoGuardado.cantidad += 1;
+            localStorage.setItem(id, JSON.stringify(productoGuardado));
+            obtenerProductos();
+        }
+        else{
+            alert('no puedes superar el stock del producto');
+        }
+    }
+
+}
+
+// funcion para restar la cantidad desde la vista del carrito
+function disminuirCantidad(id)
+{
+    const idExistente = localStorage.getItem(id);
+
+    if (idExistente) 
+    {
+        const productoGuardado = JSON.parse(idExistente);
+        if(productoGuardado.cantidad > 1)
+        {
+            productoGuardado.cantidad -= 1;
+            localStorage.setItem(id, JSON.stringify(productoGuardado));
+            obtenerProductos();
+        }
+        else{
+            alert('no puedes tener el stock negativo del producto');
+        }
+    }
+}
+
+// funcion para eliminar el producto desde el carrito
+function eliminarProducto(id)
+{
+    localStorage.removeItem(id);
+    obtenerProductos();
+}
+
+document.addEventListener("DOMContentLoaded", obtenerProductos());
+
+
+// ------------ Fin de la logica del Carrito -----------------------
 
 // Filter products
 function filterProducts(category) {

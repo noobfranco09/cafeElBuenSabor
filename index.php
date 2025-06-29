@@ -1,3 +1,20 @@
+<?php
+
+require_once './models/mySql.php';
+
+$mysql = new MySQL();
+$mysql->conectar();
+
+$mostrarProductos = "SELECT * FROM productos";
+
+$smts = $mysql->obtenerConexion()->prepare($mostrarProductos);
+$smts->execute();
+
+
+$mysql->desconectar();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,7 +50,11 @@
             <button class="close-cart" onclick="toggleCart(event)">×</button>
         </div>
         <div class="cart-items" id="cartItems">
-            <!-- Los items del carrito se agregarán dinámicamente aquí -->
+
+
+            <!-- Aqui van los productos del carrito cargados desde el DOM -->
+           
+
         </div>
         <div class="cart-notes-section">
             <h4>📝 Notas del Pedido</h4>
@@ -56,8 +77,8 @@
                 <span>Total:</span>
                 <span class="total-amount" id="cartTotal">$0</span>
             </div>
+            <button class="clear-cart-btn" id="vaciarCarrito">Vaciar Carrito</button>
             <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
-            <button class="clear-cart-btn" onclick="clearCart()">Vaciar Carrito</button>
         </div>
     </div>
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(event)"></div>
@@ -123,102 +144,25 @@
     <!-- Products -->
     <section class="products" id="menu">
         <h2 class="desktop-only">Nuestro Menú Premium</h2>
+
+        <?php while($mostrarProducto = $smts->fetch(PDO::FETCH_ASSOC)) :   ?>
+
         <div class="products-grid" id="productsGrid">
+
             <div class="product-card" data-category="cafes">
-                <div class="product-image">☕</div>
+                <div class="product-image"><?php echo $mostrarProducto['imagen']; ?></div>
                 <div class="product-info">
-                    <h3>Café Americano Premium</h3>
-                    <p>Café negro puro, intenso y aromático preparado con granos seleccionados de Colombia</p>
+                    <h3><?php echo $mostrarProducto['nombre']; ?></h3>
+                    <p><?php echo $mostrarProducto['descripcion']; ?></p>
                     <div class="product-footer">
-                        <span class="price">$3,500</span>
-                        <button class="add-btn" onclick="addToCart('Café Americano', 3500)">Agregar</button>
+                        <span class="price"><?php echo $mostrarProducto['precio']; ?></span>
+                        <button class="add-btn agregar-carrito" data-id="<?php echo $mostrarProducto['idProducto']; ?>">Agregar</button>
                     </div>
                 </div>
             </div>
-            
-            <div class="product-card" data-category="cafes">
-                <div class="product-image">☕</div>
-                <div class="product-info">
-                    <h3>Cappuccino Artesanal</h3>
-                    <p>Espresso perfecto con leche espumada y canela, creando una sinfonía de sabores</p>
-                    <div class="product-footer">
-                        <span class="price">$4,500</span>
-                        <button class="add-btn" onclick="addToCart('Cappuccino', 4500)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card" data-category="cafes">
-                <div class="product-image">☕</div>
-                <div class="product-info">
-                    <h3>Latte Supremo</h3>
-                    <p>Espresso suave con leche cremosa y un toque de vainilla que despierta los sentidos</p>
-                    <div class="product-footer">
-                        <span class="price">$4,200</span>
-                        <button class="add-btn" onclick="addToCart('Latte', 4200)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card" data-category="cafes">
-                <div class="product-image">☕</div>
-                <div class="product-info">
-                    <h3>Mocha Deluxe</h3>
-                    <p>La combinación perfecta de café, chocolate belga y crema batida artesanal</p>
-                    <div class="product-footer">
-                        <span class="price">$5,200</span>
-                        <button class="add-btn" onclick="addToCart('Mocha Deluxe', 5200)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card" data-category="bebidas">
-                <div class="product-image">🥤</div>
-                <div class="product-info">
-                    <h3>Frappé Caramelo</h3>
-                    <p>Bebida helada con café, caramelo y crema batida, perfecta para días calurosos</p>
-                    <div class="product-footer">
-                        <span class="price">$4,800</span>
-                        <button class="add-btn" onclick="addToCart('Frappé Caramelo', 4800)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card" data-category="bebidas">
-                <div class="product-image">🧊</div>
-                <div class="product-info">
-                    <h3>Smoothie Tropical</h3>
-                    <p>Mezcla refrescante de frutas tropicales con yogurt griego y miel natural</p>
-                    <div class="product-footer">
-                        <span class="price">$4,000</span>
-                        <button class="add-btn" onclick="addToCart('Smoothie Tropical', 4000)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card" data-category="postres">
-                <div class="product-image">🧁</div>
-                <div class="product-info">
-                    <h3>Cheesecake de Café</h3>
-                    <p>Delicioso cheesecake con infusión de café y crema de baileys</p>
-                    <div class="product-footer">
-                        <span class="price">$3,800</span>
-                        <button class="add-btn" onclick="addToCart('Cheesecake Café', 3800)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-card" data-category="postres">
-                <div class="product-image">🍰</div>
-                <div class="product-info">
-                    <h3>Tiramisú Clásico</h3>
-                    <p>El postre italiano por excelencia con mascarpone, café y cacao</p>
-                    <div class="product-footer">
-                        <span class="price">$4,200</span>
-                        <button class="add-btn" onclick="addToCart('Tiramisú', 4200)">Agregar</button>
-                    </div>
-                </div>
-            </div>
+
+            <?php endwhile; ?>
+
         </div>
     </section>
 
