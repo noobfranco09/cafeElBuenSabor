@@ -144,7 +144,11 @@ echo var_dump($errores);
                 </div>
                 <div class="col-md-6">
                     <label for="estado" class="form-label">Estado</label>
-                    <input type="text" class="form-control" id="estado" name="estado" required>
+                    <select class="form-control" name="estado" id="estado" required>
+                        <option value="">Selecciona un estado</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
                 </div>
                 <div class="col-12">
                     <label for="descripcion" class="form-label">Descripcion</label>

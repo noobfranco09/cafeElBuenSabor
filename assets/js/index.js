@@ -40,13 +40,24 @@ function createFloatingCoffee() {
 
 // ----------Logica para la agregacion al carrito------------------
 
-let cartCount = 0;
+function actualizarContadorCarrito() {
+    let totalCantidad = 0;
 
-document.querySelectorAll(".agregar-carrito").forEach(agregarCarrito => {
-agregarCarrito.addEventListener('click',function(){
+    for (let i = 0; i < localStorage.length; i++) {
+        const clave = localStorage.key(i);
 
-    cartCount++;
-    document.getElementById('cartCount').textContent = cartCount;
+        // Ignorar claves que no son productos (como nota o total)
+        try {
+            const producto = JSON.parse(localStorage.getItem(clave));
+            if (producto && producto.id && producto.cantidad) {
+                totalCantidad += producto.cantidad;
+            }
+        } catch (e) {
+            // probablemente no era un JSON válido de producto
+        }
+    }
+
+    document.getElementById('cartCount').textContent = totalCantidad;
 
     // Animation feedback
     const cartElement = document.querySelector('.cart');
@@ -54,6 +65,11 @@ agregarCarrito.addEventListener('click',function(){
     setTimeout(() => {
         cartElement.style.transform = 'scale(1)';
     }, 200);
+
+}
+
+document.querySelectorAll(".agregar-carrito").forEach(agregarCarrito => {
+agregarCarrito.addEventListener('click',function(){
 
     // Obtenemos los datos del producto para poder agregarlo al localStorage
 
@@ -68,21 +84,29 @@ agregarCarrito.addEventListener('click',function(){
     })
     .then(response => response.json())
     .then(data => {
-    
-        const id = data.idProducto;
-        const nombre = data.nombre;
-        const precio = data.precio;
-        const stock = data.stock;
 
-        const producto = {
-            id: parseInt(id),
-            nombre,
-            precio,
-            cantidad: 1,
-            stock
-        };
+        let cantidadProducto = localStorage.getItem(data.idProducto);
+        const productoGuardado = JSON.parse(cantidadProducto)
 
-        agregarProducto(producto);
+        if(productoGuardado.cantidad < data.stock)
+        {
+            const id = data.idProducto;
+            const nombre = data.nombre;
+            const precio = data.precio;
+            const stock = data.stock;
+
+            const producto = {
+                id: parseInt(id),
+                nombre,
+                precio: parseFloat(precio),
+                cantidad: 1,
+                stock
+            };
+
+            agregarProducto(producto);
+        }else{
+            alert("no puedes superar el sotck del producto");
+        }
 
     })
 
@@ -102,9 +126,11 @@ function agregarProducto(producto)
         productoGuardado.cantidad += producto.cantidad;
         localStorage.setItem(id, JSON.stringify(productoGuardado));
         obtenerProductos();
+        actualizarContadorCarrito();
     }else{
         localStorage.setItem(id, JSON.stringify(producto));
         obtenerProductos();
+        actualizarContadorCarrito();
     }
 
 }
@@ -146,8 +172,11 @@ function mostrarProductos(productos)
 {
 
     const contenedorCarrito = document.querySelector("#cartItems");
+    const total = document.querySelector("#total");
 
     contenedorCarrito.innerHTML = "";
+
+    let totalCompra = 0;
     
     productos.forEach((producto) => {
 
@@ -170,7 +199,7 @@ function mostrarProductos(productos)
 
         const precio = document.createElement("div");
         precio.classList.add("cart-item-price");
-        precio.textContent = `$${producto.precio.toLocaleString("es-CO")}`;
+        precio.textContent = `$${Number(producto.precio).toLocaleString("es-CO", { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
 
         detalles.append(nombre, precio);
 
@@ -185,7 +214,7 @@ function mostrarProductos(productos)
         btnMenos.textContent = "-";
 
         btnMenos.addEventListener('click', () => {
-            disminuirCantidad(producto.id, producto.stock);
+            disminuirCantidad(producto.id);
         })
 
         const cantidad = document.createElement("span");
@@ -216,13 +245,17 @@ function mostrarProductos(productos)
         // Ensamblar todo
         cartItem.append(icono, detalles, acciones);
         contenedorCarrito.appendChild(cartItem);
+        
+        totalCompra += producto.cantidad * producto.precio;
 
     })
+
+    total.textContent = "$" + totalCompra.toLocaleString("es-CO");
 
 }
 
 // funcion para amentar la cantidad desde la vista del carrito
-function aumentarCantidad(id, stock)
+function aumentarCantidad(id)
 {
     const idExistente = localStorage.getItem(id);
 
@@ -234,6 +267,7 @@ function aumentarCantidad(id, stock)
             productoGuardado.cantidad += 1;
             localStorage.setItem(id, JSON.stringify(productoGuardado));
             obtenerProductos();
+            actualizarContadorCarrito();
         }
         else{
             alert('no puedes superar el stock del producto');
@@ -255,6 +289,7 @@ function disminuirCantidad(id)
             productoGuardado.cantidad -= 1;
             localStorage.setItem(id, JSON.stringify(productoGuardado));
             obtenerProductos();
+            actualizarContadorCarrito();
         }
         else{
             alert('no puedes tener el stock negativo del producto');
@@ -267,10 +302,77 @@ function eliminarProducto(id)
 {
     localStorage.removeItem(id);
     obtenerProductos();
+    actualizarContadorCarrito();
 }
 
-document.addEventListener("DOMContentLoaded", obtenerProductos());
+const vaciarCarrito = document.querySelector("#vaciarCarrito");
 
+vaciarCarrito.addEventListener('click', () => {
+
+    document.querySelector("#nota").value = '';
+    document.querySelector("#total").textContent = '$0';
+    localStorage.clear();
+    obtenerProductos();
+    actualizarContadorCarrito();
+
+});
+
+const finalizarPedido = document.querySelector("#finalizarPedido");
+
+finalizarPedido.addEventListener('click', () => {
+
+    // se agrega al localStorage la nota que el cliente ponga en el textarea
+    const nota = document.querySelector("#nota").value;
+
+    let notas = {
+        nota
+    }
+
+    localStorage.setItem("nota", JSON.stringify(notas));
+
+    // se agrega al localStorage el valor total del pedido
+    const total = document.querySelector("#total").textContent;
+
+    let valorTotal = {
+        total
+    }
+
+    localStorage.setItem("total", JSON.stringify(valorTotal));
+
+    const datosLocalStorage = {};
+
+    for (let i = 0; i < localStorage.length; i++) 
+    {
+        const clave = localStorage.key(i);
+        datosLocalStorage[clave] = localStorage.getItem(clave);
+    }
+
+    fetch('../controller/agregarPedido.php', {
+         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datosLocalStorage)
+    })
+    .then(response => response.json())
+    .then((pedido) => {
+        console.log("todo funciona correctamente con el objeto:");
+        console.log(pedido);
+
+        // se limpia la informacion del carrito
+        document.querySelector("#nota").value = '';
+        document.querySelector("#total").textContent = '$0';
+        localStorage.clear();
+        obtenerProductos();
+        actualizarContadorCarrito();
+    });
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    obtenerProductos();
+    actualizarContadorCarrito();
+});
 
 // ------------ Fin de la logica del Carrito -----------------------
 

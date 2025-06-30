@@ -260,7 +260,7 @@ class Validaciones{
         }
 
         // Validar estado (por ejemplo, solo "activo" o "inactivo")
-        if (!preg_match("/^(activo|inactivo)$/i", $estado)) {
+        if (!preg_match("/^(Activo|Inactivo)$/i", $estado)) {
             $errores["estadoInvalido"] = "El estado debe ser 'activo' o 'inactivo'.";
             return $errores;
         }

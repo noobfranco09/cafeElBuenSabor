@@ -60,7 +60,7 @@ $mysql->desconectar();
             <h4>📝 Notas del Pedido</h4>
             <div class="notes-container">
                 <textarea 
-                    id="orderNotes" 
+                    id="nota" 
                     placeholder="Agrega notas especiales para tu pedido (ej: sin azúcar, extra caliente, sin hielo, etc.)"
                     rows="3"
                 ></textarea>
@@ -75,10 +75,10 @@ $mysql->desconectar();
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
-                <span class="total-amount" id="cartTotal">$0</span>
+                <span class="total-amount" id="total">$0</span>
             </div>
             <button class="clear-cart-btn" id="vaciarCarrito">Vaciar Carrito</button>
-            <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
+            <button class="checkout-btn" id="finalizarPedido">Finalizar Pedido</button>
         </div>
     </div>
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart(event)"></div>
@@ -155,7 +155,7 @@ $mysql->desconectar();
                     <h3><?php echo $mostrarProducto['nombre']; ?></h3>
                     <p><?php echo $mostrarProducto['descripcion']; ?></p>
                     <div class="product-footer">
-                        <span class="price"><?php echo $mostrarProducto['precio']; ?></span>
+                        <span class="price"><?php echo "$".number_format($mostrarProducto['precio'], 0, ',', '.'); ?></span>
                         <button class="add-btn agregar-carrito" data-id="<?php echo $mostrarProducto['idProducto']; ?>">Agregar</button>
                     </div>
                 </div>

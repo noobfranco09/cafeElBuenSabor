@@ -47,6 +47,15 @@ if($_FILES['imagen'] && $_FILES['imagen']['error'] === UPLOAD_ERR_OK)
 
     if(move_uploaded_file($_FILES['imagen']['tmp_name'],$rutaAbsoluta))
     {
+        $producto = [
+            "nombre" => $nombre,
+            "descripcion" => $descripcion,
+            "precio" => $precio,
+            "stock" => $stock,
+            "imagen" => $ruta,
+            "estado" => $estado,
+            "categoria" => $categoria,
+        ];
 
         $consulta = "INSERT INTO productos (nombre, descripcion, precio, stock, imagen, estado, idCategoria) 
         VALUES (:nombre, :descripcion, :precio, :stock, :imagen, :estado, :categoria)";
@@ -54,14 +63,7 @@ if($_FILES['imagen'] && $_FILES['imagen']['error'] === UPLOAD_ERR_OK)
         try {
 
         $smts = $mysql->obtenerConexion()->prepare($consulta);
-        $smts->bindParam(':nombre',$nombre,PDO::PARAM_STR);
-        $smts->bindParam(':descripcion',$descripcion,PDO::PARAM_STR);
-        $smts->bindParam(':precio',$precio);
-        $smts->bindParam(':stock',$stock,PDO::PARAM_INT);
-        $smts->bindParam(':imagen',$ruta,PDO::PARAM_STR);
-        $smts->bindParam(':estado',$estado,PDO::PARAM_STR);
-        $smts->bindParam(':categoria',$categoria,PDO::PARAM_INT);
-        $smts->execute();
+        $smts->execute($producto);
 
         header("location: ../views/productos.php");
                     
