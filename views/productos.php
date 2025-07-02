@@ -47,64 +47,64 @@ echo var_dump($errores);
     <div class="dashboard-layout">
         <main class="main-content">
             <!-- Header de Inventario -->
-            <div class="inventory-header">
-                <h2 class="content-title">Productos</h2>
+            <div class="section-header section-header-visual" style="justify-content: space-between;">
+                <div class="section-title">
+                    <span class="section-icon">📦</span>
+                    <div>
+                        <h2>Gestión de Productos</h2>
+                        <p class="section-subtitle">Administra el inventario y los detalles de los productos</p>
+                    </div>
+                </div>
                 <button class="action-button" data-bs-toggle="modal" data-bs-target="#AgregarModal">
                     ➕ Agregar Producto
                 </button>
             </div>
 
             <!-- Grid de Productos -->
-            <div class="products-grid">
+            <div class="products-grid products-grid-modern">
                 <!-- Ejemplo de Card de Producto -->
-                <div class="product-card">
-                    <div class="product-stock-badge stock-low">Stock bajo</div>
-                    <div class="product-image">
+                <div class="product-card-modern">
+                    <div class="product-image-modern">
                         <img src="/assets/images/products/coffee-beans.jpg" alt="Café Arábica">
+                        <span class="product-stock-badge-modern stock-low">Stock bajo</span>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Café Arábica Premium</h3>
-                        <div class="product-details">
-                            <span class="product-category">Granos de Café</span>
-                            <span class="product-price">$25.99</span>
+                    <div class="product-info-modern">
+                        <h3 class="product-name-modern">Café Arábica Premium</h3>
+                        <div class="product-details-modern">
+                            <span class="product-category-modern">Granos de Café</span>
                         </div>
-                        <div class="product-stock">
-                            <span class="stock-label">Stock:</span>
-                            <span class="stock-value low-stock">5 unidades</span>
+                        <div class="product-price-modern">Precio: $25.99</div>
+                        <div class="product-description-modern">Café de alta calidad, sabor intenso y aroma único.</div>
+                        <div class="product-stock-modern">Stock: <span class="stock-value-modern low-stock">5 unidades</span></div>
+                        <div class="product-actions-modern">
+                            <button class="edit-product-btn-modern">✏️ Editar</button>
+                            <button class="delete-product-btn-modern">🗑️ Eliminar</button>
                         </div>
-                        <div class="product-actions">
-                            <button class="edit-product-btn">
-                                ✏️ Editar Producto
-                            </button>
-                        </div>
+                        <div class="product-status-badge active">Activo</div>
                     </div>
                 </div>
-
-                <!-- Otro ejemplo de Card de Producto -->
-                <div class="product-card">
-                    <div class="product-stock-badge stock-ok">En stock</div>
-                    <div class="product-image">
+                <!-- Otra Card de Producto -->
+                <div class="product-card-modern">
+                    <div class="product-image-modern">
                         <img src="/assets/images/products/coffee-maker.jpg" alt="Cafetera Express">
+                        <span class="product-stock-badge-modern stock-ok">En stock</span>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Cafetera Express Pro</h3>
-                        <div class="product-details">
-                            <span class="product-category">Equipamiento</span>
-                            <span class="product-price">$299.99</span>
+                    <div class="product-info-modern">
+                        <h3 class="product-name-modern">Cafetera Express Pro</h3>
+                        <div class="product-details-modern">
+                            <span class="product-category-modern">Equipamiento</span>
                         </div>
-                        <div class="product-stock">
-                            <span class="stock-label">Stock:</span>
-                            <span class="stock-value">15 unidades</span>
+                        <div class="product-price-modern">Precio: $299.99</div>
+                        <div class="product-description-modern">Cafetera profesional para preparar espresso en casa.</div>
+                        <div class="product-stock-modern">Stock: <span class="stock-value-modern">15 unidades</span></div>
+                        <div class="product-actions-modern">
+                            <button class="edit-product-btn-modern">✏️ Editar</button>
+                            <button class="delete-product-btn-modern">🗑️ Eliminar</button>
                         </div>
-                        <div class="product-actions">
-                            <button class="edit-product-btn">
-                                ✏️ Editar Producto
-                            </button>
-                        </div>
+                        <div class="product-status-badge inactive">Inactivo</div>
                     </div>
                 </div>
-
-                <!-- Puedes agregar más cards de productos aquí -->
+                <!-- Puedes agregar más cards aquí -->
             </div>
         </main>
     </div>

@@ -2123,3 +2123,254 @@
                 justify-content: center;
             }
         }
+
+        /* Header visual para secciones (productos y empleados) */
+        .section-header-visual {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.08);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            padding: 24px 32px 18px 32px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .section-header-visual .section-title {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .section-header-visual .section-icon {
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #ffe9b3 0%, #fd7e14 100%);
+            color: #A0522D;
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(160, 82, 45, 0.10);
+        }
+        .section-header-visual h2 {
+            color: #654321;
+            font-size: 1.6em;
+            font-weight: 700;
+            margin: 0 0 2px 0;
+        }
+        .section-header-visual .section-subtitle {
+            color: #A0522D;
+            font-size: 1em;
+            margin: 0;
+            opacity: 0.85;
+        }
+        @media (max-width: 700px) {
+            .section-header-visual {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px 12px 12px 12px;
+            }
+            .section-header-visual .section-title {
+                gap: 10px;
+            }
+            .section-header-visual .section-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.3em;
+            }
+            .section-header-visual h2 {
+                font-size: 1.1em;
+            }
+            .section-header-visual .section-subtitle {
+                font-size: 0.95em;
+            }
+        }
+
+        /* Grid moderno de productos */
+        .products-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 30px;
+        }
+        @media (max-width: 1100px) {
+            .products-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 700px) {
+            .products-grid-modern {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+        }
+
+        .product-card-modern {
+            background: #fffdfa;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.10);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            border: 1.5px solid #f5e6d6;
+            position: relative;
+        }
+        .product-card-modern:hover {
+            box-shadow: 0 8px 32px rgba(139, 69, 19, 0.18);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .product-image-modern {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: #f5e6d6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-image-modern img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-info-modern {
+            padding: 22px 18px 18px 18px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .product-badges {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 6px;
+        }
+        .product-stock-badge-modern {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 2;
+            font-size: 0.98em;
+            padding: 5px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(160, 82, 45, 0.10);
+        }
+        .product-stock-badge-modern.stock-ok {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+        .product-stock-badge-modern.stock-low {
+            background: linear-gradient(135deg, #FF5252 0%, #d32f2f 100%);
+        }
+        .product-name-modern {
+            color: #654321;
+            font-size: 1.18em;
+            font-weight: 700;
+            margin: 0 0 2px 0;
+            text-align: center;
+        }
+        .product-details-modern {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            font-size: 1em;
+            color: #A0522D;
+            margin-bottom: 2px;
+        }
+        .product-category-modern {
+            background: #f5e6d6;
+            color: #A0522D;
+            border-radius: 8px;
+            padding: 2px 10px;
+            font-size: 0.98em;
+        }
+        .product-price-modern {
+            color: #D2691E;
+            font-size: 1.08em;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .product-stock-modern {
+            font-size: 1em;
+            font-weight: 600;
+            color: #A0522D;
+            margin-bottom: 4px;
+        }
+        .stock-label-modern {
+            font-weight: 600;
+        }
+        .stock-value-modern.low-stock {
+            color: #FF5252;
+            font-weight: 700;
+        }
+        .product-actions-modern {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+        .edit-product-btn-modern, .delete-product-btn-modern {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(160, 82, 45, 0.08);
+        }
+        .edit-product-btn-modern {
+            background: #FFD600;
+            color: #654321;
+        }
+        .edit-product-btn-modern:hover {
+            background: #ffe066;
+            color: #8B4513;
+            transform: translateY(-2px) scale(1.05);
+        }
+        .delete-product-btn-modern {
+            background: #FF5252;
+            color: #fff;
+        }
+        .delete-product-btn-modern:hover {
+            background: #d32f2f;
+            color: #fff;
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        /* Descripción sutil */
+        .product-description-modern {
+            color: #A0522D;
+            font-size: 0.98em;
+            margin-bottom: 6px;
+            text-align: center;
+            opacity: 0.85;
+        }
+
+        /* Badge de estado (activo/inactivo) */
+        .product-status-badge {
+            margin-top: 12px;
+            padding: 6px 18px;
+            border-radius: 12px;
+            font-size: 0.98em;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(160, 82, 45, 0.10);
+        }
+        .product-status-badge.active {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: #fff;
+        }
+        .product-status-badge.inactive {
+            background: linear-gradient(135deg, #FF5252 0%, #d32f2f 100%);
+            color: #fff;
+        }

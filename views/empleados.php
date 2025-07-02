@@ -66,6 +66,15 @@ $mysql->desconectar();
 
     <div class="dashboard-layout">
         <main class="main-content">
+            <div class="section-header section-header-visual">
+              <div class="section-title">
+                <span class="section-icon">👥</span>
+                <div>
+                  <h2>Gestión de Empleados</h2>
+                  <p class="section-subtitle">Administra la información y el estado del personal</p>
+                </div>
+              </div>
+            </div>
             <div class="content-area">
                 <div class="content-header" style="display: flex; justify-content: space-between; align-items: center;">
                     <h2 class="content-title">Empleados</h2>
