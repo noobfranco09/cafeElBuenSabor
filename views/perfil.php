@@ -33,32 +33,48 @@ $icono = str_split($nombre)??"?";
     <?php include './components/logoutModal.php'; ?>
     <div class="dashboard-layout">
         <main class="main-content">
-            <div class="content-area">
-                <div class="content-header" style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
-                    <div class="perfil-avatar-big"><?php echo $icono[0] ?></div>
-                    <div>
-                        <h2 class="content-title" style="margin-bottom: 2px;">Mi Perfil</h2>
-                        <div class="perfil-rol">Rol: <?php echo $rol ?></div>
+            <div class="perfil-card-pro">
+                <div class="perfil-header-pro">
+                    <div class="perfil-header-bg"></div>
+                    <div class="perfil-avatar-pro"><?php echo $icono[0] ?></div>
+                    <div class="perfil-header-info">
+                        <h2 class="perfil-title-pro">¡Hola, <?php echo htmlspecialchars($nombre) ?>!</h2>
+                        <div class="perfil-rol-pro">Rol: <?php echo $rol ?></div>
+                        <div class="perfil-welcome-pro">Administra tu información personal y mantén tu cuenta segura.</div>
                     </div>
                 </div>
-                <form class="perfil-form">
-                    <div class="perfil-form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre) ?>" autocomplete="off">
+                <form class="perfil-form-pro">
+                    <div class="perfil-form-block">
+                        <div class="perfil-form-block-title">Datos personales</div>
+                        <div class="perfil-form-group-pro">
+                            <label for="nombre"><span class="perfil-input-icon">👤</span>Nombre</label>
+                            <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre) ?>" autocomplete="off">
+                        </div>
+                        <div class="perfil-form-group-pro">
+                            <label for="correo"><span class="perfil-input-icon">✉️</span>Correo</label>
+                            <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($correo) ?>" autocomplete="off">
+                        </div>
+                        <div class="perfil-form-group-pro">
+                            <label for="telefono"><span class="perfil-input-icon">📞</span>Teléfono</label>
+                            <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($telefono) ?>" autocomplete="off">
+                        </div>
                     </div>
-                    <div class="perfil-form-group">
-                        <label for="correo">Correo</label>
-                        <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($correo) ?>" autocomplete="off">
+                    <div class="perfil-form-block perfil-form-block-contraseña">
+                        <div class="perfil-form-block-title">Cambio de contraseña</div>
+                        <div class="perfil-form-group-pro">
+                            <label for="password-actual"><span class="perfil-input-icon">🔒</span>Contraseña actual</label>
+                            <input type="password" id="password-actual" name="password_actual" placeholder="••••••••">
+                        </div>
+                        <div class="perfil-form-group-pro">
+                            <label for="password-nueva"><span class="perfil-input-icon">🔑</span>Nueva contraseña</label>
+                            <input type="password" id="password-nueva" name="password_nueva" placeholder="••••••••">
+                        </div>
+                        <div class="perfil-form-group-pro">
+                            <label for="password-confirmar"><span class="perfil-input-icon">🔑</span>Confirmar nueva contraseña</label>
+                            <input type="password" id="password-confirmar" name="password_confirmar" placeholder="••••••••">
+                        </div>
                     </div>
-                    <div class="perfil-form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($telefono) ?>" autocomplete="off">
-                    </div>
-                    <div class="perfil-form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" id="password" name="password" placeholder="••••••••">
-                    </div>
-                    <button type="submit" class="perfil-btn-guardar">Guardar Cambios</button>
+                    <button type="submit" class="perfil-btn-guardar-pro"><span class="perfil-btn-icon">💾</span> Guardar Cambios</button>
                 </form>
             </div>
         </main>
