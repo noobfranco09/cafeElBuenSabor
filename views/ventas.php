@@ -34,11 +34,20 @@ $icono = str_split($nombre)??"?";
     <?php include './components/logoutModal.php'; ?>
     <div class="dashboard-layout">
         <main class="main-content">
+            <div class="section-header section-header-visual">
+              <div class="section-title">
+                <span class="section-icon">💵</span>
+                <div>
+                  <h2>Registro de Ventas</h2>
+                  <p class="section-subtitle">Consulta y gestiona todas las ventas realizadas</p>
+                </div>
+              </div>
+            </div>
             <div class="content-area">
                 <div class="content-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <h2 class="content-title">Registro de Ventas</h2>
                 </div>
-                <div class="filters-row">
+                <div class="filters-row" style="margin-bottom: 24px;">
                     <div>
                         <label for="fechaFiltro">Fecha:</label>
                         <input type="date" id="fechaFiltro" name="fechaFiltro">
@@ -60,69 +69,112 @@ $icono = str_split($nombre)??"?";
                         </select>
                     </div>
                 </div>
-                <div class="stats-grid" style="margin-bottom: 20px;">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon">💵</div>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">Ingresos por Fecha</span>
                         </div>
-                        <div class="stat-value">$265.50</div>
-                        <div class="stat-label">Ingresos del Día</div>
+                        <canvas id="chartIngresosFecha" height="120"></canvas>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon">👤</div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">Ingresos por Empleado</span>
                         </div>
-                        <div class="stat-value">$205.50</div>
-                        <div class="stat-label">Ingresos por Empleado</div>
+                        <canvas id="chartIngresosEmpleado" height="120"></canvas>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-icon">🍽️</div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span class="chart-title">Ingresos por Mesa</span>
                         </div>
-                        <div class="stat-value">$120.00</div>
-                        <div class="stat-label">Ingresos por Mesa</div>
+                        <canvas id="chartIngresosMesa" height="120"></canvas>
                     </div>
                 </div>
-                <div class="table-responsive" style="overflow-x:auto;">
-                    <table id="tablaVentas" class="display responsive nowrap" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID Venta</th>
-                                <th>Fecha</th>
-                                <th>Mesa</th>
-                                <th>Empleado</th>
-                                <th>Total</th>
-                                <th>Factura</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1001</td>
-                                <td>2024-06-19</td>
-                                <td>Mesa 1</td>
-                                <td>Juan Pérez</td>
-                                <td>$120.00</td>
-                                <td><button class="btn-pdf" onclick="alert('Generar PDF de factura 1001')">PDF</button></td>
-                            </tr>
-                            <tr>
-                                <td>1002</td>
-                                <td>2024-06-19</td>
-                                <td>Mesa 2</td>
-                                <td>María López</td>
-                                <td>$85.50</td>
-                                <td><button class="btn-pdf" onclick="alert('Generar PDF de factura 1002')">PDF</button></td>
-                            </tr>
-                            <tr>
-                                <td>1003</td>
-                                <td>2024-06-18</td>
-                                <td>Mesa 1</td>
-                                <td>Juan Pérez</td>
-                                <td>$60.00</td>
-                                <td><button class="btn-pdf" onclick="alert('Generar PDF de factura 1003')">PDF</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="ventas-table-card">
+                    <div class="ventas-table-header">
+                        <span class="ventas-table-title">Ventas Finalizadas</span>
+                    </div>
+                    <div class="table-responsive" style="overflow-x:auto;">
+                        <table id="tablaVentas" class="display responsive nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID Venta</th>
+                                    <th>Fecha</th>
+                                    <th>Mesa</th>
+                                    <th>Empleado</th>
+                                    <th>Total</th>
+                                    <th>Factura</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1001</td>
+                                    <td>2024-06-19</td>
+                                    <td>Mesa 1</td>
+                                    <td>Juan Pérez</td>
+                                    <td>$120.00</td>
+                                    <td><button class="btn-pdf">PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td>1002</td>
+                                    <td>2024-06-19</td>
+                                    <td>Mesa 2</td>
+                                    <td>María López</td>
+                                    <td>$85.50</td>
+                                    <td><button class="btn-pdf">PDF</button></td>
+                                </tr>
+                                <tr>
+                                    <td>1003</td>
+                                    <td>2024-06-18</td>
+                                    <td>Mesa 1</td>
+                                    <td>Juan Pérez</td>
+                                    <td>$60.00</td>
+                                    <td><button class="btn-pdf">PDF</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    new Chart(document.getElementById('chartIngresosFecha'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                            datasets: [{
+                                label: 'Ingresos',
+                                data: [120, 150, 90, 180, 200, 170, 140],
+                                backgroundColor: '#D2691E',
+                                borderRadius: 8
+                            }]
+                        },
+                        options: {responsive: true, plugins: {legend: {display: false}}}
+                    });
+                    new Chart(document.getElementById('chartIngresosEmpleado'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Juan', 'María', 'Pedro'],
+                            datasets: [{
+                                label: 'Ingresos',
+                                data: [320, 210, 150],
+                                backgroundColor: ['#A0522D', '#D2691E', '#fd7e14'],
+                                borderRadius: 8
+                            }]
+                        },
+                        options: {responsive: true, plugins: {legend: {display: false}}}
+                    });
+                    new Chart(document.getElementById('chartIngresosMesa'), {
+                        type: 'pie',
+                        data: {
+                            labels: ['Mesa 1', 'Mesa 2', 'Mesa 3'],
+                            datasets: [{
+                                label: 'Ingresos',
+                                data: [200, 150, 100],
+                                backgroundColor: ['#D2691E', '#A0522D', '#fd7e14']
+                            }]
+                        },
+                        options: {responsive: true}
+                    });
+                </script>
             </div>
         </main>
     </div>
@@ -131,15 +183,5 @@ $icono = str_split($nombre)??"?";
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#tablaVentas').DataTable({
-                responsive: true,
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-                }
-            });
-        });
-    </script>
 </body>
 </html> 

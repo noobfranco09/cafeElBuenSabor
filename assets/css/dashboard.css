@@ -2643,3 +2643,105 @@
             padding: 12px 4vw 10px 4vw;
           }
         }
+
+        /* Card de tabla de ventas finalizadas */
+        .ventas-table-card {
+          background: #fffdfa;
+          border-radius: 18px;
+          box-shadow: 0 4px 20px rgba(139, 69, 19, 0.10);
+          margin: 36px 0 0 0;
+          padding: 0 0 32px 0;
+          border: 1.5px solid #f5e6d6;
+          overflow: hidden;
+        }
+        .ventas-table-header {
+          background: linear-gradient(135deg, #D2691E 0%, #A0522D 100%);
+          padding: 22px 36px 16px 36px;
+          border-radius: 18px 18px 0 0;
+          margin-bottom: 18px;
+        }
+        .ventas-table-title {
+          color: #fff;
+          font-size: 1.3em;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+        }
+        .ventas-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 0;
+          background: #fffdfa;
+        }
+        .ventas-table th, .ventas-table td {
+          padding: 16px 18px;
+          text-align: left;
+        }
+        .ventas-table th {
+          background: #f5e6d6;
+          color: #8B4513;
+          font-weight: bold;
+          border-bottom: 2px solid #d7b899;
+        }
+        .ventas-table tr:nth-child(even) {
+          background: #f7f7fa;
+        }
+        .ventas-table tr:hover {
+          background: #ffe9b3;
+        }
+        .btn-pdf {
+          background: #1976d2;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 7px 18px;
+          font-size: 1em;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.2s;
+          box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+        }
+        .btn-pdf:hover {
+          background: #1565c0;
+          transform: translateY(-2px) scale(1.05);
+        }
+        /* Gráficos de control de ingresos */
+        .charts-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+          margin-bottom: 36px;
+        }
+        @media (max-width: 1100px) {
+          .charts-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        @media (max-width: 700px) {
+          .charts-grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+          }
+        }
+        .chart-container {
+          background: #fffdfa;
+          border-radius: 14px;
+          box-shadow: 0 2px 8px rgba(139, 69, 19, 0.08);
+          padding: 24px 18px 18px 18px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border: 1.5px solid #f5e6d6;
+        }
+        .chart-header {
+          width: 100%;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+        }
+        .chart-title {
+          color: #A0522D;
+          font-size: 1.1em;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+        }

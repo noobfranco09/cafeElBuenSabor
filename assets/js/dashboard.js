@@ -137,3 +137,107 @@ function confirmLogout(){
     })
   
 }
+
+$(document).ready(function() {
+  if ($('#tablaVentas').length) {
+    $('#tablaVentas').DataTable({
+      responsive: true,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+      }
+    });
+  }
+});
+
+// Funciones para el manejo de TBS (Pedidos)
+function toggleFilters() {
+    const filters = document.getElementById('ordersFilters');
+    if (!filters) return;
+    filters.style.display = filters.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleActiveSection() {
+    const content = document.getElementById('activeOrdersContent');
+    const icon = document.getElementById('activeToggleIcon');
+    const section = document.getElementById('pedidosActivosSection');
+    if (!content || !icon || !section) return;
+    if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.textContent = '⬆️';
+        section.classList.remove('collapsed');
+    } else {
+        content.classList.add('collapsed');
+        icon.textContent = '⬇️';
+        section.classList.add('collapsed');
+    }
+}
+
+function togglePreparationSection() {
+    const content = document.getElementById('preparationOrdersContent');
+    const icon = document.getElementById('preparationToggleIcon');
+    const section = document.getElementById('pedidosPreparacionSection');
+    if (!content || !icon || !section) return;
+    if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.textContent = '⬆️';
+        section.classList.remove('collapsed');
+    } else {
+        content.classList.add('collapsed');
+        icon.textContent = '⬇️';
+        section.classList.add('collapsed');
+    }
+}
+
+function toggleCompletedSection() {
+    const content = document.getElementById('completedOrdersContent');
+    const icon = document.getElementById('completedToggleIcon');
+    const section = document.getElementById('pedidosCompletadosSection');
+    if (!content || !icon || !section) return;
+    if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.textContent = '⬆️';
+        section.classList.remove('collapsed');
+    } else {
+        content.classList.add('collapsed');
+        icon.textContent = '⬇️';
+        section.classList.add('collapsed');
+    }
+}
+
+function refreshOrders() {
+    // Aquí irá la lógica para refrescar todos los pedidos
+    console.log('Refrescando pedidos...');
+}
+
+function refreshActiveOrders() {
+    // Aquí irá la lógica para refrescar pedidos activos
+    console.log('Refrescando pedidos activos...');
+}
+
+function refreshPreparationOrders() {
+    // Aquí irá la lógica para refrescar pedidos en preparación
+    console.log('Refrescando pedidos en preparación...');
+}
+
+function refreshCompletedOrders() {
+    // Aquí irá la lógica para refrescar pedidos completados
+    console.log('Refrescando pedidos completados...');
+}
+
+function applyFilters() {
+    // Aquí irá la lógica para aplicar filtros
+    console.log('Aplicando filtros...');
+}
+
+function clearFilters() {
+    // Aquí irá la lógica para limpiar filtros
+    if (document.getElementById('statusFilter')) document.getElementById('statusFilter').value = '';
+    if (document.getElementById('dateFilter')) document.getElementById('dateFilter').value = '';
+    if (document.getElementById('searchFilter')) document.getElementById('searchFilter').value = '';
+    console.log('Filtros limpiados...');
+}
+
+// Auto-refresh cada 30 segundos (solo si existe la sección de pedidos)
+if (document.getElementById('pedidosActivosSection')) {
+    setInterval(refreshOrders, 30000);
+}
