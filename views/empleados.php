@@ -46,7 +46,7 @@ $mysql->desconectar();
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.css">
     <title>Empleados</title>
 </head>
 <body>
@@ -342,7 +342,7 @@ $mysql->desconectar();
 
     
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="../assets\node_modules\sweetalert2\dist\sweetalert2.all.min.js"></script>
+    
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
