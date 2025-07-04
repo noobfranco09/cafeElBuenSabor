@@ -7,6 +7,16 @@ if (!isset($_SESSION["id"])){
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
 $icono = str_split($nombre)??"?";
+
+//Obtener las mesas
+require_once '../models/mySql.php';
+$mysql = new MySQL();
+$mysql->conectar();
+$consulta = "SELECT * FROM mesas";
+$stmtMesas = $mysql->obtenerConexion()->query($consulta);
+$mysql->desconectar();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -37,13 +47,15 @@ $icono = str_split($nombre)??"?";
                 <div class="qr-card-header">
                     <div class="qr-avatar"><i class="bi bi-qr-code"></i></div>
                     <div class="qr-title">Generar Código QR</div>
-                    <div class="qr-desc">Seleccione el elemento para el cual desea generar un código QR.</div>
+                    <div class="qr-desc">Seleccione la mesa para la cual desea generar un código QR.</div>
                 </div>
-                <form method="post" action="../controller/crearQr.php">
+                <form method="POST" action="../controller/crearQr.php">
                     <div class="mb-4">
-                        <label for="selectElemento" class="form-label fw-semibold">Elemento</label>
-                        <select class="form-select form-select-lg" id="selectElemento" name="elemento" required>
-                            <!-- Opciones serán agregadas dinámicamente -->
+                        <label for="selectMesa" class="form-label fw-semibold">Mesa</label>
+                        <select class="form-select form-select-lg" id="selectMesa" name="mesa" required>
+                            <?php while($mesas = $stmtMesas->fetch(PDO::FETCH_ASSOC)): ?>
+                                <option value="<?php echo $mesas["idMesa"] ?>"><?php echo $mesas["numero"] ?></option>
+                            <?php endwhile; ?>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center gap-2">

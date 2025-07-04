@@ -1,7 +1,7 @@
 <?php
 require '.././libraries/phpqrcode/qrlib.php';
 require '../models/mySql.php';
-require './funcionSanitizar.php';
+
 
 function generarQr($mesa)
 {
@@ -13,10 +13,7 @@ function generarQr($mesa)
     $idMesa = [
         "idMesa" => $mesa
     ];
-    $validacion = verificarVariables($idMesa);
-    if ($validacion == false) {
-        die("Mesa no encontrada");
-    }
+    
     $db = new MySQL();
     $db->conectar();
     $conexion = $db->obtenerConexion();
@@ -43,9 +40,18 @@ function generarQr($mesa)
         die("error al insertar en la base de datos");
     }
     $db-> desconectar();
-    QRcode::png($url, $ubicacionQr);
+    try{
+        QRcode::png($url, $ubicacionQr);
+        return true;
+    }catch(Throwable $e){
+        return false;
+    }
+    
+        
 }
-;
+
+
+
 
 
 ?>
