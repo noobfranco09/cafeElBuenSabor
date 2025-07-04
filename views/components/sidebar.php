@@ -32,6 +32,20 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="/views/mesas.php" class="sidebar-link <?php echo (
+                        $activePage === 'mesas') ? 'active' : ''; ?>">
+                        <span class="sidebar-icon"><i class="bi bi-table"></i></span>
+                        Mesas
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="/views/rol.php" class="sidebar-link <?php echo (
+                        $activePage === 'rol') ? 'active' : ''; ?>">
+                        <span class="sidebar-icon"><i class="bi bi-shield-lock"></i></span>
+                        Roles
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a href="/views/productos.php" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span>
                         Productos

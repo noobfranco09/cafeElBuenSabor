@@ -1041,98 +1041,120 @@
             padding: 1rem;
         }
 
+        /* Card de Pedido Activo - Ultra Fácil para Cocinero */
         .order-card {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            border-radius: 12px;
-            background: #fff;
-            margin-bottom: 24px;
-            padding: 0 0 12px 0;
+            background: #fcfcfa;
+            border-radius: 28px;
+            box-shadow: none;
+            border: 1.5px solid #f0ede7;
+            padding: 36px 32px 24px 32px;
+            margin-bottom: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            min-width: 260px;
             max-width: 420px;
             width: 100%;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.22em;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            color: #444;
+            letter-spacing: 0.2px;
+            transition: border 0.2s, background 0.2s;
         }
-
+        .order-card:hover {
+            border: 1.5px solid #e0dacb;
+            background: #f7f6f3;
+        }
         .order-header {
-            border-radius: 12px 12px 0 0;
-            background: #f7f7fa;
-            padding: 16px 20px 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 700;
+            font-size: 1.25em;
+            color: #3d3d3d;
+            margin-bottom: 6px;
         }
-
-        .order-number {
-            font-size: 1.1em;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .order-time {
-            color: #888;
-            font-size: 0.95em;
-        }
-
         .order-items {
-            padding: 10px 20px 0 20px;
+            margin: 12px 0 0 0;
         }
-
         .order-item {
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .order-item:last-child {
-            border-bottom: none;
-        }
-
-        .item-header {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1em;
+            gap: 12px;
+            font-size: 1.08em;
+            color: #555;
+            padding: 3px 0;
         }
-
-        .item-quantity {
-            font-weight: 600;
-            color: #6c63ff;
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05em;
+            color: #888;
+            margin-top: 10px;
         }
-
-        .item-name {
+        .order-note {
+            background: #f6f8f2;
+            border-left: 6px solid #b7e4c7;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 12px;
+            font-size: 1.08em;
+            color: #3d3d3d;
+            font-style: italic;
             font-weight: 500;
         }
-
-        .item-notes {
-            display: inline-block;
-            margin-top: 4px;
-            background: #ffe9b3;
-            color: #7a5c00;
-            font-size: 1.15em;
-            border-radius: 6px;
-            padding: 7px 18px;
-            font-style: italic;
-            font-weight: bold;
-        }
-
-        .item-notes.empty {
-            background: #f3f3f3;
-            color: #aaa;
+        .order-note strong {
+            color: #40916c;
             font-style: normal;
-            font-weight: normal;
-            font-size: 1em;
-            padding: 3px 10px;
+            font-weight: 700;
         }
-
-        .order-footer {
-            padding: 10px 20px 0 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
         .order-actions {
             display: flex;
-            gap: 10px;
+            gap: 24px;
+            justify-content: flex-end;
+            margin-top: 18px;
+        }
+        .order-actions .btn-danger {
+            background: #f8f9fa;
+            color: #b52a37;
+            border: 2px solid #f3c2c7;
+            border-radius: 12px;
+            padding: 12px 32px;
+            font-weight: 700;
+            font-size: 1.08em;
+            box-shadow: none;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .order-actions .btn-danger:hover {
+            background: #ffe3e6;
+            color: #fff;
+            border: 2px solid #b52a37;
+        }
+        .order-actions .btn-success {
+            background: #f8f9fa;
+            color: #40916c;
+            border: 2px solid #b7e4c7;
+            border-radius: 12px;
+            padding: 12px 32px;
+            font-weight: 700;
+            font-size: 1.08em;
+            box-shadow: none;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+        }
+        .order-actions .btn-success:hover {
+            background: #d8f3dc;
+            color: #fff;
+            border: 2px solid #40916c;
+        }
+        @media (max-width: 700px) {
+            .order-card {
+                max-width: 100%;
+                padding: 18px 6px 12px 6px;
+                font-size: 1em;
+            }
+            .order-actions .btn-danger, .order-actions .btn-success {
+                padding: 10px 10px;
+                font-size: 1em;
+            }
         }
 
         /* Filtros y PDF en ventas */
@@ -2744,4 +2766,183 @@
           font-size: 1.1em;
           font-weight: 700;
           letter-spacing: 0.5px;
+        }
+
+        /* Botones de acción para la tabla de mesas */
+        #tablaMesas .btn-editar {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-right: 4px;
+            transition: background 0.2s;
+        }
+        #tablaMesas .btn-editar:hover {
+            background-color: #e0a800;
+        }
+        #tablaMesas .btn-eliminar {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            transition: background 0.2s;
+        }
+        #tablaMesas .btn-eliminar:hover {
+            background-color: #b52a37;
+        }
+
+        /* Botones de acción para la tabla de roles */
+        #tablaRoles .btn-editar {
+            background-color: #17a2b8;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-right: 4px;
+            transition: background 0.2s;
+        }
+        #tablaRoles .btn-editar:hover {
+            background-color: #117a8b;
+        }
+        #tablaRoles .btn-eliminar {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            transition: background 0.2s;
+        }
+        #tablaRoles .btn-eliminar:hover {
+            background-color: #b52a37;
+        }
+
+        /* Card de Pedido Activo - Diseño Moderno y Visualmente Claro (borde negro fino) */
+        .order-card-modern {
+          background: #fff;
+          border-radius: 20px;
+          box-shadow: 0 4px 24px rgba(60, 60, 60, 0.07);
+          border: 1.5px solid #222;
+          padding: 28px 28px 20px 24px;
+          margin-bottom: 32px;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          max-width: 420px;
+          width: 100%;
+          font-family: 'Segoe UI', 'Arial', sans-serif;
+          font-size: 1.18em;
+          color: #333;
+          transition: box-shadow 0.2s, border 0.2s;
+        }
+        .order-card-modern:hover {
+          box-shadow: 0 8px 32px rgba(60, 60, 60, 0.13);
+          border: 1.5px solid #111;
+        }
+        .order-card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-weight: 700;
+          font-size: 1.15em;
+          margin-bottom: 6px;
+        }
+        .order-card-number {
+          color: #27ae60;
+          font-size: 1.1em;
+          margin-right: 12px;
+        }
+        .order-card-time {
+          color: #888;
+          font-size: 0.95em;
+        }
+        .order-card-table {
+          color: #2d9cdb;
+          font-weight: 600;
+          font-size: 1em;
+        }
+        .order-card-items {
+          margin: 10px 0 0 0;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .order-card-item {
+          color: #555;
+          font-size: 1em;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .order-card-footer {
+          margin-top: 8px;
+          color: #b48a78;
+          font-size: 1em;
+        }
+        .order-card-client {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .order-card-note {
+          background: #f0f7e9;
+          border-left: 5px solid #6fcf97;
+          border-radius: 8px;
+          padding: 10px 16px;
+          margin-top: 10px;
+          font-size: 1.05em;
+          color: #3d3d3d;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .order-card-note i {
+          color: #27ae60;
+          font-size: 1.2em;
+        }
+        .order-card-actions {
+          display: flex;
+          gap: 18px;
+          justify-content: flex-end;
+          margin-top: 14px;
+        }
+        .order-btn-cancel, .order-btn-prepare {
+          border: none;
+          border-radius: 10px;
+          padding: 12px 28px;
+          font-weight: 700;
+          font-size: 1em;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+        }
+        .order-btn-cancel {
+          background: #fbeee6;
+          color: #eb5757;
+        }
+        .order-btn-cancel:hover {
+          background: #eb5757;
+          color: #fff;
+        }
+        .order-btn-prepare {
+          background: #eafaf1;
+          color: #27ae60;
+        }
+        .order-btn-prepare:hover {
+          background: #27ae60;
+          color: #fff;
+        }
+        @media (max-width: 700px) {
+          .order-card-modern {
+            max-width: 100%;
+            padding: 16px 6px 12px 6px;
+            font-size: 1em;
+          }
+          .order-btn-cancel, .order-btn-prepare {
+            padding: 10px 10px;
+            font-size: 1em;
+          }
         }
