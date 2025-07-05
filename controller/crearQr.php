@@ -1,21 +1,25 @@
 <?php
 if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $input = file_get_contents("php://input");
+    $data = json_decode($input,true);
  require '../functions/crearQr.php';
-    if(isset($_POST["mesa"]) && filter_var($_POST["mesa"],FILTER_VALIDATE_INT)){
-        $idMesa = $_POST["mesa"];
-        if(generarQr($idMesa)){
-            header("location: ../views/generarQr.php");
-            exit(); 
+    
+        $idMesa = $data["idMesa"];
+        $ubicacionQr = generarQr($idMesa);
+        if($ubicacionQr!="error"){
+            echo json_encode([
+                'data'=>$ubicacionQr,
+                'mesa'=>$idMesa
+            ]);
+            exit();
         }else{
-            header("location: ../views/generarQr.php");
-            exit(); 
-            //Por errror
+            echo json_encode([
+                'data'=>'Ocurrio un error'
+            ]);
+            exit();
         }
-    }
-    else{
-    header("location: ../views/generarQr.php");
-    exit();
-    }
+    
+   
     
 }else{
     header("location: ../views/generarQr.php");

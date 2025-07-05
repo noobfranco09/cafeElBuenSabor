@@ -49,7 +49,7 @@ $mysql->desconectar();
                     <div class="qr-title">Generar Código QR</div>
                     <div class="qr-desc">Seleccione la mesa para la cual desea generar un código QR.</div>
                 </div>
-                <form method="POST" action="../controller/crearQr.php">
+                <form>
                     <div class="mb-4">
                         <label for="selectMesa" class="form-label fw-semibold">Mesa</label>
                         <select class="form-select form-select-lg" id="selectMesa" name="mesa" required>
@@ -58,15 +58,37 @@ $mysql->desconectar();
                             <?php endwhile; ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
+                    <button type="submit" id="btnGenerarQr" class="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
                         <i class="bi bi-qr-code"></i> Generar QR
                     </button>
                 </form>
             </div>
+            
         </main>
     </div>
-    <script src="../assets/js/dashboard.js"></script>
+
+
+        <!-- MODAL PARA MOSTRAR LOS QR -->
+    <div class="modal" tabindex="-1" id="mdlVerQr">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">QR</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="mdlBody">
+                                
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>                        
+    
+    
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/generarQr.js"></script>
     
 </body>
 </html> 

@@ -42,9 +42,9 @@ function generarQr($mesa)
     $db-> desconectar();
     try{
         QRcode::png($url, $ubicacionQr);
-        return true;
+        return $ubicacionQr;
     }catch(Throwable $e){
-        return false;
+        return "error";
     }
     
         

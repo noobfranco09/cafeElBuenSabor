@@ -44,3 +44,15 @@
         font-size: 1.1rem;
     }
 }
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.qr-img {
+  max-width: 100%;
+  height: auto;
+}
