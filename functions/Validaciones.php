@@ -273,7 +273,7 @@ class Validaciones{
 
     }
 
-    public function validarAgregarRol()
+    public function validarRolAgregar()
     {
 
         require_once '../models/mySql.php';
@@ -303,9 +303,41 @@ class Validaciones{
             $errores["descripcionInvalida"] = "La descripción no es valida";
             return $errores;
         }
-
+        
     }
 
+    public function validarRolEditar()
+    {
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["nombreRolEditar"])) && empty(trim($this->datos["descripcionRolEditar"])))
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $nombreRolEditar = $this->datos["nombreRolEditar"];
+        $descripcionRolEditar = $this->datos["nombreRolEditar"];
+
+        // Validar nombreRol (solo letras, mayús/minús y espacios, mínimo 3 letras, máx 50)
+        if (!preg_match("/^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]{3,50}$/u", $nombreRolEditar)) {
+            $errores["nombreInvalido"] = "El nombre no es válido.";
+            return $errores;
+        }
+
+        // Validar descripcionRol (permite letras, números, signos básicos, sin < > ni comillas peligrosas)
+        if (!preg_match("/^[^<>\"']{5,200}$/u", $descripcionRolEditar)) {
+            $errores["descripcionInvalida"] = "La descripción no es valida";
+            return $errores;
+        }
+
+    }
 
 }
 

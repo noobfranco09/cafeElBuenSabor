@@ -5,7 +5,7 @@ session_start();
 
 $validaciones = new Validaciones($_POST);
 
-$errores = $validaciones->validarRolAgregar();
+$errores = $validaciones->validarRolEditar();
 
 if(!empty($errores)){
     $_SESSION["errores"]=$errores;
@@ -20,15 +20,17 @@ $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
-$nombreRol = $_POST["nombreRol"];
-$descripcionRol = $_POST["descripcionRol"];
+$idRolEditar = $_POST['idRolEditar'];
+$nombreRolEditar = $_POST["nombreRolEditar"];
+$descripcionRolEditar = $_POST["descripcionRolEditar"];
 
 $rol = [
-    "nombre" => $nombreRol,
-    "descripcion" => $descripcionRol,
+    "idRoll" => $idRolEditar,
+    "nombre" => $nombreRolEditar,
+    "descripcion" => $descripcionRolEditar,
 ];
 
-$consulta = "INSERT INTO roles (nombre, descripcion, estado) VALUES (:nombre, :descripcion, 'SinVincular')";
+$consulta = "UPDATE roles SET nombre = :nombre, descripcion = :descripcion WHERE idRoll = :idRoll";
 
 try {
 

@@ -85,9 +85,14 @@ $mysql->desconectar();
 
                             <td>
 
-                                <button type="button" class="btn btn-warning btn-sm btnEditar"><i class="bi bi-pencil-square "></i></button>
+                                <button type="button" class="btn btn-warning btn-sm btnEditar" 
+                                data-bs-toggle="modal" data-bs-target="#ModalEditarRol" data-id="<?php echo $mostrarRoles["idRoll"]?>"
+                                data-nombre="<?php echo $mostrarRoles["nombre"]?>"
+                                data-descripcion="<?php echo $mostrarRoles["descripcion"]?>"><i class="bi bi-pencil-square "></i></button>
+
                                 <?php if($mostrarRoles["estado"]=="SinVincular"): ?>
-                                <button type="button" class="btn btn-danger btn-sm btnDesactivar"><i class="bi bi-trash "></i></button></a>
+                                <button type="button" class="btn btn-danger btn-sm btnEliminar" data-id="<?php echo $mostrarRoles["idRoll"]?>"
+                                data-nombre="<?php echo $mostrarRoles["nombre"]?>"><i class="bi bi-trash "></i></button></a>
                                 <?php endif; ?>    
                                       
                             </td>
@@ -131,45 +136,43 @@ $mysql->desconectar();
     </div>
   </div>
 
-<!-- Modal Editar Rol -->
-<div class="modal fade" id="mdlEditarRol" tabindex="-1" aria-labelledby="mdlEditarRolLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="mdlEditarRolLabel">Editar Rol</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formEditarRol" action="#" method="POST" >
-          <input type="hidden" name="idRol" id="idRolEditar">
-          <div class="mb-3">
-            <label for="nombreRolEditar" class="form-label">Nombre del Rol</label>
-            <input type="text" class="form-control" id="nombreRolEditar" name="nombreRol" required>
-          </div>
-          <div class="mb-3">
-            <label for="descripcionRolEditar" class="form-label">Descripción</label>
-            <input type="text" class="form-control" id="descripcionRolEditar" name="descripcionRol" required>
-          </div>
-          <div class="mb-3">
-            <label for="permisosRolEditar" class="form-label">Permisos</label>
-            <input type="text" class="form-control" id="permisosRolEditar" name="permisosRol" required>
-          </div>
+  <!-- Modal Editar Rol -->
+  <div class="modal fade" id="ModalEditarRol" tabindex="-1" aria-labelledby="ModalEditarRolLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalEditarRolLabel">Editar Rol</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarRol" action="../controller/editarRol.php" method="POST" >
+            <input type="hidden" name="idRolEditar" id="idRolEditar">
+            <div class="mb-3">
+              <label for="nombreRolEditar" class="form-label">Nombre del Rol</label>
+              <input type="text" class="form-control" id="nombreRolEditar" name="nombreRolEditar" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcionRolEditar" class="form-label">Descripción</label>
+              <input type="text" class="form-control" id="descripcionRolEditar" name="descripcionRolEditar" required>
+            </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-warning" form="formEditarRol">Actualizar Rol</button>
-          </div>
-        </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-warning" form="formEditarRol">Actualizar Rol</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/roles.js"></script>
     <script>
         $(document).ready(function() {
             $('#tablaRoles').DataTable({
