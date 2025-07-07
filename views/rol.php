@@ -8,6 +8,17 @@ if (!isset($_SESSION["id"])){
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
 $icono = str_split($nombre)??"?";
+
+require_once '../models/mySql.php';
+
+$mysql = new MySQL();
+$mysql->conectar();
+$conexion = $mysql->obtenerConexion();
+
+$obtenerRoles = $conexion->query("SELECT * FROM roles");
+
+$mysql->desconectar();
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +62,7 @@ $icono = str_split($nombre)??"?";
             <div class="content-area">
                 <div class="content-header" style="display: flex; justify-content: space-between; align-items: center;">
                     <h2 class="content-title">Roles</h2>
-                    <button class="action-button" style="margin-bottom: 10px;" id="btnAgregarRol">Agregar Rol</button>
+                    <button class="action-button" style="margin-bottom: 10px;" data-bs-toggle="modal" data-bs-target="#ModalAgregarRol">Agregar Rol</button>
                 </div>
                 <div class="table-responsive" style="overflow-x:auto;">
                     <table id="tablaRoles" class="display responsive nowrap" style="width:100%">
@@ -59,49 +70,66 @@ $icono = str_split($nombre)??"?";
                             <tr>
                                 <th>Nombre del Rol</th>
                                 <th>Descripción</th>
-                                <th>Permisos</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaRolesBody">
-                            <!-- Aquí se llenarán los roles dinámicamente -->
+                        <tbody>
+                        
+                        <?php while($mostrarRoles = $obtenerRoles->fetch(PDO::FETCH_ASSOC)) :   ?>
+
+                          <tr>
+                            <td><?php echo $mostrarRoles["nombre"] ?></td>
+                            <td><?php echo $mostrarRoles["descripcion"] ?></td>
+                            <td><?php echo $mostrarRoles["estado"] ?></td>
+
+                            <td>
+
+                                <button type="button" class="btn btn-warning btn-sm btnEditar"><i class="bi bi-pencil-square "></i></button>
+                                <?php if($mostrarRoles["estado"]=="SinVincular"): ?>
+                                <button type="button" class="btn btn-danger btn-sm btnDesactivar"><i class="bi bi-trash "></i></button></a>
+                                <?php endif; ?>    
+                                      
+                            </td>
+                          </tr>
+
+                        <?php endwhile; ?>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
-<!-- Modal Agregar Rol -->
-<div class="modal fade" id="mdlAgregarRol" tabindex="-1" aria-labelledby="mdlAgregarRolLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="mdlAgregarRolLabel">Agregar Rol</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formAgregarRol" action="#" method="POST" >
-          <div class="mb-3">
-            <label for="nombreRol" class="form-label">Nombre del Rol</label>
-            <input type="text" class="form-control" id="nombreRol" name="nombreRol" placeholder="Ingrese el nombre del rol" required>
-          </div>
-          <div class="mb-3">
-            <label for="descripcionRol" class="form-label">Descripción</label>
-            <input type="text" class="form-control" id="descripcionRol" name="descripcionRol" placeholder="Ingrese una descripción" required>
-          </div>
-          <div class="mb-3">
-            <label for="permisosRol" class="form-label">Permisos</label>
-            <input type="text" class="form-control" id="permisosRol" name="permisosRol" placeholder="Ej: Ver, Editar, Eliminar" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-warning" form="formAgregarRol">Agregar Rol</button>
+
+  <!-- Modal Agregar Rol -->
+  <div class="modal fade" id="ModalAgregarRol" tabindex="-1" aria-labelledby="ModalAgregarRolLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalAgregarRolLabel">Agregar Rol</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="../controller/agregarRol.php" method="POST" >
+            <div class="mb-3">
+              <label for="nombreRol" class="form-label">Nombre del Rol</label>
+              <input type="text" class="form-control" id="nombreRol" name="nombreRol" placeholder="Ingrese el nombre del rol" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcionRol" class="form-label">Descripción</label>
+              <input type="text" class="form-control" id="descripcionRol" name="descripcionRol" placeholder="Ingrese una descripción" required>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-warning">Agregar Rol</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <!-- Modal Editar Rol -->
 <div class="modal fade" id="mdlEditarRol" tabindex="-1" aria-labelledby="mdlEditarRolLabel" aria-hidden="true">
@@ -126,11 +154,12 @@ $icono = str_split($nombre)??"?";
             <label for="permisosRolEditar" class="form-label">Permisos</label>
             <input type="text" class="form-control" id="permisosRolEditar" name="permisosRol" required>
           </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-warning" form="formEditarRol">Actualizar Rol</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-warning" form="formEditarRol">Actualizar Rol</button>
       </div>
     </div>
   </div>

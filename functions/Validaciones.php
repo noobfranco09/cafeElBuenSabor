@@ -267,7 +267,40 @@ class Validaciones{
 
         // Validar descripción (texto libre, longitud opcionalmente limitada)
         if (!preg_match("/^.{0,500}$/s", $descripcion)) {
-            $errores["descripcionInvalida"] = "La descripción no puede superar los 500 caracteres.";
+            $errores["descripcionInvalida"] = "La descripción no es valida";
+            return $errores;
+        }
+
+    }
+
+    public function validarAgregarRol()
+    {
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["nombreRol"])) && empty(trim($this->datos["descripcionRol"])))
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $nombreRol = $this->datos["nombreRol"];
+        $descripcionRol = $this->datos["nombreRol"];
+
+        // Validar nombreRol (solo letras, mayús/minús y espacios, mínimo 3 letras, máx 50)
+        if (!preg_match("/^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]{3,50}$/u", $nombreRol)) {
+            $errores["nombreInvalido"] = "El nombre no es válido.";
+            return $errores;
+        }
+
+        // Validar descripcionRol (permite letras, números, signos básicos, sin < > ni comillas peligrosas)
+        if (!preg_match("/^[^<>\"']{5,200}$/u", $descripcionRol)) {
+            $errores["descripcionInvalida"] = "La descripción no es valida";
             return $errores;
         }
 
