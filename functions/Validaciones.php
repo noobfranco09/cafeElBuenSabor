@@ -274,6 +274,69 @@ class Validaciones{
     }
 
 
+    public function vldActualizarPerfil(){
+        $errores = [];
+
+
+        if(empty(trim($this->datos["nombre"]??""))||
+        empty(trim($this->datos["telefono"]??""))||
+        empty(trim($this->datos["correo"]??""))){
+            $errores["datosVacios"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        session_start();
+        $nombre = $this->datos["nombre"];
+        $telefono = $this->datos["telefono"];
+        $correo = $this->datos["correo"];
+        $id = $_SESSION["id"];
+        
+
+
+        if(!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$correo) ||
+         !filter_var($correo,FILTER_VALIDATE_EMAIL)){
+            $errores["errorCorreo"]="Este correo no es valido";
+            return $errores;
+        }
+
+        if(!preg_match('/^[a-zA-Z0-9_]+$/',$nombre)){
+            $errores["errorNombre"] = "Este nombre no es valido";
+            return $errores;
+        }
+
+
+        if(!preg_match('/^[0-9]+$/',$telefono)){
+            $errores["errorTelefono"]="Este telefono no es valido";
+            return $errores;
+        }
+       
+
+
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+
+        $mysql->conectar();
+        $consulta = "SELECT * FROM  usuario WHERE correo = :correo";
+
+        $stmt = $mysql->obtenerConexion()->prepare($consulta);
+        $stmt->bindParam(":correo", $correo,PDO::PARAM_STR);
+        $stmt->execute();
+        $cntFilas = $stmt->rowCount();
+        $datos = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        
+
+        if($cntFilas > 0 && $datos["idUsuario"]!=$id){
+          $errores["correoEnUso"]="Este correo ya esta en uso";
+          return $errores;
+        }
+    
+        return  $errores;
+    }
+
+
 }
 
 ?>

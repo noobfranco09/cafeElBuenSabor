@@ -4,11 +4,30 @@ if (!isset($_SESSION["id"])){
     header("Location: ./login.php");
     exit();
 }
-$nombre = $_SESSION["nombre"]??"Desconocido";
-$rol = $_SESSION["rol"]??"Desconocido";
-$correo = $_SESSION["correo"]??"correo@ejemplo.com";
-$telefono = $_SESSION["telefono"]??"";
-$icono = str_split($nombre)??"?";
+require_once '../models/mySql.php';
+$id = $_SESSION["id"]??"";
+$mysql = new MySQL();
+$mysql->conectar();
+$consulta = "SELECT usuario.idUsuario,usuario.nombre,usuario.fechaIngreso,usuario.telefono,usuario.correo,usuario.estado,roles.nombre AS nombreRol FROM usuario
+JOIN roles ON roles.idRoll = usuario.idRoll 
+WHERE idUsuario =:id";
+$stmt = $mysql->obtenerConexion()->prepare($consulta);
+$stmt->bindParam(":id",$id,PDO::PARAM_INT);
+$stmt->execute();
+
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+$nombre = $usuario["nombre"]??"Desconocido";
+$rol =  $usuario["nombreRol"]??"Desconocido";   
+$correo =  $usuario["correo"]??"Desconocido";
+$telefono = $usuario["telefono"]??"Desconocido";   
+$icono = str_split($usuario["nombre"]);
+
+
+$errores = $_SESSION["errores"]??[];
+$old = $_SESSION["old"]??[];
+unset($_SESSION["old"],$_SESSION["errores"]);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -33,50 +52,64 @@ $icono = str_split($nombre)??"?";
     <?php include './components/logoutModal.php'; ?>
     <div class="dashboard-layout">
         <main class="main-content">
-            <div class="perfil-card-pro">
-                <div class="perfil-header-pro">
-                    <div class="perfil-header-bg"></div>
-                    <div class="perfil-avatar-pro"><?php echo $icono[0] ?></div>
-                    <div class="perfil-header-info">
-                        <h2 class="perfil-title-pro">¡Hola, <?php echo htmlspecialchars($nombre) ?>!</h2>
-                        <div class="perfil-rol-pro">Rol: <?php echo $rol ?></div>
-                        <div class="perfil-welcome-pro">Administra tu información personal y mantén tu cuenta segura.</div>
+            <div class="container min-vh-100 d-flex justify-content-center align-items-center">
+                <div class="card shadow perfil-form-card" style="max-width: 400px; width: 100%;">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <div class="perfil-avatar-pro mx-auto mb-2" style="width: 60px; height: 60px; background: #f1f1f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                                <?php echo $icono[0] ?>
+                            </div>
+                            <h2 class="h5 mb-1">¡Hola, <?php echo htmlspecialchars($nombre) ?>!</h2>
+                            <div class="text-muted mb-1">Rol: <?php echo $rol ?></div>
+                            <div class="small text-secondary">Administra tu información personal y mantén tu cuenta segura.</div>
+                        </div>
+                        <form action="../controller/actualizarPerfil.php" method="POST">
+                            <?php if(!empty($errores["datosVacios"]) && isset($errores["datosVacios"])): ?>
+                                     <p class="text-start text-danger"><?php echo $errores["datosVacios"] ?></p>
+                            <?php endif; ?>
+
+                            <?php if(!empty($errores["errorPerfil"]) && isset($errores["errorPerfil"])): ?>
+                                     <p class="text-start text-danger"><?php echo $errores["errorPerfil"] ?></p>
+                            <?php endif; ?>
+
+
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">
+                                    <i class="bi bi-person me-2"></i>Nombre
+                                </label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($nombre) ?>" autocomplete="off">
+                                 <?php if(!empty($errores["errorNombre"]) && isset($errores["errorNombre"])): ?>
+                                    <p class="text-start text-danger"><?php echo $errores["errorNombre"] ?></p>
+                                <?php endif; ?>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">
+                                    <i class="bi bi-envelope me-2"></i>Correo
+                                </label>
+                                <input type="email" class="form-control" id="correo" name="correo" required value="<?php echo htmlspecialchars($correo) ?>" autocomplete="off">
+                                    <?php if(!empty($errores["errorCorreo"]) && isset($errores["errorCorreo"])): ?>
+                                        <p class="text-start text-danger"><?php echo $errores["errorCorreo"] ?></p>
+                                    <?php endif; ?>
+                                    <?php if(!empty($errores["correoEnUso"]) && isset($errores["correoEnUso"])): ?>
+                                        <p class="text-start text-danger"><?php echo $errores["correoEnUso"] ?></p>
+                                    <?php endif; ?>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">
+                                    <i class="bi bi-telephone me-2"></i>Teléfono
+                                </label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" required value="<?php echo htmlspecialchars($telefono) ?>" autocomplete="off" >
+                                    <?php if(!empty($errores["errorTelefono"]) && isset($errores["errorTelefono"])): ?>
+                                        <p class="text-start text-danger"><?php echo $errores["errorTelefono"] ?></p>
+                                    <?php endif; ?>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100">
+                                <i class="bi bi-save me-2"></i>Guardar Cambios
+                            </button>
+                        </form>
                     </div>
                 </div>
-                <form class="perfil-form-pro">
-                    <div class="perfil-form-block">
-                        <div class="perfil-form-block-title">Datos personales</div>
-                        <div class="perfil-form-group-pro">
-                            <label for="nombre"><span class="perfil-input-icon">👤</span>Nombre</label>
-                            <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre) ?>" autocomplete="off">
-                        </div>
-                        <div class="perfil-form-group-pro">
-                            <label for="correo"><span class="perfil-input-icon">✉️</span>Correo</label>
-                            <input type="email" id="correo" name="correo" value="<?php echo htmlspecialchars($correo) ?>" autocomplete="off">
-                        </div>
-                        <div class="perfil-form-group-pro">
-                            <label for="telefono"><span class="perfil-input-icon">📞</span>Teléfono</label>
-                            <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($telefono) ?>" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="perfil-form-block perfil-form-block-contraseña">
-                        <div class="perfil-form-block-title">Cambio de contraseña</div>
-                        <div class="perfil-form-group-pro">
-                            <label for="password-actual"><span class="perfil-input-icon">🔒</span>Contraseña actual</label>
-                            <input type="password" id="password-actual" name="password_actual" placeholder="••••••••">
-                        </div>
-                        <div class="perfil-form-group-pro">
-                            <label for="password-nueva"><span class="perfil-input-icon">🔑</span>Nueva contraseña</label>
-                            <input type="password" id="password-nueva" name="password_nueva" placeholder="••••••••">
-                        </div>
-                        <div class="perfil-form-group-pro">
-                            <label for="password-confirmar"><span class="perfil-input-icon">🔑</span>Confirmar nueva contraseña</label>
-                            <input type="password" id="password-confirmar" name="password_confirmar" placeholder="••••••••">
-                        </div>
-                    </div>
-                    <button type="submit" class="perfil-btn-guardar-pro"><span class="perfil-btn-icon">💾</span> Guardar Cambios</button>
-                </form>
-            </div>
+                </div>
         </main>
     </div>
     <script src="/assets/js/dashboard.js"></script>
