@@ -5,7 +5,7 @@ require '../models/mySql.php';
 
 function generarQr($mesa)
 {
-    $carpeta = '../assets/images';
+    $carpeta = '../assets/Qrs';
     if (!file_exists($carpeta)) {
         mkdir($carpeta, recursive: true);
     }

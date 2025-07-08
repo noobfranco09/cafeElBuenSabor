@@ -18,7 +18,7 @@ function generarQr(mesa){
     .then(response => response.json())
     .then(data =>{
         if(data.data=="Ocurrio un error"){
-
+            
         }else{
             let ruta = data.data;
             let mesa = data.mesa

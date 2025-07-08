@@ -13,6 +13,17 @@ $errores = $_SESSION["errores"]??[];
 $old = $_SESSION["old"]??[];
 unset($_SESSION["errores"],$_SESSION["old"]);
 echo var_dump($errores);
+
+require_once '../models/mySql.php';
+
+$mysql = new MySQL();
+$mysql->conectar();
+$conexion = $mysql->obtenerConexion();
+
+$obtenerProductos = $conexion->query("SELECT * FROM productos");
+
+$mysql->desconectar();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -63,28 +74,48 @@ echo var_dump($errores);
             <!-- Grid de Productos -->
             <div class="products-grid products-grid-modern">
                 <!-- Ejemplo de Card de Producto -->
+
+                <?php while($mostrarProductos = $obtenerProductos->fetch(PDO::FETCH_ASSOC)) :   ?>
+
                 <div class="product-card-modern">
                     <div class="product-image-modern">
-                        <img src="/assets/images/products/coffee-beans.jpg" alt="Café Arábica">
+                        <img src="../<?php echo $mostrarProductos["imagen"]; ?>">
+                        <?php if($mostrarProductos["stock"] <= 5): ?>
                         <span class="product-stock-badge-modern stock-low">Stock bajo</span>
+                        <?php else: ?>
+                            <span class="product-stock-badge-modern stock-ok">En stock</span>
+                        <?php endif ?>
                     </div>
                     <div class="product-info-modern">
-                        <h3 class="product-name-modern">Café Arábica Premium</h3>
+                        <h3 class="product-name-modern"><?php echo $mostrarProductos["nombre"]; ?></h3>
                         <div class="product-details-modern">
                             <span class="product-category-modern">Granos de Café</span>
                         </div>
-                        <div class="product-price-modern">Precio: $25.99</div>
-                        <div class="product-description-modern">Café de alta calidad, sabor intenso y aroma único.</div>
-                        <div class="product-stock-modern">Stock: <span class="stock-value-modern low-stock">5 unidades</span></div>
+                        <div class="product-price-modern">Precio: $<?php echo $mostrarProductos["precio"]; ?></div>
+                        <div class="product-description-modern"><?php echo $mostrarProductos["descripcion"]; ?></div>
+                        <?php if($mostrarProductos["stock"] <= 5): ?>
+                            <div class="product-stock-modern">Stock: <span class="stock-value-modern low-stock"><?php echo $mostrarProductos["stock"]; ?> Unidades</span></div>
+                        <?php else: ?>
+                            <div class="product-stock-modern">Stock: <span class="stock-value-modern"><?php echo $mostrarProductos["stock"]; ?> Unidades</span></div>
+                        <?php endif ?>
                         <div class="product-actions-modern">
                             <button class="edit-product-btn-modern">✏️ Editar</button>
                             <button class="delete-product-btn-modern">🗑️ Eliminar</button>
                         </div>
-                        <div class="product-status-badge active">Activo</div>
+                        
+                        <?php if($mostrarProductos["estado"] == "Activo"): ?>
+                            <div class="product-status-badge active"><?php echo $mostrarProductos["estado"]; ?></div>
+                        <?php else: ?>
+                            <div class="product-status-badge inactive"><?php echo $mostrarProductos["estado"]; ?></div>
+                        <?php endif ?>
+
+                        
                     </div>
                 </div>
+
+                <?php endwhile; ?>
                 <!-- Otra Card de Producto -->
-                <div class="product-card-modern">
+                <!-- <div class="product-card-modern">
                     <div class="product-image-modern">
                         <img src="/assets/images/products/coffee-maker.jpg" alt="Cafetera Express">
                         <span class="product-stock-badge-modern stock-ok">En stock</span>
@@ -103,8 +134,8 @@ echo var_dump($errores);
                         </div>
                         <div class="product-status-badge inactive">Inactivo</div>
                     </div>
-                </div>
-                <!-- Puedes agregar más cards aquí -->
+                </div> -->
+                
             </div>
         </main>
     </div>
