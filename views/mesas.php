@@ -145,7 +145,7 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="#" method="POST" >
+          <form action="../controller/editarMesa.php" method="POST" >
             <input type="hidden" name="idMesaEditar" id="idMesaEditar">
             <div class="mb-3">
               <label for="numeroMesaEditar" class="form-label">Número de Mesa</label>
@@ -173,6 +173,7 @@ $mysql->desconectar();
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/mesas.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>

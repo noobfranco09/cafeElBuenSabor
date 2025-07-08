@@ -31,7 +31,7 @@ desactivarMesa.addEventListener('click',function(){
     }).then((result) => {
         if (result.isConfirmed) {
             
-            fetch('../controller/eliminarRol.php',{
+            fetch('../controller/desactivarMesa.php',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,14 +40,10 @@ desactivarMesa.addEventListener('click',function(){
             })
             .then(response => response.json())
             .then(data => {
-                Swal.fire({
-                    title: "¡Desactivado con éxito!",
-                    text: data.message,
-                    icon: "success"
-                });
 
-                // se elimina de la vista del DOM para no tener que recargar la pagina
-                eliminarRol.closest("tr").remove();
+                setTimeout(function() {
+                    location.reload();
+                }, 300); // Espera 0.3 segundos antes de recargar
 
             })
                     
