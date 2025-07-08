@@ -32,6 +32,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     try{
     $stmt = $mysql->obtenerConexion()->prepare($consulta);
     $stmt->execute($datosUsuario);
+    $_SESSION["nombre"]=$nombre;
      header("location: ../views/perfil.php");
      exit();         
     }

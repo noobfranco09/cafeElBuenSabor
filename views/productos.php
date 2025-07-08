@@ -91,7 +91,7 @@ $mysql->desconectar();
                         <div class="product-details-modern">
                             <span class="product-category-modern">Granos de Café</span>
                         </div>
-                        <div class="product-price-modern">Precio: $<?php echo $mostrarProductos["precio"]; ?></div>
+                        <div class="product-price-modern">Precio: $<?php echo number_format($mostrarProductos['precio'], 0, ',', '.'); ?></div>
                         <div class="product-description-modern"><?php echo $mostrarProductos["descripcion"]; ?></div>
                         <?php if($mostrarProductos["stock"] <= 5): ?>
                             <div class="product-stock-modern">Stock: <span class="stock-value-modern low-stock"><?php echo $mostrarProductos["stock"]; ?> Unidades</span></div>

@@ -12,7 +12,7 @@ $icono = str_split($nombre)??"?";
 require_once '../models/mySql.php';
 $mysql = new MySQL();
 $mysql->conectar();
-$consulta = "SELECT * FROM mesas";
+$consulta = "SELECT * FROM mesas WHERE estado = 'Activa'";
 $stmtMesas = $mysql->obtenerConexion()->query($consulta);
 $mysql->desconectar();
 
