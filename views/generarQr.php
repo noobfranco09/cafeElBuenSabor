@@ -7,6 +7,16 @@ if (!isset($_SESSION["id"])){
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
 $icono = str_split($nombre)??"?";
+
+//Obtener las mesas
+require_once '../models/mySql.php';
+$mysql = new MySQL();
+$mysql->conectar();
+$consulta = "SELECT * FROM mesas";
+$stmtMesas = $mysql->obtenerConexion()->query($consulta);
+$mysql->desconectar();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -37,24 +47,48 @@ $icono = str_split($nombre)??"?";
                 <div class="qr-card-header">
                     <div class="qr-avatar"><i class="bi bi-qr-code"></i></div>
                     <div class="qr-title">Generar Código QR</div>
-                    <div class="qr-desc">Seleccione el elemento para el cual desea generar un código QR.</div>
+                    <div class="qr-desc">Seleccione la mesa para la cual desea generar un código QR.</div>
                 </div>
-                <form method="post" action="../controller/crearQr.php">
+                <form>
                     <div class="mb-4">
-                        <label for="selectElemento" class="form-label fw-semibold">Elemento</label>
-                        <select class="form-select form-select-lg" id="selectElemento" name="elemento" required>
-                            <!-- Opciones serán agregadas dinámicamente -->
+                        <label for="selectMesa" class="form-label fw-semibold">Mesa</label>
+                        <select class="form-select form-select-lg" id="selectMesa" name="mesa" required>
+                            <?php while($mesas = $stmtMesas->fetch(PDO::FETCH_ASSOC)): ?>
+                                <option value="<?php echo $mesas["idMesa"] ?>"><?php echo $mesas["numero"] ?></option>
+                            <?php endwhile; ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
+                    <button type="submit" id="btnGenerarQr" class="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
                         <i class="bi bi-qr-code"></i> Generar QR
                     </button>
                 </form>
             </div>
+            
         </main>
     </div>
-    <script src="../assets/js/dashboard.js"></script>
+
+
+        <!-- MODAL PARA MOSTRAR LOS QR -->
+    <div class="modal" tabindex="-1" id="mdlVerQr">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">QR</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="mdlBody">
+                                
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>                        
+    
+    
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/generarQr.js"></script>
     
 </body>
 </html> 
