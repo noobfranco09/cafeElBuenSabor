@@ -8,6 +8,18 @@ if (!isset($_SESSION["id"])){
     $nombre = $_SESSION["nombre"]??"Desconocido";
     $rol = $_SESSION["rol"]??"Desconocido";
     $icono = str_split($nombre)??"?";
+
+require_once '../models/mySql.php';
+
+$mysql = new MySQL();
+$mysql->conectar();
+$conexion = $mysql->obtenerConexion();
+
+$cantidadUsuarios = $conexion->query("SELECT count(*) As contarUsuarios FROM usuario WHERE estado = 'Activo'");
+$cantidadUsuario = $cantidadUsuarios->fetch(PDO::FETCH_ASSOC);
+
+$mysql->desconectar();
+
 ?>
 
 <!DOCTYPE html>
@@ -47,11 +59,8 @@ if (!isset($_SESSION["id"])){
                     <div class="stat-header">
                         <div class="stat-icon">👥</div>
                     </div>
-                    <div class="stat-value">2,345</div>
+                    <div class="stat-value"><?php echo $cantidadUsuario['contarUsuarios'] ?></div>
                     <div class="stat-label">Usuarios Activos</div>
-                    <div class="stat-change positive">
-                        ↗️ +12% vs mes anterior
-                    </div>
                 </div>
 
                 <div class="stat-card">
@@ -155,6 +164,7 @@ if (!isset($_SESSION["id"])){
                         </div>
                         <div class="chart-body" id="tablesServedChart">
                             <!-- Aquí irá el gráfico de mesas atendidas -->
+                             <canvas id="mesasPorMesero" width="600" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -168,6 +178,7 @@ if (!isset($_SESSION["id"])){
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="../libraries/Char.js/dist/chart.umd.min.js"></script>
     <script src="../assets/js/graficoProductoMasVendido.js"></script>
+    <script src="../assets/js/graficoMesasPorMesero.js"></script>
 
 </body>
 </html>
