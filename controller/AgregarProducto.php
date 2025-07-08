@@ -42,7 +42,7 @@ if($_FILES['imagen'] && $_FILES['imagen']['error'] === UPLOAD_ERR_OK)
                 
     $img = $imagnesPermitidas[$tipoImagen];
     $nombreImagen = 'imagen_'.date('Ymd_Hisv').$img;
-    $ruta = 'assets/img/'.$nombreImagen;
+    $ruta = 'assets/imgProductos/'.$nombreImagen;
     $rutaAbsoluta = __DIR__.'/../'.$ruta;
 
     if(move_uploaded_file($_FILES['imagen']['tmp_name'],$rutaAbsoluta))
