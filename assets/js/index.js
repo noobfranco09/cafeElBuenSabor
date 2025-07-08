@@ -88,8 +88,8 @@ agregarCarrito.addEventListener('click',function(){
         let cantidadProducto = localStorage.getItem(data.idProducto);
         const productoGuardado = JSON.parse(cantidadProducto)
 
-        if(productoGuardado.cantidad < data.stock)
-        {
+        // if(productoGuardado.cantidad < data.stock)
+        // {
             const id = data.idProducto;
             const nombre = data.nombre;
             const precio = data.precio;
@@ -104,9 +104,9 @@ agregarCarrito.addEventListener('click',function(){
             };
 
             agregarProducto(producto);
-        }else{
-            alert("no puedes superar el sotck del producto");
-        }
+        // }else{
+        //     alert("no puedes superar el sotck del producto");
+        // }
 
     })
 
@@ -346,6 +346,7 @@ finalizarPedido.addEventListener('click', () => {
         const clave = localStorage.key(i);
         datosLocalStorage[clave] = localStorage.getItem(clave);
     }
+  
 
     fetch('../controller/agregarPedido.php', {
          method: 'POST',

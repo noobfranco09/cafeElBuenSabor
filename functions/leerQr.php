@@ -1,11 +1,9 @@
 <?php
-require '../models/mySql.php';
+
 function verificarQr($codigo)
 {
 
-    if (!isset($codigo) || empty($codigo)) {
-        die("codigo inexistente");
-    }
+   
 
     $db = new MySQL();
     $db->conectar();
@@ -20,8 +18,8 @@ function verificarQr($codigo)
 
 
     if ($resultado) {
-        $fechaInicio = new DateTime($resultado['fechaInicio']);
-        $fechaFinal = new DateTime($resultado['fechaFinal']);
+        $fechaInicio = new DateTime($resultado['horaInicio']);
+        $fechaFinal = new DateTime($resultado['horaFinal']);
         $fechaActual = new DateTime();
         if ($resultado['estado'] == 1 && $fechaActual >= $fechaInicio && $fechaActual < $fechaFinal) {
             try {

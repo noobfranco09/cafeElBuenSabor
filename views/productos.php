@@ -156,7 +156,7 @@ $mysql->desconectar();
                     <select name="categoria" id="categoria" class="form-control" required>
                         <option value="">Selecciona una categoria...</option>
                         <?php while($mostrarCategorias = $obtenerCategorias->fetch(PDO::FETCH_ASSOC)) :   ?>
-                            <option value="<?php echo $mostrarCategorias['nombre']?>"><?php echo $mostrarCategorias['nombre']?></option>
+                            <option value="<?php echo $mostrarCategorias['idCategoria']?>"><?php echo $mostrarCategorias['nombre']?></option>
                         <?php endwhile; ?>
                     </select>
                 </div>

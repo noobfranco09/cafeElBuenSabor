@@ -1,17 +1,47 @@
 <?php
-
+session_start();
 require_once './models/mySql.php';
+require_once './functions/leerQr.php';
+
+
+if(!isset($_GET["qr"])){
+    include './views/components/404.php';
+    exit();
+}
+
 
 $mysql = new MySQL();
 $mysql->conectar();
-
 $mostrarProductos = "SELECT * FROM productos";
-
 $smts = $mysql->obtenerConexion()->prepare($mostrarProductos);
 $smts->execute();
 
 
+$consultaVldQr = "SELECT * FROM qr where codigo = :codigo AND estado = 1";
+$stmt = $mysql->obtenerConexion()->prepare($consultaVldQr);
+$stmt->bindParam(":codigo", $_GET["qr"],PDO::PARAM_STR);
+$stmt->execute();
+$Qrs = $stmt->fetch(PDO::FETCH_ASSOC);
+$cntQr = $stmt->rowCount();
+
+if($cntQr==0){
+    include './views/components/qrFail.php';
+    exit();
+}
+
+
+if(!verificarQr($_GET["qr"])){
+    include './views/components/qrFail.php';
+    exit();
+}
+
+
+$_SESSION["qrActivo"] = $_GET["qr"];
+$_SESSION["url"] = $Qrs["url"];
 $mysql->desconectar();
+
+
+
 
 ?>
 
@@ -150,7 +180,7 @@ $mysql->desconectar();
         <div class="products-grid" id="productsGrid">
 
             <div class="product-card" data-category="cafes">
-                <div class="product-image"><?php echo $mostrarProducto['imagen']; ?></div>
+                <div class="product-image"><img src="<?php echo $mostrarProducto['imagen']; ?>" alt=""></div>
                 <div class="product-info">
                     <h3><?php echo $mostrarProducto['nombre']; ?></h3>
                     <p><?php echo $mostrarProducto['descripcion']; ?></p>

@@ -15,6 +15,24 @@ $datos = json_decode($datosJSON, true);
 
 // NOTA: para entender mejor los datos que le llegan mire el LocarStorage y la estructura que tenga sera la misma la que recibe la varible $datos
 
+
+//Esto es para desactivar el QR al finalizar el pedido
+// session_start();
+// $codigoQr = $_SESSION["qrActivo"];
+// $url = $_SESSION["url"];
+// $consultaQr = "DELETE FROM qr WHERE codigo = :codigo";
+// $stmt = $mysql->obtenerConexion()->prepare($consultaQr);
+// $stmt->bindParam(":codigo",$codigoQr,PDO::PARAM_STR);
+// $stmt->execute();
+
+// if(file_exists($url)){
+//     unlink($url);
+// }
+
+// unset($_SESSION["qrActivo"],$_SESSION["url"]);
+
+
+
 $mysql->desconectar();
 
 // esta parte retorna el resultado de la operacion que se realizo
