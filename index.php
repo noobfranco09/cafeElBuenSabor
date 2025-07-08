@@ -150,7 +150,7 @@ $mysql->desconectar();
         <div class="products-grid" id="productsGrid">
 
             <div class="product-card" data-category="cafes">
-                <div class="product-image"><?php echo $mostrarProducto['imagen']; ?></div>
+                <div class="product-image"></div>
                 <div class="product-info">
                     <h3><?php echo $mostrarProducto['nombre']; ?></h3>
                     <p><?php echo $mostrarProducto['descripcion']; ?></p>
