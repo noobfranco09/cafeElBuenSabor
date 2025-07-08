@@ -8,6 +8,18 @@ if (!isset($_SESSION["id"])){
     $nombre = $_SESSION["nombre"]??"Desconocido";
     $rol = $_SESSION["rol"]??"Desconocido";
     $icono = str_split($nombre)??"?";
+
+require_once '../models/mySql.php';
+
+$mysql = new MySQL();
+$mysql->conectar();
+$conexion = $mysql->obtenerConexion();
+
+$cantidadUsuarios = $conexion->query("SELECT count(*) As contarUsuarios FROM usuario WHERE estado = 'Activo'");
+$cantidadUsuario = $cantidadUsuarios->fetch(PDO::FETCH_ASSOC);
+
+$mysql->desconectar();
+
 ?>
 
 <!DOCTYPE html>
@@ -47,11 +59,8 @@ if (!isset($_SESSION["id"])){
                     <div class="stat-header">
                         <div class="stat-icon">👥</div>
                     </div>
-                    <div class="stat-value">2,345</div>
+                    <div class="stat-value"><?php echo $cantidadUsuario['contarUsuarios'] ?></div>
                     <div class="stat-label">Usuarios Activos</div>
-                    <div class="stat-change positive">
-                        ↗️ +12% vs mes anterior
-                    </div>
                 </div>
 
                 <div class="stat-card">
@@ -117,16 +126,10 @@ if (!isset($_SESSION["id"])){
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3 class="chart-title">Productos Más Vendidos</h3>
-                            <div class="chart-actions">
-                                <select class="chart-period">
-                                    <option value="week">Esta semana</option>
-                                    <option value="month">Este mes</option>
-                                    <option value="year">Este año</option>
-                                </select>
-                            </div>
                         </div>
-                        <div class="chart-body" id="topProductsChart">
+                        <div class="chart-body">
                             <!-- Aquí irá el gráfico de productos más vendidos -->
+                            <canvas id="productoMasVendido" width="600" height="400"></canvas>
                         </div>
                     </div>
 
@@ -144,6 +147,7 @@ if (!isset($_SESSION["id"])){
                         </div>
                         <div class="chart-body" id="employeeRevenueChart">
                             <!-- Aquí irá el gráfico de ingresos por empleado -->
+                             
                         </div>
                     </div>
 
@@ -161,6 +165,7 @@ if (!isset($_SESSION["id"])){
                         </div>
                         <div class="chart-body" id="tablesServedChart">
                             <!-- Aquí irá el gráfico de mesas atendidas -->
+                             <canvas id="mesasPorMesero" width="600" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -172,6 +177,9 @@ if (!isset($_SESSION["id"])){
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="../libraries/Char.js/dist/chart.umd.min.js"></script>
+    <script src="../assets/js/graficoProductoMasVendido.js"></script>
+    <script src="../assets/js/graficoMesasPorMesero.js"></script>
 
 </body>
 </html>

@@ -180,7 +180,11 @@ $mysql->desconectar();
         <div class="products-grid" id="productsGrid">
 
             <div class="product-card" data-category="cafes">
+<<<<<<< HEAD
                 <div class="product-image"><img src="<?php echo $mostrarProducto['imagen']; ?>" alt=""></div>
+=======
+                <div class="product-image"></div>
+>>>>>>> 135c4eaebc331d916182de0e109f5721e0cfccd0
                 <div class="product-info">
                     <h3><?php echo $mostrarProducto['nombre']; ?></h3>
                     <p><?php echo $mostrarProducto['descripcion']; ?></p>
