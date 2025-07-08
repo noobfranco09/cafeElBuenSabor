@@ -147,6 +147,7 @@ $mysql->desconectar();
                         </div>
                         <div class="chart-body" id="employeeRevenueChart">
                             <!-- Aquí irá el gráfico de ingresos por empleado -->
+                             
                         </div>
                     </div>
 

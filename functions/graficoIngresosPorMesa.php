@@ -6,12 +6,12 @@ $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
-$obtenerProductosMasVendidos = $conexion->query("SELECT mesas.numero , count(pedidos.idMesa) As cantidadMesasAtendidas FROM ventas 
+$obtenerProductosMasVendidos = $conexion->query("SELECT mesas.numero , sum(ventas.total) As ingresoMesa FROM ventas 
 JOIN pedidos ON pedidos.idPedido = ventas.pedidos_idPedido 
 JOIN mesas ON mesas.idMesa = pedidos.idMesa
 JOIN productos_has_pedidos ON productos_has_pedidos.idPedido = pedidos.idPedido
 JOIN productos ON productos.idProducto = productos_has_pedidos.idProducto GROUP BY mesas.numero
-ORDER BY cantidadMesasAtendidas DESC");
+ORDER BY ingresoMesa DESC");
 
 $data = $obtenerProductosMasVendidos->fetchAll(PDO::FETCH_ASSOC);
 

@@ -1,19 +1,19 @@
 // se raliza el grafico que mostrara los 3 productos mas vendidos
-fetch('../functions/graficoMesasPorMesero.php')
+fetch('../functions/graficoIngresosPorMesa.php')
 .then(response => response.json())
 .then(data => {
 
     console.log(data)
     const labels = data.map(item => item.numero);
-    const valores = data.map(item => item.cantidadMesasAtendidas);
+    const valores = data.map(item => item.ingresoMesa);
 
-    const ctx = document.getElementById('mesasPorMesero').getContext('2d');
+    const ctx = document.getElementById('ingresoPorMesa').getContext('2d');
     new Chart(ctx, {
-        type: 'bar', // Puede ser line, pie, doughnut, etc.
+        type: 'pie', // Puede ser line, pie, doughnut, etc.
         data: {
             labels: labels,
             datasets: [{
-                label: 'Gráfico Mesas Atendidas por Mesero',
+                label: 'Gráfico Ingresos Por Mesa',
                 data: valores,
                 backgroundColor: 'rgba(192, 75, 124, 0.5)',
                 borderColor: 'rgb(192, 75, 91)',

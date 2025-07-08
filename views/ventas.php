@@ -47,28 +47,6 @@ $icono = str_split($nombre)??"?";
                 <div class="content-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
                     <h2 class="content-title">Registro de Ventas</h2>
                 </div>
-                <div class="filters-row" style="margin-bottom: 24px;">
-                    <div>
-                        <label for="fechaFiltro">Fecha:</label>
-                        <input type="date" id="fechaFiltro" name="fechaFiltro">
-                    </div>
-                    <div>
-                        <label for="empleadoFiltro">Empleado:</label>
-                        <select id="empleadoFiltro" name="empleadoFiltro">
-                            <option value="">Todos</option>
-                            <option value="1">Juan Pérez</option>
-                            <option value="2">María López</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="mesaFiltro">Mesa:</label>
-                        <select id="mesaFiltro" name="mesaFiltro">
-                            <option value="">Todas</option>
-                            <option value="1">Mesa 1</option>
-                            <option value="2">Mesa 2</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="charts-grid">
                     <div class="chart-container">
                         <div class="chart-header">
@@ -86,7 +64,7 @@ $icono = str_split($nombre)??"?";
                         <div class="chart-header">
                             <span class="chart-title">Ingresos por Mesa</span>
                         </div>
-                        <canvas id="chartIngresosMesa" height="120"></canvas>
+                        <canvas id="ingresoPorMesa" height="100"></canvas>
                     </div>
                 </div>
                 <div class="ventas-table-card">
@@ -134,47 +112,6 @@ $icono = str_split($nombre)??"?";
                         </table>
                     </div>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                <script>
-                    new Chart(document.getElementById('chartIngresosFecha'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
-                            datasets: [{
-                                label: 'Ingresos',
-                                data: [120, 150, 90, 180, 200, 170, 140],
-                                backgroundColor: '#D2691E',
-                                borderRadius: 8
-                            }]
-                        },
-                        options: {responsive: true, plugins: {legend: {display: false}}}
-                    });
-                    new Chart(document.getElementById('chartIngresosEmpleado'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Juan', 'María', 'Pedro'],
-                            datasets: [{
-                                label: 'Ingresos',
-                                data: [320, 210, 150],
-                                backgroundColor: ['#A0522D', '#D2691E', '#fd7e14'],
-                                borderRadius: 8
-                            }]
-                        },
-                        options: {responsive: true, plugins: {legend: {display: false}}}
-                    });
-                    new Chart(document.getElementById('chartIngresosMesa'), {
-                        type: 'pie',
-                        data: {
-                            labels: ['Mesa 1', 'Mesa 2', 'Mesa 3'],
-                            datasets: [{
-                                label: 'Ingresos',
-                                data: [200, 150, 100],
-                                backgroundColor: ['#D2691E', '#A0522D', '#fd7e14']
-                            }]
-                        },
-                        options: {responsive: true}
-                    });
-                </script>
             </div>
         </main>
     </div>
@@ -183,5 +120,7 @@ $icono = str_split($nombre)??"?";
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="../libraries/Char.js/dist/chart.umd.min.js"></script>
+    <script src="../assets/js/graficoIngresosPorMesas.js"></script>
 </body>
 </html> 
