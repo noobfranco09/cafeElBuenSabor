@@ -20,7 +20,10 @@ $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
-$obtenerProductos = $conexion->query("SELECT * FROM productos");
+$obtenerProductos = $conexion->query("SELECT productos.nombre, productos.descripcion, productos.precio, 
+productos.stock, productos.imagen, productos.estado, categorias.nombre As nombreCategoria
+FROM productos JOIN categorias ON categorias.idCategoria = productos.idCategoria");
+$obtenerCategorias = $conexion->query("SELECT * FROM categorias");
 
 $mysql->desconectar();
 
@@ -89,7 +92,7 @@ $mysql->desconectar();
                     <div class="product-info-modern">
                         <h3 class="product-name-modern"><?php echo $mostrarProductos["nombre"]; ?></h3>
                         <div class="product-details-modern">
-                            <span class="product-category-modern">Granos de Café</span>
+                            <span class="product-category-modern"><?php echo $mostrarProductos["nombreCategoria"]; ?></span>
                         </div>
                         <div class="product-price-modern">Precio: $<?php echo number_format($mostrarProductos['precio'], 0, ',', '.'); ?></div>
                         <div class="product-description-modern"><?php echo $mostrarProductos["descripcion"]; ?></div>
@@ -114,27 +117,6 @@ $mysql->desconectar();
                 </div>
 
                 <?php endwhile; ?>
-                <!-- Otra Card de Producto -->
-                <!-- <div class="product-card-modern">
-                    <div class="product-image-modern">
-                        <img src="/assets/images/products/coffee-maker.jpg" alt="Cafetera Express">
-                        <span class="product-stock-badge-modern stock-ok">En stock</span>
-                    </div>
-                    <div class="product-info-modern">
-                        <h3 class="product-name-modern">Cafetera Express Pro</h3>
-                        <div class="product-details-modern">
-                            <span class="product-category-modern">Equipamiento</span>
-                        </div>
-                        <div class="product-price-modern">Precio: $299.99</div>
-                        <div class="product-description-modern">Cafetera profesional para preparar espresso en casa.</div>
-                        <div class="product-stock-modern">Stock: <span class="stock-value-modern">15 unidades</span></div>
-                        <div class="product-actions-modern">
-                            <button class="edit-product-btn-modern">✏️ Editar</button>
-                            <button class="delete-product-btn-modern">🗑️ Eliminar</button>
-                        </div>
-                        <div class="product-status-badge inactive">Inactivo</div>
-                    </div>
-                </div> -->
                 
             </div>
         </main>
@@ -171,12 +153,17 @@ $mysql->desconectar();
                 </div>
                 <div class="col-md-6">
                     <label for="categoria" class="form-label">Categoria</label>
-                    <input type="text" class="form-control" id="categoria" name="categoria" required>
+                    <select name="categoria" id="categoria" class="form-control" required>
+                        <option value="">Selecciona una categoria...</option>
+                        <?php while($mostrarCategorias = $obtenerCategorias->fetch(PDO::FETCH_ASSOC)) :   ?>
+                            <option value="<?php echo $mostrarCategorias['nombre']?>"><?php echo $mostrarCategorias['nombre']?></option>
+                        <?php endwhile; ?>
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-control" name="estado" id="estado" required>
-                        <option value="">Selecciona un estado</option>
+                        <option value="">Selecciona un estado...</option>
                         <option value="Activo">Activo</option>
                         <option value="Inactivo">Inactivo</option>
                     </select>
