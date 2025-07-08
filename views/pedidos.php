@@ -119,6 +119,33 @@ $icono = str_split($nombre)??"?";
                     <div class="section-content" id="activeOrdersContent">
                         <div class="orders-grid" id="activeOrdersGrid">
                             <!-- Los pedidos activos se cargarán dinámicamente aquí -->
+                            <!-- Ejemplo de Card de Pedido Activo (Diseño Moderno) -->
+                            <div class="order-card-modern">
+                              <div class="order-card-header">
+                                <div>
+                                  <span class="order-card-number">#1234</span>
+                                  <span class="order-card-time"><i class="bi bi-clock"></i> 10:45 AM</span>
+                                </div>
+                                <div class="order-card-table"><i class="bi bi-table"></i> Mesa 5</div>
+                              </div>
+                              <div class="order-card-items">
+                                <div class="order-card-item"><i class="bi bi-cup-hot"></i> 2x Café Latte</div>
+                                <div class="order-card-item"><i class="bi bi-cup-straw"></i> 1x Jugo Naranja</div>
+                                <div class="order-card-item"><i class="bi bi-cake"></i> 1x Croissant</div>
+                              </div>
+                              <div class="order-card-footer">
+                                <div class="order-card-client"><i class="bi bi-person"></i> Juan Pérez</div>
+                              </div>
+                              <div class="order-card-note">
+                                <i class="bi bi-chat-left-text"></i>
+                                <span><strong>NOTA:</strong> Sin azúcar, por favor.</span>
+                              </div>
+                              <div class="order-card-actions">
+                                <button class="order-btn-cancel"><i class="bi bi-x-circle"></i> Cancelar</button>
+                                <button class="order-btn-prepare"><i class="bi bi-check-circle"></i> Preparar</button>
+                              </div>
+                            </div>
+                            <!-- Fin ejemplo card moderno -->
                             <div class="loading-placeholder">
                                 <i class="bi bi-hourglass-split"></i>
                                 <p>Cargando pedidos activos...</p>
