@@ -339,6 +339,73 @@ class Validaciones{
 
     }
 
+    public function validarMesaAgregar()
+    {
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["numeroMesa"])) && empty(trim($this->datos["estadoMesa"])))
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $numeroMesa = $this->datos["numeroMesa"];
+        $estadoMesa = $this->datos["estadoMesa"];
+
+        // Validar numeroMesa (solo números enteros positivos mayores que 0)
+        if (!preg_match("/^[1-9][0-9]*$/", $numeroMesa)) {
+            $errores["numeroMesaInvalido"] = "El número de mesa no es válido";
+            return $errores;
+        }
+
+        // Validar estadoMesa (solo 'Activa' o 'Inactiva', sin < > ni comillas)
+        if (!preg_match("/^(Activa|Inactiva)$/i", $estadoMesa)) {
+            $errores["estadoMesaInvalido"] = "El estado de la mesa no es válido";
+            return $errores;
+        }
+
+    }
+
+    public function validarMesaEditar()
+    {
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["numeroMesaEditar"])) && empty(trim($this->datos["estadoMesaEditar"])))
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $numeroMesaEditar = $this->datos["numeroMesaEditar"];
+        $estadoMesaEditar = $this->datos["estadoMesaEditar"];
+
+        // Validar numeroMesa (solo números enteros positivos mayores que 0)
+        if (!preg_match("/^[1-9][0-9]*$/", $numeroMesaEditar)) {
+            $errores["numeroMesaInvalido"] = "El número de mesa no es válido";
+            return $errores;
+        }
+
+        // Validar estadoMesa (solo 'Activa' o 'Inactiva', sin < > ni comillas)
+        if (!preg_match("/^(Activa|Inactiva)$/i", $estadoMesaEditar)) {
+            $errores["estadoMesaInvalido"] = "El estado de la mesa no es válido";
+            return $errores;
+        }
+
+    }
+
+
 }
 
 ?>
