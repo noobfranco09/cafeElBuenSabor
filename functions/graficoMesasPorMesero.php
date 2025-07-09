@@ -6,14 +6,16 @@ $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
-$obtenerProductosMasVendidos = $conexion->query("SELECT mesas.numero , count(pedidos.idMesa) As cantidadMesasAtendidas FROM ventas 
-JOIN pedidos ON pedidos.idPedido = ventas.pedidos_idPedido 
+$obtenerMesasPorMesero = $conexion->query("SELECT mesas.numero , count(pedidos.idMesa) As cantidadMesasAtendidas FROM ventas 
+JOIN pedidos ON pedidos.idPedido = ventas.pedidos_idPedido
+JOIN usuario ON usuario.idUsuario = pedidos.idUsuario
+JOIN roles  ON roles.idRoll = usuario.idRoll
 JOIN mesas ON mesas.idMesa = pedidos.idMesa
 JOIN productos_has_pedidos ON productos_has_pedidos.idPedido = pedidos.idPedido
-JOIN productos ON productos.idProducto = productos_has_pedidos.idProducto GROUP BY mesas.numero
+JOIN productos ON productos.idProducto = productos_has_pedidos.idProducto WHERE roles.nombre = 'mesero' GROUP BY mesas.numero
 ORDER BY cantidadMesasAtendidas DESC");
 
-$data = $obtenerProductosMasVendidos->fetchAll(PDO::FETCH_ASSOC);
+$data = $obtenerMesasPorMesero->fetchAll(PDO::FETCH_ASSOC);
 
 // Se devuelve el resultado en formato JSON
 header('Content-Type: application/json');

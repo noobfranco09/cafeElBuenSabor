@@ -52,7 +52,7 @@ $icono = str_split($nombre)??"?";
                         <div class="chart-header">
                             <span class="chart-title">Ingresos por Fecha</span>
                         </div>
-                        <canvas id="chartIngresosFecha" height="120"></canvas>
+                        <canvas id="ingresoPorFecha" width="600" height="400"></canvas>
                     </div>
                     <div class="chart-container">
                         <div class="chart-header">
@@ -122,5 +122,6 @@ $icono = str_split($nombre)??"?";
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="../libraries/Char.js/dist/chart.umd.min.js"></script>
     <script src="../assets/js/graficoIngresosPorMesas.js"></script>
+    <script src="../assets/js/graficoIngresosPorFecha.js"></script>
 </body>
 </html> 

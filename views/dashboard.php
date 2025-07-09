@@ -133,24 +133,6 @@ $mysql->desconectar();
                         </div>
                     </div>
 
-                    <!-- Gráfico de Ingresos por Empleado -->
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Ingresos por Empleado</h3>
-                            <div class="chart-actions">
-                                <select class="chart-period">
-                                    <option value="today">Hoy</option>
-                                    <option value="week">Esta semana</option>
-                                    <option value="month">Este mes</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="chart-body" id="employeeRevenueChart">
-                            <!-- Aquí irá el gráfico de ingresos por empleado -->
-                             
-                        </div>
-                    </div>
-
                     <!-- Gráfico de Mesas Atendidas -->
                     <div class="chart-container">
                         <div class="chart-header">
