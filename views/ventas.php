@@ -8,6 +8,20 @@ if (!isset($_SESSION["id"])){
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
 $icono = str_split($nombre)??"?";
+
+require_once '../models/mySql.php';
+
+$mysql = new MySQL();
+$mysql->conectar();
+$conexion = $mysql->obtenerConexion();
+
+$obtenerVentas = $conexion->query("SELECT ventas.idVenta, ventas.fecha, ventas.total, mesas.numero, usuario.nombre FROM ventas
+JOIN pedidos ON pedidos.idPedido = ventas. 	pedidos_idPedido
+JOIN mesas ON mesas.idMesa = pedidos.idMesa
+JOIN usuario ON usuario.idUsuario = pedidos.idUsuario");
+
+$mysql->desconectar();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -80,34 +94,31 @@ $icono = str_split($nombre)??"?";
                                     <th>Mesa</th>
                                     <th>Empleado</th>
                                     <th>Total</th>
-                                    <th>Factura</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                <?php while($mostrarVentas = $obtenerVentas->fetch(PDO::FETCH_ASSOC)) :   ?>
+
                                 <tr>
-                                    <td>1001</td>
-                                    <td>2024-06-19</td>
-                                    <td>Mesa 1</td>
-                                    <td>Juan Pérez</td>
-                                    <td>$120.00</td>
-                                    <td><button class="btn-pdf">PDF</button></td>
+                                    
+                                    <td><?php echo $mostrarVentas["idVenta"]; ?></td>
+                                    <td><?php echo $mostrarVentas["fecha"]; ?></td>
+                                    <td><?php echo $mostrarVentas["numero"]; ?></td>
+                                    <td><?php echo $mostrarVentas["nombre"]; ?></td>
+                                    <td>$<?php echo number_format($mostrarVentas['total'], 0, ',', '.'); ?></td>
+
+                                    <td>
+
+                                        <button>ver</button>
+
+                                    </td>
+
                                 </tr>
-                                <tr>
-                                    <td>1002</td>
-                                    <td>2024-06-19</td>
-                                    <td>Mesa 2</td>
-                                    <td>María López</td>
-                                    <td>$85.50</td>
-                                    <td><button class="btn-pdf">PDF</button></td>
-                                </tr>
-                                <tr>
-                                    <td>1003</td>
-                                    <td>2024-06-18</td>
-                                    <td>Mesa 1</td>
-                                    <td>Juan Pérez</td>
-                                    <td>$60.00</td>
-                                    <td><button class="btn-pdf">PDF</button></td>
-                                </tr>
+
+                                <?php endwhile; ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -115,6 +126,7 @@ $icono = str_split($nombre)??"?";
             </div>
         </main>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
@@ -124,5 +136,15 @@ $icono = str_split($nombre)??"?";
     <script src="../assets/js/graficoIngresosPorMesas.js"></script>
     <script src="../assets/js/graficoIngresosPorFecha.js"></script>
     <script src="../assets/js/graficoIngresoPorEmpleado.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tablaVentas').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
