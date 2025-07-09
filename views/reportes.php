@@ -47,28 +47,22 @@ $icono = str_split($nombre)??"?";
                 </div>
                 <div class="reportes-grid">
                     <div class="reporte-card">
-                        <div class="reporte-icon">🧾</div>
-                        <div class="reporte-title">Facturas Individuales</div>
-                        <div class="reporte-desc">Descarga facturas en PDF de ventas específicas.</div>
-                        <button class="reporte-btn" onclick="alert('Descargar factura individual')">Ver facturas</button>
-                    </div>
-                    <div class="reporte-card">
                         <div class="reporte-icon">📈</div>
                         <div class="reporte-title">Balance General de Ventas</div>
                         <div class="reporte-desc">Genera un PDF con el balance de ventas entre fechas.</div>
-                        <button class="reporte-btn" onclick="alert('Generar balance general')">Generar balance</button>
+                        <button class="reporte-btn"><a href="../controller/generarPDFBalanceGeneralVentas.php">Generar balance</a></button>
                     </div>
                     <div class="reporte-card">
                         <div class="reporte-icon">👤</div>
                         <div class="reporte-title">Desempeño por Empleado</div>
                         <div class="reporte-desc">Reporte PDF del desempeño de cada empleado.</div>
-                        <button class="reporte-btn" onclick="alert('Generar reporte de desempeño')">Ver desempeño</button>
+                        <button class="reporte-btn"><a href="">Ver desempeño</a></button>
                     </div>
                     <div class="reporte-card">
                         <div class="reporte-icon">📦</div>
                         <div class="reporte-title">Estado del Inventario</div>
                         <div class="reporte-desc">Descarga un PDF con el estado actual del inventario.</div>
-                        <button class="reporte-btn" onclick="alert('Generar reporte de inventario')">Ver inventario</button>
+                        <button class="reporte-btn"><a href="../controller/generarPDFEstadoInventario.php">Ver inventario</a></button>
                     </div>
                 </div>
             </div>

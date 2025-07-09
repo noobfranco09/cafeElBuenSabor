@@ -131,13 +131,6 @@ $mysql->desconectar();
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3 class="chart-title">Mesas Atendidas por Mesero</h3>
-                            <div class="chart-actions">
-                                <select class="chart-period">
-                                    <option value="today">Hoy</option>
-                                    <option value="week">Esta semana</option>
-                                    <option value="month">Este mes</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="chart-body" id="tablesServedChart">
                             <!-- Aquí irá el gráfico de mesas atendidas -->
