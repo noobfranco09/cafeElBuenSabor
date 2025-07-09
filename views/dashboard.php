@@ -109,16 +109,10 @@ $mysql->desconectar();
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3 class="chart-title">Recaudo Mensual</h3>
-                            <div class="chart-actions">
-                                <select class="chart-period">
-                                    <option value="6m">Últimos 6 meses</option>
-                                    <option value="1y">Último año</option>
-                                    <option value="2y">Últimos 2 años</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="chart-body" id="monthlyRevenueChart">
                             <!-- Aquí irá el gráfico de recaudo mensual -->
+                             <canvas id="recaudoMensual" width="600" height="400"></canvas>
                         </div>
                     </div>
 
@@ -162,6 +156,7 @@ $mysql->desconectar();
     <script src="../libraries/Char.js/dist/chart.umd.min.js"></script>
     <script src="../assets/js/graficoProductoMasVendido.js"></script>
     <script src="../assets/js/graficoMesasPorMesero.js"></script>
+    <script src="../assets/js/graficoRecaudoMensual.js"></script>
 
 </body>
 </html>
