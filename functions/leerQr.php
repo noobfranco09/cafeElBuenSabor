@@ -20,19 +20,34 @@ function verificarQr($codigo)
     if ($resultado) {
         $fechaInicio = new DateTime($resultado['horaInicio']);
         $fechaFinal = new DateTime($resultado['horaFinal']);
-        $fechaActual = new DateTime();
-        if ($resultado['estado'] == 1 && $fechaActual >= $fechaInicio && $fechaActual < $fechaFinal) {
+        $fecha = new DateTime();
+        $fechaActual = $fecha->format("Y-m-d H:i:s");
+        if ($resultado['estado'] == 1 && $fechaActual > $fechaFinal->format("Y-m-d H:i:s")) {
             try {
+
+                
                 $consulta2 = $conexion->prepare('update qr set estado = 0 where codigo = :codigo');
                 $consulta2->execute(['codigo' => $codigo]);
-                return true;
+
+                $obtenerUrl = $conexion->prepare("SELECT * FROM qr WHERE codigo =:codigo");
+                $obtenerUrl->execute(['codigo' => $codigo]);
+                $data = $obtenerUrl->fetch(PDO::FETCH_ASSOC);
+                $url = $data["url"];
+                echo $url;
+                if(file_exists($url)){
+                    unlink($url);
+                    echo "Borrado";
+                }
+
+
+                 exit();
             } catch (PDOException) {
                 die('error en la consulta');
             }
 
 
         } else {
-            return false;
+           return true;
         }
     } else {
         die('Qr inválido');

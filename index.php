@@ -12,7 +12,7 @@ if(!isset($_GET["qr"])){
 
 $mysql = new MySQL();
 $mysql->conectar();
-$mostrarProductos = "SELECT * FROM productos";
+$mostrarProductos = "SELECT * FROM productos WHERE estado = 'Activo'";
 $smts = $mysql->obtenerConexion()->prepare($mostrarProductos);
 $smts->execute();
 
@@ -34,7 +34,7 @@ if(!verificarQr($_GET["qr"])){
     include './views/components/qrFail.php';
     exit();
 }
-
+    
 
 $_SESSION["qrActivo"] = $_GET["qr"];
 $_SESSION["url"] = $Qrs["url"];
@@ -180,11 +180,7 @@ $mysql->desconectar();
         <div class="products-grid" id="productsGrid">
 
             <div class="product-card" data-category="cafes">
-<<<<<<< HEAD
                 <div class="product-image"><img src="<?php echo $mostrarProducto['imagen']; ?>" alt=""></div>
-=======
-                <div class="product-image"></div>
->>>>>>> 135c4eaebc331d916182de0e109f5721e0cfccd0
                 <div class="product-info">
                     <h3><?php echo $mostrarProducto['nombre']; ?></h3>
                     <p><?php echo $mostrarProducto['descripcion']; ?></p>
