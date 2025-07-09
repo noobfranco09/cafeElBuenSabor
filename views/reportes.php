@@ -50,7 +50,7 @@ $icono = str_split($nombre)??"?";
                         <div class="reporte-icon">📈</div>
                         <div class="reporte-title">Balance General de Ventas</div>
                         <div class="reporte-desc">Genera un PDF con el balance de ventas entre fechas.</div>
-                        <button class="reporte-btn" onclick="alert('Generar balance general')">Generar balance</button>
+                        <button class="reporte-btn"><a href="../controller/generarPDFBalanceGeneralVentas.php">Generar balance</a></button>
                     </div>
                     <div class="reporte-card">
                         <div class="reporte-icon">👤</div>
