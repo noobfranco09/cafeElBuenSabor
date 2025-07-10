@@ -7,60 +7,71 @@ $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
-$ventas = $conexion->query("SELECT * FROM ventas");
-
-$ventaGeneral = $ventas->fetchAll(PDO::FETCH_ASSOC);
-
-class PDF extends FPDF
+if(isset($_POST['fechaInicial'],$_POST['fechaFinal']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal']))
 {
-    function Header() 
+
+    $fechaInicial = $_POST['fechaInicial'].' 00:00:00';
+    $fechaFinal = $_POST['fechaFinal'].' 23:59:59';
+
+    $ventas = $conexion->prepare("SELECT DATE_FORMAT(ventas.fecha, '%Y-%m-%d') As fecha, ventas.total, ventas.idVenta, ventas.pedidos_idPedido FROM ventas 
+    WHERE fecha BETWEEN ? AND ?");
+
+    $ventas->execute([$fechaInicial, $fechaFinal]);
+
+    $ventaGeneral = $ventas->fetchAll(PDO::FETCH_ASSOC);
+
+    class PDF extends FPDF
     {
-        $this->SetFont('Arial', 'B', 14);
-        $this->Cell(0, 10, 'Balance General de Ventas', 0, 1, 'C');
-        $this->Ln(5);
+        function Header() 
+        {
+            $this->SetFont('Arial', 'B', 14);
+            $this->Cell(0, 10, 'Balance General de Ventas', 0, 1, 'C');
+            $this->Ln(5);
+        }
+
+        function Footer() 
+        {
+            $this->SetY(-15);
+            $this->SetFont('Arial', 'I', 8);
+            $this->Cell(0, 10, 'Página ' . $this->PageNo(), 0, 0, 'C');
+        }
     }
 
-    function Footer() 
+    $pdf = new PDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 12);
+
+    $pdf->Cell(10, 10, 'idVenta', 1);
+    $pdf->Cell(30, 10, 'Fecha', 1);
+    $pdf->Cell(30, 10, 'idPedido', 1);
+    $pdf->Cell(30, 10, 'Total', 1);
+
+    $pdf->Ln();
+
+    $pdf->SetFont('Arial', '', 12);
+
+    if(!empty($ventaGeneral))
     {
-        $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, 'Página ' . $this->PageNo(), 0, 0, 'C');
+        foreach ($ventaGeneral as $ventaGen) 
+        {
+            $pdf->Cell(10, 10, $ventaGen['idVenta'], 1);
+            $pdf->Cell(30, 10, $ventaGen['fecha'], 1);
+            $pdf->Cell(30, 10, $ventaGen['pedidos_idPedido'], 1);
+            $pdf->Cell(30, 10, "$".number_format($ventaGen['total'], 0, ',', '.'), 1);
+            $pdf->Ln();
+        }
+        
+        // Se puede visualizar en el navegador o descargar:
+        // 'I' = Inline (mostrar), 'D' = Download
+        $pdf->Output('I', 'Balance_General_Ventas.pdf');
+        // $pdf->Output('D', 'Listado_Empleados.pdf'); // ← para forzar descarga
     }
-}
-
-$pdf = new PDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 12);
-
-$pdf->Cell(10, 10, 'ID', 1);
-$pdf->Cell(30, 10, 'Fecha', 1);
-$pdf->Cell(30, 10, 'idPedido', 1);
-$pdf->Cell(30, 10, 'Total', 1);
-
-$pdf->Ln();
-
-$pdf->SetFont('Arial', '', 12);
-
-if(!empty($ventaGeneral))
-{
-    foreach ($ventaGeneral as $ventaGen) 
+    else
     {
-        $pdf->Cell(10, 10, $ventaGen['idVenta'], 1);
-        $pdf->Cell(30, 10, $ventaGen['fecha'], 1);
-        $pdf->Cell(30, 10, $ventaGen['pedidos_idPedido'], 1);
-        $pdf->Cell(30, 10, "$".number_format($ventaGen['total'], 0, ',', '.'), 1);
-        $pdf->Ln();
+        echo "Sin Datos";
+        header("refresh:3; url=../views/dashboard.php");
+        $mysql->desconectar();
     }
-    
-    // Se puede visualizar en el navegador o descargar:
-    // 'I' = Inline (mostrar), 'D' = Download
-    $pdf->Output('I', 'Balance_General_Ventas.pdf');
-    // $pdf->Output('D', 'Listado_Empleados.pdf'); // ← para forzar descarga
-}
-else
-{
-    echo "Sin Datos";
-    header("refresh:3; url=../views/dashboard.php");
 }
 
 $mysql->desconectar();

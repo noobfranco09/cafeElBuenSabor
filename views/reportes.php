@@ -50,7 +50,7 @@ $icono = str_split($nombre)??"?";
                         <div class="reporte-icon">📈</div>
                         <div class="reporte-title">Balance General de Ventas</div>
                         <div class="reporte-desc">Genera un PDF con el balance de ventas entre fechas.</div>
-                        <button class="reporte-btn"><a href="../controller/generarPDFBalanceGeneralVentas.php">Generar balance</a></button>
+                        <button class="reporte-btn" data-bs-toggle="modal" data-bs-target="#ModalBalanceEntreFechas">Generar balance</button>
                     </div>
                     <div class="reporte-card">
                         <div class="reporte-icon">👤</div>
@@ -68,6 +68,37 @@ $icono = str_split($nombre)??"?";
             </div>
         </main>
     </div>
+
+    <!-- Modal Agregar Rol -->
+  <div class="modal fade" id="ModalBalanceEntreFechas" tabindex="-1" aria-labelledby="ModalBalanceEntreFechasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalBalanceEntreFechasLabel">Generar Balance Entre Fechas</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="../controller/generarPDFBalanceGeneralVentas.php" method="POST" >
+            <div class="mb-3">
+              <label for="nombreRol" class="form-label">Fecha Inicial</label>
+              <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcionRol" class="form-label">Fecha Final</label>
+              <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" required>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-warning">Generar PDF</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
 </body>
