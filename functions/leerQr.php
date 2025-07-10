@@ -38,8 +38,6 @@ function verificarQr($codigo)
                     unlink($url);
                     echo "Borrado";
                 }
-
-
                  exit();
             } catch (PDOException) {
                 die('error en la consulta');
@@ -52,6 +50,8 @@ function verificarQr($codigo)
     } else {
         die('Qr inválido');
     }
-}
-;
+
+
+    
+};
 ?>

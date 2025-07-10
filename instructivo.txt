@@ -14,3 +14,31 @@ _______________________________________ !!!!!!!!!!!!!!!!IMPORTANTE¡¡¡¡¡¡¡
 
 *  NO SER PROCRASTINADOR 
 * Tomen yogurt
+
+
+
+
+                                 <?php if(isset($_POST['idProducto'])){
+                                     $idProducto = $_POST['idProducto'];
+                                     try{
+                                        $mysql = new MySQL();
+                                        $mysql->conectar();
+                                        $conexion = $mysql->obtenerConexion();
+
+                                        $query = $conexion->prepare("select * from productos where idProducto = :idProducto");
+                                        $resultadoProductos = $query->execute(["idProducto"=>$idProducto]);
+                                        $resultadoCategorias = $conexion->query("SELECT * FROM categorias");
+                                         $producto = $resultadoProductos->fetch(PDO::FETCH_ASSOC);
+                                         $categoria = $resultadoCategorias->fetch(PDO::FETCH_ASSOC);
+                                        $mysql->desconectar();
+                                     }
+                                     catch(PDOException $error)
+                                     {
+                                         echo "error $error ";
+                                     }
+                                 }else{echo "No se seleccionó ningún producto";} ?>
+
+
+
+
+                                 name="idProducto" value="<?php echo $mostrarProductos["idProducto"]; ?>"

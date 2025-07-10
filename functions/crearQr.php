@@ -3,17 +3,13 @@ require '.././libraries/phpqrcode/qrlib.php';
 require '../models/mySql.php';
 
 
-function generarQr($mesa)
+function generarQr($mesa,$idMesa)
 {
     $carpeta = '../assets/Qrs';
     if (!file_exists($carpeta)) {
         mkdir($carpeta, recursive: true);
     }
 
-    $idMesa = [
-        "idMesa" => $mesa
-    ];
-    
     $db = new MySQL();
     $db->conectar();
     $conexion = $db->obtenerConexion();
@@ -24,7 +20,7 @@ function generarQr($mesa)
     $horaInicio = date('Y-m-d H:i:s');
     $duracionQr = 10;
     $horaFinal = date('Y-m-d H:i:s', strtotime("+$duracionQr minutes"));
-    $url = "localhost:3000/index.php?qr=$codigo&mesa=$mesa";
+    $url = "localhost:3000/index.php?qr=$codigo&mesa=$idMesa";
     $ubicacionQr = $carpeta . "/$codigo.png";
     $qr = [
         "url" => $ubicacionQr,
