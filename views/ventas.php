@@ -111,7 +111,7 @@ $mysql->desconectar();
 
                                     <td>
 
-                                        <button>ver</button>
+                                        <button type="button" class="btn btn-primary btn-sm btnVista" data-id="<?php echo $mostrarVentas["idVenta"] ?>" data-bs-toggle="modal" data-bs-target="#ModalVistaPedido"><i class="bi bi-eye-fill"></i></button>
 
                                     </td>
 
@@ -127,6 +127,43 @@ $mysql->desconectar();
         </main>
     </div>
 
+    <!-- Modal Vista de Pedido -->
+  <div class="modal fade" id="ModalVistaPedido" tabindex="-1" aria-labelledby="ModalVistaPedidoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalVistaPedidoLabel">Informacion de la Venta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        <div class="table-responsive">
+            <table class="table table-lingth">
+                <thead>
+                    <tr>
+                        <th scope="col">ID Pedido</th>
+                        <th scope="col">Mesa</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Nota</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="informacionPedido">
+                    
+                </tbody>
+            </table>
+        </div>
+            
+        </div>
+        <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
@@ -136,6 +173,7 @@ $mysql->desconectar();
     <script src="../assets/js/graficoIngresosPorMesas.js"></script>
     <script src="../assets/js/graficoIngresosPorFecha.js"></script>
     <script src="../assets/js/graficoIngresoPorEmpleado.js"></script>
+    <script src="../assets/js/vistaVentaConPedido.js"></script>
     <script>
         $(document).ready(function() {
             $('#tablaVentas').DataTable({

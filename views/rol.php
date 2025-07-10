@@ -92,7 +92,7 @@ $mysql->desconectar();
 
                                 <?php if($mostrarRoles["estado"]=="SinVincular"): ?>
                                 <button type="button" class="btn btn-danger btn-sm btnEliminar" data-id="<?php echo $mostrarRoles["idRoll"]?>"
-                                data-nombre="<?php echo $mostrarRoles["nombre"]?>"><i class="bi bi-trash "></i></button></a>
+                                data-nombre="<?php echo $mostrarRoles["nombre"]?>"><i class="bi bi-trash "></i></button>
                                 <?php endif; ?>    
                                       
                             </td>
