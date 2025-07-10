@@ -20,7 +20,7 @@ $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
-$obtenerProductos = $conexion->query("SELECT productos.nombre, productos.descripcion, productos.precio, 
+$obtenerProductos = $conexion->query("SELECT productos.idProducto, productos.nombre, productos.descripcion, productos.precio, 
 productos.stock, productos.imagen, productos.estado, categorias.nombre As nombreCategoria
 FROM productos JOIN categorias ON categorias.idCategoria = productos.idCategoria");
 $obtenerCategorias = $conexion->query("SELECT * FROM categorias");
@@ -102,8 +102,8 @@ $mysql->desconectar();
                             <div class="product-stock-modern">Stock: <span class="stock-value-modern"><?php echo $mostrarProductos["stock"]; ?> Unidades</span></div>
                         <?php endif ?>
                         <div class="product-actions-modern">
-                            <button class="edit-product-btn-modern">✏️ Editar</button>
-                            <button class="delete-product-btn-modern">🗑️ Eliminar</button>
+                                <button class=" action-button"  data-bs-toggle="modal" data-bs-target="#modalEditar" data-id="<?php echo $mostrarProductos['idProducto']; ?>" id="editarProducto" >✏️ Editar</button>
+                            <button class="delete-product-btn-modern" >🗑️ Eliminar</button>
                         </div>
                         
                         <?php if($mostrarProductos["estado"] == "Activo"): ?>
@@ -185,7 +185,56 @@ $mysql->desconectar();
         </div>
     </div>
     </div>
+                        <!--***********************************************************fin modal agregar*************************************** -->
+                                <!-- Modal editar -->
 
+    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="AgregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content bg-white" style="max-height: 90vh; overflow-y: auto;">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="AgregarModalLabel">Editar Producto</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row g-3" action="../controller/admin/editarProducto.php" method="POST" enctype="multipart/form-data">
+                <div class="col-12">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="editarNombre" name="nombre"  required >
+                </div>
+                <div class="col-md-6">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="editarPrecio" name="precio" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="text" class="form-control" id="editarStock" name="stock" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select name="categoria" id="editarCategoria" class="form-control" required>
+                        <option id="optionEditarCategoria" value="">Selecciona una categoria...</option>
+
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <input type="text" class="form-control" id="editarDescripcion" name="descripcion" required>
+                </div>
+                <div class="col-12">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="editarImagen" name="imagen" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+     <!--***********************************************************fin modal editar*************************************** -->
+    <script src="../assets/js/editarProducto.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>

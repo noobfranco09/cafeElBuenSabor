@@ -56,7 +56,7 @@ $icono = str_split($nombre)??"?";
                         <div class="reporte-icon">👤</div>
                         <div class="reporte-title">Reporte de Empleados</div>
                         <div class="reporte-desc">Descarga un PDF con el listado completo de empleados.</div>
-                        <button class="reporte-btn">Ver empleados</button>
+                        <button class="reporte-btn"><a href="../controller/generarPDFDesempeñoEmpleado.php">Ver empleados</a></button>
                     </div>
                     <div class="reporte-card">
                         <div class="reporte-icon">📦</div>

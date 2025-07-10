@@ -38,9 +38,13 @@ function verificarQr($codigo)
                     unlink($url);
                     
                 }
+<<<<<<< HEAD
 
 
                  return false;
+=======
+                 exit();
+>>>>>>> c96694155e346632296e50a6c75838d36e409697
             } catch (PDOException) {
                 die('error en la consulta');
             }
@@ -52,6 +56,8 @@ function verificarQr($codigo)
     } else {
         die('Qr inválido');
     }
-}
-;
+
+
+    
+};
 ?>
