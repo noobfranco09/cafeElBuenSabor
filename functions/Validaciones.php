@@ -468,6 +468,79 @@ class Validaciones{
         return  $errores;
     }
 
+    public function validarCategoriaAgregar()
+    {
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["nombreCategoria"])) && empty(trim($this->datos["descripcionCategoria"])))
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $nombreCategoria = $this->datos["nombreCategoria"];
+        $descripcionCategoria = $this->datos["descripcionCategoria"];
+
+        // Validar nombreCategoria (letras, números, espacios, guiones, paréntesis, etc.)
+        if (!preg_match("/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ\-\.\,\(\)\&]{2,100}$/", $nombreCategoria)) {
+            $errores["nombreCategoriaInvalido"] = "El nombre de la categoría no es válido";
+            return $errores;
+        }
+
+        // Validar descripcionCategoria (permite más longitud)
+        if (!preg_match("/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ\-\.\,\(\)\&]{5,255}$/", $descripcionCategoria)) {
+            $errores["descripcionCategoriaInvalida"] = "La descripción de la categoría no es válida";
+            return $errores;
+        }
+
+    }
+
+    public function validarCategoriaEditar()
+    {
+
+        require_once '../models/mySql.php';
+
+        $mysql = new MySQL();
+        $mysql->conectar();
+
+        $errores = [];
+
+        if(empty(trim($this->datos["nombreCategoriaEditar"])) && empty(trim($this->datos["descripcionCategoriaEditar"])))
+        {
+            $errores["datosVacio"]="Enviaste datos vacios";
+            return $errores;
+        }
+
+        $nombreCategoriaEditar = $this->datos["nombreCategoriaEditar"];
+        $descripcionCategoriaEditar = $this->datos["descripcionCategoriaEditar"];
+        $estadoCategoriaEditar = $this->datos["estadoCategoriaEditar"];
+
+        // Validar nombreCategoria (letras, números, espacios, guiones, paréntesis, etc.)
+        if (!preg_match("/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ\-\.\,\(\)\&]{2,100}$/", $nombreCategoriaEditar)) {
+            $errores["nombreCategoriaInvalido"] = "El nombre de la categoría no es válido";
+            return $errores;
+        }
+
+        // Validar descripcionCategoria (permite más longitud)
+        if (!preg_match("/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ\-\.\,\(\)\&]{5,255}$/", $descripcionCategoriaEditar)) {
+            $errores["descripcionCategoriaInvalida"] = "La descripción de la categoría no es válida";
+            return $errores;
+        }
+
+        // Validar estadoCategoria (solo 'Activa' o 'Inactiva', sin comillas ni símbolos)
+        if (!preg_match("/^(Activa|Inactiva)$/i", $estadoCategoriaEditar)) {
+            $errores["estadoCategoriaInvalido"] = "El estado de la categoría no es válido";
+            return $errores;
+        }
+
+    }
+
 
 }
 

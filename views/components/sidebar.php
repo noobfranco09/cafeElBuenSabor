@@ -46,6 +46,12 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="/views/categorias.php" class="sidebar-link <?php echo ($activePage === 'categorias') ? 'active' : ''; ?>">
+                        <span class="sidebar-icon"><i class="bi bi-folder"></i></span>
+                        Categorías
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a href="/views/productos.php" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span>
                         Productos
