@@ -33,14 +33,14 @@ function verificarQr($codigo)
                 $obtenerUrl->execute(['codigo' => $codigo]);
                 $data = $obtenerUrl->fetch(PDO::FETCH_ASSOC);
                 $url = $data["url"];
-                echo $url;
+                
                 if(file_exists($url)){
                     unlink($url);
-                    echo "Borrado";
+                    
                 }
 
 
-                 exit();
+                 return false;
             } catch (PDOException) {
                 die('error en la consulta');
             }

@@ -27,7 +27,7 @@ function generarQr($mesa)
     $url = "localhost:3000/index.php?qr=$codigo&mesa=$mesa";
     $ubicacionQr = $carpeta . "/$codigo.png";
     $qr = [
-        "url" => $ubicacionQr,
+        "url" => "./assets/Qrs"."/$codigo.png",
         "codigo"=>$codigo,
         "horaInicio" => $horaInicio,
         "horaFinal" => $horaFinal,

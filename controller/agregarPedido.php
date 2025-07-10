@@ -19,7 +19,6 @@ $datos = json_decode($datosJSON, true);
 
 
 
-
 $mysql->desconectar();
 
 // esta parte retorna el resultado de la operacion que se realizo

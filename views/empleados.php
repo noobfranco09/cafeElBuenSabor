@@ -84,6 +84,7 @@ $mysql->desconectar();
                     <table id="tablaEmpleados" class="display responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Fecha Ingreso</th>
                                 <th>Teléfono</th>
@@ -96,6 +97,7 @@ $mysql->desconectar();
                         <tbody id="tablaUsuarios">
                             <?php while($usuarios = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                             <tr>
+                                <td><?php echo $usuarios["idUsuario"] ?></td>
                                 <td><?php echo $usuarios["nombre"] ?></td>
                                 <td><?php echo $usuarios["fechaIngreso"] ?></td>
                                 <td><?php echo $usuarios["telefono"] ?></td>

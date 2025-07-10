@@ -172,7 +172,7 @@ $mysql->desconectar();
     </section>
 
     <!-- Products -->
-    <section class="products" id="menu">
+    <section class="products" id="menu" data-carta="<?php echo $_GET["qr"]??"" ?>">
         <h2 class="desktop-only">Nuestro Menú Premium</h2>
 
         <?php while($mostrarProducto = $smts->fetch(PDO::FETCH_ASSOC)) :   ?>

@@ -94,13 +94,16 @@ agregarCarrito.addEventListener('click',function(){
             const nombre = data.nombre;
             const precio = data.precio;
             const stock = data.stock;
+             const carta = document.querySelector("#menu").dataset.carta;
 
             const producto = {
                 id: parseInt(id),
                 nombre,
                 precio: parseFloat(precio),
                 cantidad: 1,
-                stock
+                stock,
+                carta
+            
             };
 
             agregarProducto(producto);
