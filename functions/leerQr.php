@@ -26,7 +26,7 @@ function verificarQr($codigo)
             try {
 
                 
-                $consulta2 = $conexion->prepare('update qr set estado = 0 where codigo = :codigo');
+                $consulta2 = $conexion->prepare('update qr set estado = "Inactivo" where codigo = :codigo');
                 $consulta2->execute(['codigo' => $codigo]);
 
                 $obtenerUrl = $conexion->prepare("SELECT * FROM qr WHERE codigo =:codigo");
@@ -38,13 +38,9 @@ function verificarQr($codigo)
                     unlink($url);
                     
                 }
-<<<<<<< HEAD
 
 
                  return false;
-=======
-                 exit();
->>>>>>> c96694155e346632296e50a6c75838d36e409697
             } catch (PDOException) {
                 die('error en la consulta');
             }

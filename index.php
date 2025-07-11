@@ -17,7 +17,7 @@ $smts = $mysql->obtenerConexion()->prepare($mostrarProductos);
 $smts->execute();
 
 
-$consultaVldQr = "SELECT * FROM qr where codigo = :codigo AND estado = 1";
+$consultaVldQr = "SELECT * FROM qr where codigo = :codigo AND estado = 'Activo'";
 $stmt = $mysql->obtenerConexion()->prepare($consultaVldQr);
 $stmt->bindParam(":codigo", $_GET["qr"],PDO::PARAM_STR);
 $stmt->execute();

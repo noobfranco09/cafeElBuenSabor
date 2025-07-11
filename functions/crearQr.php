@@ -3,7 +3,7 @@ require '.././libraries/phpqrcode/qrlib.php';
 require '../models/mySql.php';
 
 
-function generarQr($mesa,$idMesa)
+function generarQr($idMesa)
 {
     $carpeta = '../assets/Qrs';
     if (!file_exists($carpeta)) {
@@ -27,7 +27,7 @@ function generarQr($mesa,$idMesa)
         "codigo"=>$codigo,
         "horaInicio" => $horaInicio,
         "horaFinal" => $horaFinal,
-        "estado" => 1
+        "estado" => 'Activo'
     ];
 
     $consulta = $conexion->prepare('insert into qr (url,codigo,horaInicio,horaFinal,estado) values (:url,:codigo,:horaInicio,:horaFinal,:estado)');

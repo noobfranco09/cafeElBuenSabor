@@ -90,6 +90,7 @@ agregarCarrito.addEventListener('click',function(){
 
         // if(productoGuardado.cantidad < data.stock)
         // {
+       
             const id = data.idProducto;
             const nombre = data.nombre;
             const precio = data.precio;
