@@ -19,18 +19,26 @@
         <div class="sidebar-section">
             <h3 class="sidebar-title">Principal</h3>
             <ul class="sidebar-menu">
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/dashboard.php" class="sidebar-link <?php echo ($activePage === 'dashboard') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-bar-chart-line"></i></span>
                         Dashboard
                     </a>
                 </li>
+                <?php endif; ?>
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/empleados.php" class="sidebar-link <?php echo ($activePage === 'empleados') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-people"></i></span>
                         Empleados
                     </a>
                 </li>
+                <?php endif; ?>
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/mesas.php" class="sidebar-link <?php echo (
                         $activePage === 'mesas') ? 'active' : ''; ?>">
@@ -38,6 +46,9 @@
                         Mesas
                     </a>
                 </li>
+                <?php endif; ?>
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/rol.php" class="sidebar-link <?php echo (
                         $activePage === 'rol') ? 'active' : ''; ?>">
@@ -45,43 +56,57 @@
                         Roles
                     </a>
                 </li>
+                <?php endif; ?>
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/categorias.php" class="sidebar-link <?php echo ($activePage === 'categorias') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-folder"></i></span>
                         Categorías
                     </a>
                 </li>
+                <?php endif; ?>
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/productos.php" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span>
                         Productos
                     </a>
                 </li>
+                <?php endif; ?>
+
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/generarQr.php" class="sidebar-link <?php echo ($activePage === 'generarQr') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-qr-code"></i></span>
                         Generar QR
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/pedidos.php" class="sidebar-link <?php echo ($activePage === 'pedidos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-cart"></i></span>
                         Pedidos
                     </a>
                 </li>
+
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/ventas.php" class="sidebar-link <?php echo ($activePage === 'ventas') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-cash-coin"></i></span>
                         Ventas
                     </a>
                 </li>
+                <?php endif; ?>
                
+                <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
                     <a href="/cafeElBuenSabor/views/reportes.php" class="sidebar-link <?php echo ($activePage === 'reportes') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-clipboard-data"></i></span>
                         Reportes
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
 
