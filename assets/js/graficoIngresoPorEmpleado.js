@@ -9,13 +9,24 @@ fetch('../functions/graficoIngresoPorEmpleado.php')
 
     const ctx = document.getElementById('ingresoPorEmpleado').getContext('2d');
     
-    // Crear gradientes para las barras
-    const gradients = valores.map((_, index) => {
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(139, 69, 19, 0.9)'); // Marrón café
-        gradient.addColorStop(1, 'rgba(160, 82, 45, 0.7)'); // Marrón sienna
-        return gradient;
-    });
+    // Generar colores aleatorios bien distribuidos para distinguir cada barra
+    function generateDistinctColors(count) {
+        const colors = [];
+        const step = 360 / count;
+        for (let i = 0; i < count; i++) {
+            const hue = Math.round(i * step + Math.random() * step * 0.3) % 360;
+            const sat = 65 + Math.floor(Math.random() * 20); // 65-85%
+            const lum = 50 + Math.floor(Math.random() * 15); // 50-65%
+            colors.push(`hsl(${hue}, ${sat}%, ${lum}%)`);
+        }
+        // Barajar para evitar agrupación de tonos similares
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+        return colors;
+    }
+    const colors = generateDistinctColors(labels.length);
 
     new Chart(ctx, {
         type: 'bar',
@@ -24,13 +35,11 @@ fetch('../functions/graficoIngresoPorEmpleado.php')
             datasets: [{
                 label: 'Ingresos por Empleado',
                 data: valores,
-                backgroundColor: gradients,
+                backgroundColor: colors,
                 borderColor: '#8B4513',
                 borderWidth: 2,
                 borderRadius: 6,
                 borderSkipped: false,
-                hoverBackgroundColor: '#FFD700',
-                hoverBorderColor: '#8B4513',
                 hoverBorderWidth: 3
             }]
         },

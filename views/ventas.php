@@ -78,7 +78,9 @@ $mysql->desconectar();
                         <div class="chart-header">
                             <span class="chart-title">Ingresos por Mesa</span>
                         </div>
-                        <canvas id="ingresoPorMesa" width="600" height="400"></canvas>
+                        <div class="chart-body">
+                            <canvas id="ingresoPorMesa"></canvas>
+                        </div>
                     </div>
                 </div>
                 <div class="ventas-table-card">

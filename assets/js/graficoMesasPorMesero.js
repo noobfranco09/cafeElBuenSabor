@@ -9,15 +9,24 @@ fetch('../functions/graficoMesasPorMesero.php')
 
     const ctx = document.getElementById('mesasPorMesero').getContext('2d');
     
-    // Colores temáticos del café
-    const colors = [
-        'rgba(139, 69, 19, 0.8)',   // Marrón café
-        'rgba(160, 82, 45, 0.8)',   // Marrón sienna
-        'rgba(205, 133, 63, 0.8)',  // Marrón peru
-        'rgba(210, 180, 140, 0.8)', // Marrón trigo
-        'rgba(244, 164, 96, 0.8)',  // Marrón arena
-        'rgba(255, 215, 0, 0.8)'    // Dorado
-    ];
+    // Generar colores aleatorios bien distribuidos para distinguir cada segmento
+    function generateDistinctColors(count) {
+        const colors = [];
+        const step = 360 / count;
+        for (let i = 0; i < count; i++) {
+            const hue = Math.round(i * step + Math.random() * step * 0.3) % 360;
+            const sat = 65 + Math.floor(Math.random() * 20); // 65-85%
+            const lum = 50 + Math.floor(Math.random() * 15); // 50-65%
+            colors.push(`hsl(${hue}, ${sat}%, ${lum}%)`);
+        }
+        // Barajar para evitar agrupación de tonos similares
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+        return colors;
+    }
+    const colors = generateDistinctColors(labels.length);
 
     new Chart(ctx, {
         type: 'doughnut',
@@ -29,8 +38,6 @@ fetch('../functions/graficoMesasPorMesero.php')
                 backgroundColor: colors,
                 borderColor: '#8B4513',
                 borderWidth: 3,
-                hoverBackgroundColor: '#FFD700',
-                hoverBorderColor: '#8B4513',
                 hoverBorderWidth: 4
             }]
         },

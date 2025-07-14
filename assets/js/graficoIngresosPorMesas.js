@@ -9,26 +9,25 @@ fetch('../functions/graficoIngresosPorMesa.php')
 
     const ctx = document.getElementById('ingresoPorMesa').getContext('2d');
     
-    // Paleta amplia de colores temáticos del café
-    const baseColors = [
-        '#8B4513', // Marrón café
-        '#A0522D', // Marrón sienna
-        '#CD853F', // Marrón peru
-        '#D2B48C', // Marrón trigo
-        '#F4A460', // Marrón arena
-        '#FFD700', // Dorado
-        '#DAA520', // Dorado oscuro
-        '#B8860B', // Dorado web
-        '#6F4E37', // Café oscuro
-        '#C19A6B', // Café claro
-        '#A67B5B', // Café medio
-        '#E6BE8A', // Café suave
-        '#BC8F8F', // Café rosado
-        '#DEB887', // Café beige
-        '#FFE4B5'  // Café muy claro
-    ];
-    // Asignar colores cíclicamente según la cantidad de datos
-    const colors = labels.map((_, i) => baseColors[i % baseColors.length]);
+    // Generar colores aleatorios bien distribuidos para distinguir cada segmento
+    function generateDistinctColors(count) {
+        const colors = [];
+        const step = 360 / count;
+        for (let i = 0; i < count; i++) {
+            // Hue equidistante, saturación y luminosidad fijas para buena visibilidad
+            const hue = Math.round(i * step + Math.random() * step * 0.3) % 360;
+            const sat = 65 + Math.floor(Math.random() * 20); // 65-85%
+            const lum = 50 + Math.floor(Math.random() * 15); // 50-65%
+            colors.push(`hsl(${hue}, ${sat}%, ${lum}%)`);
+        }
+        // Barajar para evitar agrupación de tonos similares
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+        return colors;
+    }
+    const colors = generateDistinctColors(labels.length);
 
     new Chart(ctx, {
         type: 'pie',
@@ -40,8 +39,6 @@ fetch('../functions/graficoIngresosPorMesa.php')
                 backgroundColor: colors,
                 borderColor: '#8B4513',
                 borderWidth: 3,
-                hoverBackgroundColor: '#FFD700',
-                hoverBorderColor: '#8B4513',
                 hoverBorderWidth: 4
             }]
         },

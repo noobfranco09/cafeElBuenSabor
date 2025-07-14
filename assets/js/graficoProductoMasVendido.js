@@ -9,15 +9,26 @@ fetch('../functions/graficoProductoMasVendido.php')
 
     const ctx = document.getElementById('productoMasVendido').getContext('2d');
     
-    // Crear gradientes para las barras
-    const gradients = valores.map((_, index) => {
-        const gradient = ctx.createLinearGradient(0, 0, 400, 0);
-        gradient.addColorStop(0, 'rgba(139, 69, 19, 0.8)'); // Marrón café
-        gradient.addColorStop(1, 'rgba(160, 82, 45, 0.6)'); // Marrón sienna
-        return gradient;
-    });
-    // Array de colores de hover para que solo la barra activa cambie
-    const hoverColors = valores.map(() => '#FFD700');
+    // Generar colores aleatorios bien distribuidos para distinguir cada barra
+    function generateDistinctColors(count) {
+        const colors = [];
+        const step = 360 / count;
+        for (let i = 0; i < count; i++) {
+            const hue = Math.round(i * step + Math.random() * step * 0.3) % 360;
+            const sat = 65 + Math.floor(Math.random() * 20); // 65-85%
+            const lum = 50 + Math.floor(Math.random() * 15); // 50-65%
+            colors.push(`hsl(${hue}, ${sat}%, ${lum}%)`);
+        }
+        // Barajar para evitar agrupación de tonos similares
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+        return colors;
+    }
+    const colors = generateDistinctColors(labels.length);
+    // Definir hoverColors para evitar error
+    const hoverColors = labels.map(() => '#FFD700');
 
     new Chart(ctx, {
         type: 'bar',
@@ -26,13 +37,11 @@ fetch('../functions/graficoProductoMasVendido.php')
             datasets: [{
                 label: 'Cantidad Vendida',
                 data: valores,
-                backgroundColor: gradients,
+                backgroundColor: colors,
                 borderColor: '#8B4513',
                 borderWidth: 2,
                 borderRadius: 8,
                 borderSkipped: false,
-                hoverBackgroundColor: hoverColors,
-                hoverBorderColor: '#8B4513',
                 hoverBorderWidth: 3,
                 minBarLength: 10 // Aumenta el tamaño mínimo de la barra
             }]

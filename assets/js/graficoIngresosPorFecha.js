@@ -9,10 +9,24 @@ fetch('../functions/graficoIngresosPorFecha.php')
 
     const ctx = document.getElementById('ingresoPorFecha').getContext('2d');
     
-    // Crear gradiente para el gráfico de área
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(139, 69, 19, 0.6)'); // Marrón café
-    gradient.addColorStop(1, 'rgba(160, 82, 45, 0.2)'); // Marrón sienna
+    // Generar colores aleatorios bien distribuidos para los puntos
+    function generateDistinctColors(count) {
+        const colors = [];
+        const step = 360 / count;
+        for (let i = 0; i < count; i++) {
+            const hue = Math.round(i * step + Math.random() * step * 0.3) % 360;
+            const sat = 65 + Math.floor(Math.random() * 20); // 65-85%
+            const lum = 50 + Math.floor(Math.random() * 15); // 50-65%
+            colors.push(`hsl(${hue}, ${sat}%, ${lum}%)`);
+        }
+        // Barajar para evitar agrupación de tonos similares
+        for (let i = colors.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+        return colors;
+    }
+    const pointColors = generateDistinctColors(labels.length);
 
     new Chart(ctx, {
         type: 'line',
@@ -21,18 +35,15 @@ fetch('../functions/graficoIngresosPorFecha.php')
             datasets: [{
                 label: 'Ingresos Diarios',
                 data: valores,
-                backgroundColor: gradient,
+                backgroundColor: 'rgba(139, 69, 19, 0.15)', // Mantengo el gradiente de fondo suave
                 borderColor: '#8B4513',
                 borderWidth: 3,
-                pointBackgroundColor: '#FFD700',
+                pointBackgroundColor: pointColors,
                 pointBorderColor: '#8B4513',
                 pointBorderWidth: 2,
                 pointRadius: 5,
-                pointHoverRadius: 7,
                 fill: true,
-                tension: 0.3,
-                pointHoverBackgroundColor: '#FFD700',
-                pointHoverBorderColor: '#8B4513'
+                tension: 0.3
             }]
         },
         options: {
