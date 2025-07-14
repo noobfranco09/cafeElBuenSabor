@@ -8,7 +8,7 @@ $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
 
 $inventario = $conexion->query("SELECT DATE_FORMAT(usuario.fechaIngreso, '%Y-%m-%d') As fecha, usuario.nombre As nombreUsuario, roles.nombre As nombreRol, COUNT(pedidos.idUsuario) As mesasAtentidas,
-SUM(ventas.total) As valorGenerado, usuario.estado FROM ventas 
+SUM(ventas.total) As valorGenerado FROM ventas 
 JOIN pedidos ON pedidos.idPedido = ventas.pedidos_idPedido
 JOIN usuario ON usuario.idUsuario = pedidos.idUsuario
 JOIN roles  ON roles.idRoll = usuario.idRoll
@@ -73,15 +73,18 @@ class PDF extends FPDF
         $this->SetTextColor(255, 255, 255);
         $this->SetFont('Arial', 'B', 11);
         
-        // Margen izquierdo
-        $this->SetX(20);
+        // Calcular el ancho total de la tabla y centrarla
+        $tableWidth = 30 + 40 + 35 + 35 + 35; // 175
+        $pageWidth = 210; // A4 horizontal en mm
+        $marginLeft = ($pageWidth - $tableWidth) / 2;
+        $this->SetX($marginLeft);
         // Encabezados de tabla
-        $this->Cell(15, 12, 'Fecha Ingreso', 1, 0, 'C', true);
+        $this->Cell(30, 12, 'Fecha Ingreso', 1, 0, 'C', true);
         $this->Cell(40, 12, 'Nombre', 1, 0, 'C', true);
-        $this->Cell(55, 12, 'Rol', 1, 0, 'C', true);
-        $this->Cell(25, 12, 'Mesas Atendidas', 1, 0, 'C', true);
-        $this->Cell(20, 12, 'Valor Generado', 1, 0, 'C', true);
-        $this->Cell(30, 12, 'Estado', 1, 1, 'C', true);
+        $this->Cell(35, 12, 'Rol', 1, 0, 'C', true);
+        $this->Cell(35, 12, 'Mesas Atendidas', 1, 0, 'C', true);
+        $this->Cell(35, 12, 'Valor Generado', 1, 0, 'C', true);
+        $this->Ln(12);
     }
     
     function TableRow($data)
@@ -98,14 +101,16 @@ class PDF extends FPDF
         }
         $alternate = !$alternate;
         
-        // Margen izquierdo
-        $this->SetX(20);
-        $this->Cell(15, 10, $data['fecha'], 1, 0, 'L', true);
+        // Calcular el ancho total de la tabla y centrarla
+        $tableWidth = 30 + 40 + 35 + 35 + 35; // 175
+        $pageWidth = 210; // A4 horizontal en mm
+        $marginLeft = ($pageWidth - $tableWidth) / 2;
+        $this->SetX($marginLeft);
+        $this->Cell(30, 10, $data['fecha'], 1, 0, 'L', true);
         $this->Cell(40, 10, $data['nombreUsuario'], 1, 0, 'L', true);
-        $this->Cell(40, 10, $data['nombreRol'], 1, 0, 'C', true);
-        $this->Cell(20, 10, $data['mesasAtentidas'], 1, 0, 'C', true);
-        $this->Cell(25, 10, "$" . number_format($data['valorGenerado'], 0, ',', '.'), 1, 0, 'R', true);
-        $this->Cell(40, 10, $data['estado'], 1, 0, 'C', true);
+        $this->Cell(35, 10, $data['nombreRol'], 1, 0, 'C', true);
+        $this->Cell(35, 10, $data['mesasAtentidas'], 1, 0, 'C', true);
+        $this->Cell(35, 10, "$" . number_format($data['valorGenerado'], 0, ',', '.'), 1, 0, 'R', true);
     }
 }
 
