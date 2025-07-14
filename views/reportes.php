@@ -14,9 +14,9 @@ $icono = str_split($nombre)??"?";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/dashboard.css">
     <title>Reportes - CoffeeShop Pro</title>
 </head>
 <body>
@@ -99,7 +99,7 @@ $icono = str_split($nombre)??"?";
   </div>
 
 
-    <script src="/assets/js/dashboard.js"></script>
+    <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
 </body>
 </html> 

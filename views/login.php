@@ -17,9 +17,9 @@ if(isset($_SESSION["id"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/login.css">
-    <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/login.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
     <title>Coffee Login</title>
 </head>
 <body>
@@ -94,7 +94,7 @@ if(isset($_SESSION["id"])){
         </div>
     </div>
 
-    <script src="/assets/js/login.js"></script>
+    <script src="/cafeElBuenSabor/assets/js/login.js"></script>
 
 </body>
 </html>

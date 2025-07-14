@@ -22,7 +22,7 @@ $conexion = $mysql->obtenerConexion();
 
 $obtenerProductos = $conexion->query("SELECT productos.idProducto, productos.nombre, productos.descripcion, productos.precio, 
 productos.stock, productos.imagen, productos.estado, categorias.nombre As nombreCategoria
-FROM productos JOIN categorias ON categorias.idCategoria = productos.idCategoria");
+FROM productos JOIN categorias ON categorias.idCategoria = productos.idCategoria where productos.estado=1");
 $obtenerCategorias = $conexion->query("SELECT * FROM categorias");
 
 $mysql->desconectar();
@@ -33,9 +33,9 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/boostrap/bootstrap.min.css">
     <title>Productos - CoffeeShop Pro</title>
 </head>
@@ -82,7 +82,7 @@ $mysql->desconectar();
 
                 <div class="product-card-modern">
                     <div class="product-image-modern">
-                        <img src="../<?php echo $mostrarProductos["imagen"]; ?>">
+                        <img src="<?php echo $mostrarProductos["imagen"]; ?>">
                         <?php if($mostrarProductos["stock"] <= 5): ?>
                         <span class="product-stock-badge-modern stock-low">Stock bajo</span>
                         <?php else: ?>
@@ -103,7 +103,11 @@ $mysql->desconectar();
                         <?php endif ?>
                         <div class="product-actions-modern">
                                 <button class=" action-button"  data-bs-toggle="modal" data-bs-target="#modalEditar" data-id="<?php echo $mostrarProductos['idProducto']; ?>" id="editarProducto" >✏️ Editar</button>
-                            <button class="delete-product-btn-modern" >🗑️ Eliminar</button>
+                                <form action="/cafeElBuenSabor/controller/admin/eliminarProducto.php" method="POST">
+                                    <input hidden type="number" class="label-control" name="eliminarIdProducto" value="<?php echo $mostrarProductos['idProducto']; ?>">
+                                      <button class="btn btn-danger" >🗑️ Eliminar</button>
+                                </form>
+                          
                         </div>
                         
                         <?php if($mostrarProductos["estado"] == "Activo"): ?>
@@ -154,7 +158,7 @@ $mysql->desconectar();
                 <div class="col-md-6">
                     <label for="categoria" class="form-label">Categoria</label>
                     <select name="categoria" id="categoria" class="form-control" required>
-                        <option value="">Selecciona una categoria...</option>
+                        <option value="" enabled selected>Selecciona una categoria...</option>
                         <?php while($mostrarCategorias = $obtenerCategorias->fetch(PDO::FETCH_ASSOC)) :   ?>
                             <option value="<?php echo $mostrarCategorias['idCategoria']?>"><?php echo $mostrarCategorias['nombre']?></option>
                         <?php endwhile; ?>
@@ -164,8 +168,8 @@ $mysql->desconectar();
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-control" name="estado" id="estado" required>
                         <option value="">Selecciona un estado...</option>
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
                     </select>
                 </div>
                 <div class="col-12">
@@ -198,6 +202,10 @@ $mysql->desconectar();
         <div class="modal-body">
             <form class="row g-3" action="../controller/admin/editarProducto.php" method="POST" enctype="multipart/form-data">
                 <div class="col-12">
+                    <label for="nombre" class="form-label">Id del producto</label>
+                    <input type="number" class="form-control" id="editarIdProducto" name="editarIdProducto"  required readonly>
+                </div>
+                <div class="col-12">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="editarNombre" name="nombre"  required >
                 </div>
@@ -206,14 +214,14 @@ $mysql->desconectar();
                     <input type="text" class="form-control" id="editarPrecio" name="precio" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="stock" class="form-label">Stock</label>
+                    <label for="editarStock" class="form-label">Stock</label>
                     <input type="text" class="form-control" id="editarStock" name="stock" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="categoria" class="form-label">Categoria</label>
-                    <select name="categoria" id="editarCategoria" class="form-control" required>
-                        <option id="optionEditarCategoria" value="">Selecciona una categoria...</option>
 
+                    <label for="editarCategoria" class="form-label">Categoria</label>
+                    <select name="editarCategoria" id="editarCategoria" class="form-control" required>
+                            <option value="" disabled selected>Elija una categoría</option>
                     </select>
                 </div>
                 <div class="col-12">
@@ -221,8 +229,8 @@ $mysql->desconectar();
                     <input type="text" class="form-control" id="editarDescripcion" name="descripcion" required>
                 </div>
                 <div class="col-12">
-                    <label for="imagen" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" id="editarImagen" name="imagen" required>
+                    <label for="editarImagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="editarImagen" name="editarImagen" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -236,7 +244,7 @@ $mysql->desconectar();
      <!--***********************************************************fin modal editar*************************************** -->
     <script src="../assets/js/editarProducto.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/dashboard.js"></script>
+    <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
 </body>
 </html> 

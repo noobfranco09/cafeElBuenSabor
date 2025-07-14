@@ -50,7 +50,7 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/index.css">
     <title>El Buen Sabor - Café Premium</title>
 </head>
 <body>
@@ -197,7 +197,7 @@ $mysql->desconectar();
     </section>
 
 
-    <script src="/assets/js/index.js"></script>
+    <script src="/cafeElBuenSabor/assets/js/index.js"></script>
 
 </body>
 </html>

@@ -20,64 +20,64 @@
             <h3 class="sidebar-title">Principal</h3>
             <ul class="sidebar-menu">
                 <li class="sidebar-item">
-                    <a href="/views/dashboard.php" class="sidebar-link <?php echo ($activePage === 'dashboard') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/dashboard.php" class="sidebar-link <?php echo ($activePage === 'dashboard') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-bar-chart-line"></i></span>
                         Dashboard
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/empleados.php" class="sidebar-link <?php echo ($activePage === 'empleados') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/empleados.php" class="sidebar-link <?php echo ($activePage === 'empleados') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-people"></i></span>
                         Empleados
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/mesas.php" class="sidebar-link <?php echo (
+                    <a href="/cafeElBuenSabor/views/mesas.php" class="sidebar-link <?php echo (
                         $activePage === 'mesas') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-table"></i></span>
                         Mesas
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/rol.php" class="sidebar-link <?php echo (
+                    <a href="/cafeElBuenSabor/views/rol.php" class="sidebar-link <?php echo (
                         $activePage === 'rol') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-shield-lock"></i></span>
                         Roles
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/categorias.php" class="sidebar-link <?php echo ($activePage === 'categorias') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/categorias.php" class="sidebar-link <?php echo ($activePage === 'categorias') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-folder"></i></span>
                         Categorías
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/productos.php" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/productos.php" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span>
                         Productos
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/generarQr.php" class="sidebar-link <?php echo ($activePage === 'generarQr') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/generarQr.php" class="sidebar-link <?php echo ($activePage === 'generarQr') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-qr-code"></i></span>
                         Generar QR
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/pedidos.php" class="sidebar-link <?php echo ($activePage === 'pedidos') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/pedidos.php" class="sidebar-link <?php echo ($activePage === 'pedidos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-cart"></i></span>
                         Pedidos
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="/views/ventas.php" class="sidebar-link <?php echo ($activePage === 'ventas') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/ventas.php" class="sidebar-link <?php echo ($activePage === 'ventas') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-cash-coin"></i></span>
                         Ventas
                     </a>
                 </li>
                
                 <li class="sidebar-item">
-                    <a href="/views/reportes.php" class="sidebar-link <?php echo ($activePage === 'reportes') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/reportes.php" class="sidebar-link <?php echo ($activePage === 'reportes') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-clipboard-data"></i></span>
                         Reportes
                     </a>

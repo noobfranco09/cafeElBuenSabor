@@ -124,7 +124,7 @@ function closeLogoutModal() {
 }
 
 function confirmLogout(){
-    fetch("../../controller/admin/logout.php",{
+    fetch("/cafeElBuenSabor/controller/admin/logout.php",{
         method:"GET",
         headers: {
         'Content-Type': 'application/json'

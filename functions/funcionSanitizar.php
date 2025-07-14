@@ -1,5 +1,4 @@
 <?php
-require './funcionSanitizar.php';
 function verificarVariables(array $datos)
 {
     $datosSanitizados = [];
