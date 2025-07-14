@@ -45,7 +45,17 @@ function desactivarUsuario(id){
     })
     .then(response => response.json())
     .then(data =>{
-         Swal.fire({
+
+        if(data.estado=="Indesactivable"){
+            Swal.fire({
+                    title: "Error!",
+                    text: "No puedes desactivarte a ti mismo.",
+                    icon: "warning"
+                    });
+                 
+        }
+        else{
+            Swal.fire({
                     title: "Desactivado!",
                     text: "El usuario ah sido desactivado.",
                     icon: "success"
@@ -53,6 +63,8 @@ function desactivarUsuario(id){
                     setTimeout(()=>{
                         location.reload();
                     },1000)
+        }
+         
                 
     })
 

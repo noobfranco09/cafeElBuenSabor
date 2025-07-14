@@ -5,6 +5,11 @@ if (!isset($_SESSION["id"])){
     exit();
 }
 
+if ($_SESSION["estado"]=="Inactivo"){
+    header("Location: ./login.php");
+    exit();
+}
+
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
 $icono = str_split($nombre)??"?";

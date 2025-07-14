@@ -57,8 +57,13 @@ if(isset($_SESSION["id"])){
                 <?php if(isset($errores["errorCorreo"]) && !empty($errores["errorCorreo"])):  ?>
                     <p class="text-start text-danger"><?php echo $errores["errorCorreo"]; ?></p>
                     <?php endif;  ?>
+                    
                     <?php if(isset($errores["correoNoExiste"]) && !empty($errores["correoNoExiste"])):  ?>
                     <p class="text-start text-danger"><?php echo $errores["correoNoExiste"]; ?></p>
+                    <?php endif;  ?>
+
+                    <?php if(isset($errores["usuarioInactivo"]) && !empty($errores["usuarioInactivo"])):  ?>
+                    <p class="text-start text-danger"><?php echo $errores["usuarioInactivo"]; ?></p>
                     <?php endif;  ?>
             </div>
              <!-- Aca se puede ver el error del correo -->

@@ -4,6 +4,10 @@ if (!isset($_SESSION["id"])){
     header("Location: ./login.php");
     exit();
 }
+if ($_SESSION["estado"]=="Inactivo"){
+    header("Location: ./login.php");
+    exit();
+}
 
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";

@@ -34,6 +34,7 @@ if(!empty($errores)){
     $_SESSION["id"]= $resultado["idUsuario"];
     $_SESSION["nombre"]=$resultado["nombre"];
     $_SESSION["rol"]=$resultado["rol"];
+    $_SESSION["estado"]=$resultado["estado"];
 
     $mysql->desconectar();
     header("Location: ../../views/dashboard.php");

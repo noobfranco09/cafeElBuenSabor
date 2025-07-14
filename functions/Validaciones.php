@@ -60,6 +60,11 @@ class Validaciones{
             return $errores;
 
         }
+
+        if($resultado["estado"]=="Inactivo"){
+            $errores["usuarioInactivo"]="El usuario esta inactivo";
+            return $errores;
+        }
         
         $mysql->desconectar();
         return $errores;
@@ -160,6 +165,7 @@ class Validaciones{
         $rol = $this->datos["rol"];
         $contraseña = $this->datos["contraseña"];
         $id = $this->datos["id"];
+        $estado = $this->datos["estado"];
 
 
         if(!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',$correo) ||
@@ -184,6 +190,11 @@ class Validaciones{
         }
         if(!preg_match('/^[0-9]+$/',$rol)){
             $errores["errorRol"]="Este rol no es valido";
+            return $errores;
+        }
+        session_start();
+        if($estado=="Inactivo" && $id==$_SESSION["id"]){
+            $errores["errorEstado"]="No puedes desactivarte a ti mismo";
             return $errores;
         }
 

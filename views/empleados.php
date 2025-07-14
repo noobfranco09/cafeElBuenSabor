@@ -4,6 +4,10 @@ if (!isset($_SESSION["id"])){
     header("Location: ./login.php");
     exit();
 }
+if ($_SESSION["estado"]=="Inactivo"){
+    header("Location: ./login.php");
+    exit();
+}
 
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
@@ -318,6 +322,9 @@ $mysql->desconectar();
     </div>
 
     <div class="mb-3">
+        <?php if(!empty($erroresEditar["errorEstado"]) && isset($erroresEditar["errorEstado"])): ?>
+            <p class="text-start text-danger"><?php echo $erroresEditar["errorEstado"] ?></p>
+        <?php endif; ?>
         <label for="estadoEditar"  class="form-label">Estado</label>
         <select class="form-select" aria-label="Elije un rol" name="estado" id="estadoEditar" required>
                 <option value="Activo">Activo</option>
