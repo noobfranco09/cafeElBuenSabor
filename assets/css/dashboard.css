@@ -3237,3 +3237,46 @@
                 padding: 6px 8px;
             }
         }
+
+        /* === Tabla de detalle de venta en modal === */
+        .modal .table-lingth {
+          width: 100%;
+          border-radius: 14px;
+          overflow: hidden;
+          background: #fffdfa;
+          box-shadow: 0 4px 18px rgba(139, 69, 19, 0.10);
+          border: 1.5px solid #f5e6d6;
+          margin-bottom: 0;
+        }
+        .modal .table-lingth th, .modal .table-lingth td {
+          padding: 14px 16px;
+          text-align: left;
+          border-bottom: 1px solid #f5e6d6;
+          font-size: 1em;
+        }
+        .modal .table-lingth th {
+          background: #f5e6d6;
+          color: #8B4513;
+          font-weight: bold;
+          border-bottom: 2px solid #d7b899;
+        }
+        .modal .table-lingth tr:last-child td {
+          border-bottom: none;
+        }
+        .modal .table-lingth tbody tr:hover {
+          background: #ffe9b3;
+          transition: background 0.2s;
+        }
+        .modal .table-lingth td {
+          color: #654321;
+        }
+        .modal .table-lingth td:last-child, .modal .table-lingth th:last-child {
+          text-align: right;
+        }
+
+        /* === Enlaces blancos sin subrayado === */
+        a, a:link, a:visited, a:hover, a:active {
+          color: #fff !important;
+          text-decoration: none !important;
+          transition: color 0.2s;
+        }
