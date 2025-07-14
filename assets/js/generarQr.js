@@ -1,10 +1,10 @@
-const btnGenerarQr = document.querySelector("#btnGenerarQr");
+const btnGenerarQr = document.querySelectorAll(".btnMostrarQr");
 const mdlVerQr = new bootstrap.Modal(document.getElementById('mdlVerQr'));
 
-btnGenerarQr.addEventListener('click',(e)=>{
-    e.preventDefault();
-    const mesaElegida = document.querySelector("#selectMesa").value;
-    generarQr(mesaElegida);
+btnGenerarQr.forEach(function(boton){
+    boton.addEventListener('click',function(){
+        alert("Hola mundo");
+    });
 })
 
 function generarQr(mesa){
