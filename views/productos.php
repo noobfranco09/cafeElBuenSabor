@@ -102,7 +102,7 @@ $mysql->desconectar();
                             <div class="product-stock-modern">Stock: <span class="stock-value-modern"><?php echo $mostrarProductos["stock"]; ?> Unidades</span></div>
                         <?php endif ?>
                         <div class="product-actions-modern">
-                                <button class=" action-button"  data-bs-toggle="modal" data-bs-target="#modalEditar" data-id="<?php echo $mostrarProductos['idProducto']; ?>" id="editarProducto" >✏️ Editar</button>
+                                <button class=" action-button btnEditarProducto"  data-bs-toggle="modal" data-bs-target="#modalEditar" data-id="<?php echo $mostrarProductos['idProducto']; ?>"  >✏️ Editar</button>
                                 <form action="/cafeElBuenSabor/controller/admin/eliminarProducto.php" method="POST">
                                     <input hidden type="number" class="label-control" name="eliminarIdProducto" value="<?php echo $mostrarProductos['idProducto']; ?>">
                                       <button class="btn btn-danger" >🗑️ Eliminar</button>
