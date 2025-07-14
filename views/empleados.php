@@ -348,8 +348,9 @@ $mysql->desconectar();
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
-    <script defer src="/assets/js/empleados.js"></script>
-    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script defer src="/cafeElBuenSabor/assets/js/empleados.js"></script>
+    <script src="/cafeElBuenSabor/assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
             $('#tablaEmpleados').DataTable({

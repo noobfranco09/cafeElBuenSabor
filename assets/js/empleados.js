@@ -36,7 +36,7 @@ document.querySelector("#tablaUsuarios").addEventListener("click", function (e) 
     
 
 function desactivarUsuario(id){
-    fetch('../../controller/desactivarEmpleado.php',{
+    fetch('/cafeElBuenSabor/controller/desactivarEmpleado.php',{
         method:"POST",
         headers:{
             'Content-Type':"application/json"
@@ -70,7 +70,7 @@ document.querySelector("#tablaUsuarios").addEventListener("click", function (e) 
 });
 
 function obtenerUsuario(id){
-    fetch('../../functions/obtenerUsuario.php',{
+    fetch('/cafeElBuenSabor/functions/obtenerUsuario.php',{
         method:"POST",
         headers:{
             'Content-Type':"application/json"

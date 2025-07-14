@@ -3,12 +3,15 @@ const mdlVerQr = new bootstrap.Modal(document.getElementById('mdlVerQr'));
 
 btnGenerarQr.forEach(function(boton){
     boton.addEventListener('click',function(){
-        alert("Hola mundo");
+        let idMesa = boton.getAttribute("data-id");
+        generarQr(idMesa);
+
+        
     });
 })
 
 function generarQr(mesa){
-    fetch("../../controller/crearQr.php",{
+    fetch("/cafeElBuenSabor/controller/crearQr.php",{
         method:"POST",
         headers:{
              'Content-Type':"application/json"
