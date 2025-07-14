@@ -6,13 +6,12 @@ try {
     $db->conectar();
     $conexion = $db->obtenerConexion();
 
-    $consulta = $conexion->prepare('update productos set estado = 0 where idProducto = :idProducto');
+    $consulta = $conexion->prepare('update productos set estado = "Inactivo" where idProducto = :idProducto');
     $consulta->execute(['idProducto' => $idProducto]);
 
     $db->desconectar();
 
-    header("Refresh :3; URL=../../views/dashBoard.php");
-    echo "Eliminado con éxito";
+    header('Location: /cafeElBuenSabor/views/productos.php');
     exit;
 
 } catch (PDOException $e) {

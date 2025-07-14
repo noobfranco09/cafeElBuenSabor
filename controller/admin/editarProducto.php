@@ -49,8 +49,8 @@ if ($datosSanitizados != false) {
         $consulta = $conexion->prepare("update productos set nombre = :nombre,descripcion = :descripcion,precio = :precio,
     stock= :stock,idCategoria= :idCategoria,imagen= :imagen where idProducto = :idProducto");
         $consulta->execute($datosSanitizados);
-        header('Refresh:3 ; URL= ../../views/dashBoard.php');
-        echo "Editado exitosamente";
+        header('Location: /cafeElBuenSabor/views/productos.php');
+        // echo "Editado exitosamente";
         exit;
     } catch (PDOException $e) {
         echo $e;

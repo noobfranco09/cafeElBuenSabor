@@ -22,7 +22,7 @@ $conexion = $mysql->obtenerConexion();
 
 $obtenerProductos = $conexion->query("SELECT productos.idProducto, productos.nombre, productos.descripcion, productos.precio, 
 productos.stock, productos.imagen, productos.estado, categorias.nombre As nombreCategoria
-FROM productos JOIN categorias ON categorias.idCategoria = productos.idCategoria where productos.estado=1");
+FROM productos JOIN categorias ON categorias.idCategoria = productos.idCategoria ");
 $obtenerCategorias = $conexion->query("SELECT * FROM categorias");
 
 $mysql->desconectar();
@@ -168,8 +168,8 @@ $mysql->desconectar();
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-control" name="estado" id="estado" required>
                         <option value="">Selecciona un estado...</option>
-                        <option value="1">Activo</option>
-                        <option value="0">Inactivo</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
                     </select>
                 </div>
                 <div class="col-12">
