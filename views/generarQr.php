@@ -42,28 +42,37 @@ $mysql->desconectar();
     ?>
     <?php include './components/logoutModal.php'; ?>
     <div class="dashboard-layout">
-        <main class="main-content d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-            <div class="qr-card">
-                <div class="qr-card-header">
-                    <div class="qr-avatar"><i class="bi bi-qr-code"></i></div>
-                    <div class="qr-title">Generar Código QR</div>
-                    <div class="qr-desc">Seleccione la mesa para la cual desea generar un código QR.</div>
+        <main class="main-content" style="min-height: 80vh;">
+            <div class="container py-4">
+                <div class="row g-4" id="mesasGrid">
+                    <?php 
+                    // Volver a obtener las mesas porque el while anterior las agotó
+                    require_once '../models/mySql.php';
+                    $mysql = new MySQL();
+                    $mysql->conectar();
+                    $consulta = "SELECT * FROM mesas WHERE estado = 'Activa'";
+                    $stmtMesas = $mysql->obtenerConexion()->query($consulta);
+                    $mysql->desconectar();
+                    while($mesa = $stmtMesas->fetch(PDO::FETCH_ASSOC)): ?>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card shadow-sm h-100 text-center">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <div class="mb-2">
+                                            <i class="bi bi-table" style="font-size:2rem;color:#8B4513;"></i>
+                                        </div>
+                                        <h5 class="card-title mb-1">Mesa <?php echo htmlspecialchars($mesa['numero']); ?></h5>
+                                        
+                                    </div>
+                                    <button class="btn btn-warning w-100 mt-3 btnMostrarQr" data-id="<?php echo htmlspecialchars($mesa['idMesa']); ?>" data-numero="<?php echo htmlspecialchars($mesa['numero']); ?>">
+                                        <i class="bi bi-qr-code"></i> Mostrar QR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
                 </div>
-                <form>
-                    <div class="mb-4">
-                        <label for="selectMesa" class="form-label fw-semibold">Mesa</label>
-                        <select class="form-select form-select-lg" id="selectMesa" name="mesa" required>
-                            <?php while($mesas = $stmtMesas->fetch(PDO::FETCH_ASSOC)): ?>
-                                <option value="<?php echo $mesas["idMesa"] ?>"><?php echo $mesas["numero"] ?></option>
-                            <?php endwhile; ?>
-                        </select>
-                    </div>
-                    <button type="submit" id="btnGenerarQr" class="btn btn-lg btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-qr-code"></i> Generar QR
-                    </button>
-                </form>
             </div>
-            
         </main>
     </div>
 

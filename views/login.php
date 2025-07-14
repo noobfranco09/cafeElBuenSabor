@@ -8,7 +8,7 @@ unset($_SESSION["old"],$_SESSION["errores"]);
 if(isset($_SESSION["id"])){
     header("location:./dashboard.php");
     exit;
-}
+}   
 ?>
 
 
