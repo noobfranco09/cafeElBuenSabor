@@ -75,7 +75,7 @@ agregarCarrito.addEventListener('click',function(){
 
     const idProducto = this.dataset.id;
 
-    fetch('../functions/obtenerProducto.php',{
+    fetch('/cafeElBuenSabor/functions/obtenerProducto.php',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -352,7 +352,7 @@ finalizarPedido.addEventListener('click', () => {
     }
   
 
-    fetch('../controller/agregarPedido.php', {
+    fetch('/cafeElBuenSabor/controller/agregarPedido.php', {
          method: 'POST',
         headers: {
             'Content-Type': 'application/json'

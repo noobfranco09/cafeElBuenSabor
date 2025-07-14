@@ -20,7 +20,7 @@ function generarQr($idMesa)
     $horaInicio = date('Y-m-d H:i:s');
     $duracionQr = 10;
     $horaFinal = date('Y-m-d H:i:s', strtotime("+$duracionQr minutes"));
-    $url = "localhost:3000/index.php?qr=$codigo&mesa=$idMesa";
+    $url = "localhost/cafeElBuenSabor/index.php?qr=$codigo&mesa=$idMesa";
     $ubicacionQr = $carpeta . "/$codigo.png";
     $qr = [
         "url" => "./assets/Qrs"."/$codigo.png",
