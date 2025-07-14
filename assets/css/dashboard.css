@@ -3275,7 +3275,7 @@
         }
 
         /* === Enlaces blancos sin subrayado === */
-        a, a:link, a:visited, a:hover, a:active {
+        a:not(.sidebar a), a:link:not(.sidebar a), a:visited:not(.sidebar a), a:hover:not(.sidebar a), a:active:not(.sidebar a) {
           color: #fff !important;
           text-decoration: none !important;
           transition: color 0.2s;
