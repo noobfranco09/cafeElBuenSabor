@@ -202,8 +202,7 @@ $mysql->desconectar();
         <div class="modal-body">
             <form class="row g-3" action="../controller/admin/editarProducto.php" method="POST" enctype="multipart/form-data">
                 <div class="col-12">
-                    <label for="nombre" class="form-label">Id del producto</label>
-                    <input type="number" class="form-control" id="editarIdProducto" name="editarIdProducto"  required readonly>
+                    <input hidden type="number" class="form-control" id="editarIdProducto" name="editarIdProducto"  required readonly>
                 </div>
                 <div class="col-12">
                     <label for="nombre" class="form-label">Nombre</label>

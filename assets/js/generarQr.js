@@ -42,7 +42,7 @@ imgQr.setAttribute('src',ruta);
 
 
 let lblMesa = document.createElement('h4');
-lblMesa.innerText = `Mesa NRO: ${mesa}`;
+lblMesa.innerText = `Mesa Id: ${mesa}`;
 lblMesa.classList.add("text-center");
 mdlQr.appendChild(lblMesa);
 let container = document.createElement("div");

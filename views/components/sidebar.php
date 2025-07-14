@@ -89,7 +89,7 @@
             <h3 class="sidebar-title">Cuenta</h3>
             <ul class="sidebar-menu">
                 <li class="sidebar-item">
-                    <a href="/views/perfil.php" class="sidebar-link <?php echo ($activePage === 'perfil') ? 'active' : ''; ?>">
+                    <a href="/cafeElBuenSabor/views/perfil.php" class="sidebar-link <?php echo ($activePage === 'perfil') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-person"></i></span>
                         Perfil
                     </a>

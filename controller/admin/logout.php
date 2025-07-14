@@ -5,7 +5,7 @@ session_unset();
 
 echo json_encode([
     "estado"=>"ok",
-    "redirecion"=>"../../views/login.php"
+    "redirecion"=>"/cafeElBuenSabor/views/login.php"
 ])
 
 ?>

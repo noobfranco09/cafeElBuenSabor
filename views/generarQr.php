@@ -65,7 +65,7 @@ $mysql->desconectar();
                                         
                                     </div>
                                     <button class="btn btn-warning w-100 mt-3 btnMostrarQr" data-id="<?php echo htmlspecialchars($mesa['idMesa']); ?>" data-numero="<?php echo htmlspecialchars($mesa['numero']); ?>">
-                                        <i class="bi bi-qr-code"></i> Mostrar QR
+                                        <i class="bi bi-qr-code"></i> Generar QR
                                     </button>
                                 </div>
                             </div>
