@@ -16,8 +16,9 @@ $icono = str_split($nombre)??"?";
 require_once '../models/mySql.php';
 $mysql = new MySQL();
 $mysql->conectar();
-$consulta = "SELECT * FROM mesas WHERE estado = 'Activa'";
+$consulta = "SELECT * FROM mesas WHERE estado != 'Inactiva'"    ;
 $stmtMesas = $mysql->obtenerConexion()->query($consulta);
+$stmtMesas->execute();
 $mysql->desconectar();
 
 
@@ -49,18 +50,30 @@ $mysql->desconectar();
         <main class="main-content" style="min-height: 80vh;">
             <div class="container py-4">
                 <div class="row g-4" id="mesasGrid">
-                    <?php 
-                    // Volver a obtener las mesas porque el while anterior las agotó
-                    require_once '../models/mySql.php';
-                    $mysql = new MySQL();
-                    $mysql->conectar();
-                    $consulta = "SELECT * FROM mesas WHERE estado = 'Activa'";
-                    $stmtMesas = $mysql->obtenerConexion()->query($consulta);
-                    $mysql->desconectar();
-                    while($mesa = $stmtMesas->fetch(PDO::FETCH_ASSOC)): ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <?php while($mesa = $stmtMesas->fetch(PDO::FETCH_ASSOC)): ?>
+                       
+                        <?php if($mesa["estado"]=='Ocupada'): ?>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="card shadow-sm h-100 text-center">
-                                <div class="card-body d-flex flex-column justify-content-between">
+                                <div class="card-body d-flex flex-column justify-content-between" id="<?php echo htmlspecialchars($mesa['idMesa']); ?>">
+                                    <div>
+                                        <div class="mb-2">
+                                            <i class="bi bi-table" style="font-size:2rem;color:#8B4513;"></i>
+                                        </div>
+                                        <h5 class="card-title mb-1">Mesa <?php echo htmlspecialchars($mesa["numero"]." ".$mesa['estado']); ?></h5>
+                                        
+                                        
+                                    </div>
+                                    <button class="btn btn-warning w-100 mt-3 btnMostrarQr" data-id="<?php echo htmlspecialchars($mesa['idMesa']); ?>" data-numero="<?php echo htmlspecialchars($mesa['numero']); ?>">
+                                        <i class="bi bi-qr-code"></i> Ver QR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <?php else: ?>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="card shadow-sm h-100 text-center">
+                                <div class="card-body d-flex flex-column justify-content-between" id="<?php echo htmlspecialchars($mesa['idMesa']); ?>">
                                     <div>
                                         <div class="mb-2">
                                             <i class="bi bi-table" style="font-size:2rem;color:#8B4513;"></i>
@@ -74,6 +87,9 @@ $mysql->desconectar();
                                 </div>
                             </div>
                         </div>
+
+                        <?php endif; ?>
+                            
                     <?php endwhile; ?>
                 </div>
             </div>

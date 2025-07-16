@@ -7,6 +7,7 @@ btnGenerarQr.forEach(function(boton){
         generarQr(idMesa);
 
         
+        
     });
 })
 
@@ -25,6 +26,7 @@ function generarQr(mesa){
         }else{
             let ruta = data.data;
             let mesa = data.mesa
+            
             mostrarQr(ruta,mesa);
         }
     });

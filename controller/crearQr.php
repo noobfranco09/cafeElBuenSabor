@@ -7,6 +7,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $idMesa = $data["idMesa"];
         $ubicacionQr = generarQr($idMesa);
         if($ubicacionQr!="error"){
+
+            
+            $mysql = new MySQL;
+            $mysql->conectar();
+            $consulta ="UPDATE mesas set estado ='Ocupada' WHERE idMesa =:id";
+            $stmt = $mysql->obtenerConexion()->prepare($consulta);
+            $stmt->bindParam(":id",$idMesa,PDO::PARAM_STR);
+            $stmt->execute();
+
             echo json_encode([
                 'data'=>$ubicacionQr,
                 'mesa'=>$idMesa
