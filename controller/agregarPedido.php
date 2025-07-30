@@ -5,12 +5,41 @@ require_once '../models/mySql.php';
 $mysql = new MySQL();
 $mysql->conectar();
 $conexion = $mysql->obtenerConexion();
-
+header('Content-Type: application/json');
 $datosJSON = file_get_contents("php://input");
 $datos = json_decode($datosJSON, true);
 
+$notaObj = json_decode($datos['nota'], true);
+$nota = $notaObj['nota'] ?? '';
 
-$pedido = json_decode($datos[1],true);
+// Remover la nota del array para que el foreach solo procese productos
+unset($datos['nota']);
+
+foreach ($datos as $idProducto => $productoJsonString) {
+    $producto = json_decode($productoJsonString, true);
+
+    // Ahora $producto es un array con los datos reales
+    // Ejemplo para acceder a los datos:
+    $nombre = $producto['nombre'];
+    $precio = $producto['precio'];
+    $cantidad = $producto['cantidad'];
+    $stock = $producto['stock'];
+    $carta = $producto['carta'];
+
+    // Aquí puedes insertar o procesar cada producto en la base de datos
+
+
+
+
+
+
+
+
+
+
+}
+
+
 // la varible $datos es la que tiene ya toda la informacion del localSotage y esta lista para manipular
 
 // aqui ya puede implementar la logica para lo que necesite
@@ -19,7 +48,7 @@ $pedido = json_decode($datos[1],true);
 
 //Para eliminar la carta y desactivarla
 
-$codigo = $pedido["carta"];
+$codigo = $carta;
 $consulta = "UPDATE qr SET estado = 'Inactivo' WHERE codigo = :codigo";
 $desactivarQr = $conexion->prepare($consulta);
 $desactivarQr->bindParam(":codigo",$codigo,PDO::PARAM_STR);
@@ -32,15 +61,20 @@ $url = ".".$data["url"];
  if(file_exists($url)){
 unlink($url);                    
 }           
-               
-
-
 
 
 $mysql->desconectar();
 
 // esta parte retorna el resultado de la operacion que se realizo
-header('Content-Type: application/json');
-echo json_encode($datos);
+echo json_encode([
+    'nombre' => $nombre,
+    'precio' => $precio,
+    'cantidad' => $cantidad,
+    'stock' => $stock,
+    'carta' => $carta,
+    'nota' => $nota
+]);
+
+
 
 ?>
