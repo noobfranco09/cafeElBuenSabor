@@ -85,17 +85,43 @@ agregarCarrito.addEventListener('click',function(){
     .then(response => response.json())
     .then(data => {
 
+        let productoExistente = localStorage.getItem(idProducto);
         let cantidadProducto = localStorage.getItem(data.idProducto);
-        const productoGuardado = JSON.parse(cantidadProducto)
+        const productoGuardado = JSON.parse(cantidadProducto);
 
-        // if(productoGuardado.cantidad < data.stock)
-        // {
-       
+        if(productoExistente)
+        {
+            if(productoGuardado.cantidad < data.stock)
+            {
+        
+                const id = data.idProducto;
+                const nombre = data.nombre;
+                const precio = data.precio;
+                const stock = data.stock;
+                const carta = document.querySelector("#menu").dataset.carta;
+
+                const producto = {
+                    id: parseInt(id),
+                    nombre,
+                    precio: parseFloat(precio),
+                    cantidad: 1,
+                    stock,
+                    carta
+                
+                };
+
+                agregarProducto(producto);
+            }else{
+                alert("no puedes superar el sotck del producto");
+            } 
+        }
+        else{
+
             const id = data.idProducto;
             const nombre = data.nombre;
             const precio = data.precio;
             const stock = data.stock;
-             const carta = document.querySelector("#menu").dataset.carta;
+            const carta = document.querySelector("#menu").dataset.carta;
 
             const producto = {
                 id: parseInt(id),
@@ -104,13 +130,14 @@ agregarCarrito.addEventListener('click',function(){
                 cantidad: 1,
                 stock,
                 carta
-            
+                
             };
 
             agregarProducto(producto);
-        // }else{
-        //     alert("no puedes superar el sotck del producto");
-        // }
+
+        }
+            
+        
 
     })
 
@@ -333,15 +360,6 @@ finalizarPedido.addEventListener('click', () => {
     }
 
     localStorage.setItem("nota", JSON.stringify(notas));
-
-    // se agrega al localStorage el valor total del pedido
-    const total = document.querySelector("#total").textContent;
-
-    let valorTotal = {
-        total
-    }
-
-    localStorage.setItem("total", JSON.stringify(valorTotal));
 
     const datosLocalStorage = {};
 
