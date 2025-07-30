@@ -1,11 +1,12 @@
-<?php   
+<?php
 session_start();
 session_destroy();
 session_unset();
 
-echo json_encode([
-    "estado"=>"ok",
-    "redirecion"=>"/cafeElBuenSabor/views/login.php"
-])
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
 
+echo json_encode([
+    "estado" => "ok",
+    "redirecion" => BASE_URL . 'views/login.php'
+]);
 ?>

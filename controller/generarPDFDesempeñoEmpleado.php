@@ -1,7 +1,7 @@
 <?php
-
-require_once '../libraries/fpdf/fpdf.php';
-require_once '../models/mySql.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
+require_once BASE_PATH. 'libraries/fpdf/fpdf.php';
+require_once BASE_PATH.'models/mySql.php';
 
 $mysql = new MySQL();
 $mysql->conectar();
@@ -161,7 +161,7 @@ if(!empty($estadoInventario))
 else
 {
     echo "Sin Datos";
-    header("refresh:3; url=../views/dashboard.php");
+    header("refresh:3; url=".BASE_URL."views/dashboard.php");
 }
 
 $mysql->desconectar();
