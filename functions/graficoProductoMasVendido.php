@@ -1,6 +1,7 @@
 <?php 
 
-require_once '../models/mySql.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
+require_once BASE_PATH . 'models/mySql.php';
 
 $mysql = new MySQL();
 $mysql->conectar();

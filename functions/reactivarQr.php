@@ -1,27 +1,28 @@
 <?php
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $input = file_get_contents("php://input");
-    $data = json_decode($input,true);
-    require_once '../models/mySql.php';
-    $id = $data["idMesa"];
-    $mysql = new MySQL;
-    $mysql->conectar();
-    
-    $consulta = "UPDATE mesas set estado = 'Activa' WHERE idMesa = :id";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $input = file_get_contents("php://input");
+  $data = json_decode($input, true);
 
-    $stmt = $mysql->obtenerConexion()->prepare($consulta);
-    $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-    $stmt->execute();
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
+  require_once BASE_PATH . 'models/mySql.php';
+  $id = $data["idMesa"];
+  $mysql = new MySQL;
+  $mysql->conectar();
 
-   if($stmt){
-     echo json_encode(["success"=>"true"]);
-   }
-   else{
-     echo json_encode(["success"=>"false"]);
-   }
-    
-    
-    
+  $consulta = "UPDATE mesas set estado = 'Activa' WHERE idMesa = :id";
+
+  $stmt = $mysql->obtenerConexion()->prepare($consulta);
+  $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+  $stmt->execute();
+
+  if ($stmt) {
+    echo json_encode(["success" => "true"]);
+  } else {
+    echo json_encode(["success" => "false"]);
+  }
+
+
+
 
 }
 ?>

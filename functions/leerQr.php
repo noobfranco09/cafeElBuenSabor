@@ -4,6 +4,8 @@ function verificarQr($codigo)
 {
 
    
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
+require_once BASE_PATH . 'models/mySql.php';
 
     $db = new MySQL();
     $db->conectar();
