@@ -9,7 +9,6 @@ $conexion = $mysql->obtenerConexion();
 $datosJSON = file_get_contents("php://input");
 $datos = json_decode($datosJSON, true);
 
-$id = $datos['idVenta'];
 
 $consulta = $conexion->prepare("SELECT ventas.pedidos_idPedido, DATE_FORMAT(ventas.fecha, '%Y-%m-%d') As fecha, ventas.total, mesas.numero, productos.nombre, productos_has_pedidos.cantidad,
 productos_has_pedidos.nota, productos_has_pedidos.precioVenta FROM ventas
@@ -20,7 +19,6 @@ JOIN mesas ON mesas.idMesa = pedidos.idMesa WHERE idVenta = ?");
 
 $consulta->execute([$id]);
 
-$resultado =  $consulta->fetchAll(PDO::FETCH_ASSOC);
 
 $mysql->desconectar();
 

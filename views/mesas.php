@@ -92,7 +92,7 @@ $mysql->desconectar();
                                 data-numero="<?php echo $mostrarMesas["numero"]?>"
                                 data-estado="<?php echo $mostrarMesas["estado"]?>"><i class="bi bi-pencil-square "></i></button>
 
-                                <button type="button" class="btn btn-danger btn-sm btnDesactivar" data-id="<?php echo $mostrarMesas["idMesa"]?>"
+                                <button type="button" class="btn btn-danger btn-sm btnDesactivar" data-id="<?php echo $mostrarMesas["idMesa"]?> " 
                                 data-numero="<?php echo $mostrarMesas["numero"]?>"><i class="bi bi-trash "></i></button></a>
                                       
                             </td>

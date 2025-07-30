@@ -64,8 +64,8 @@ $mysql->desconectar();
                                         
                                         
                                     </div>
-                                    <button class="btn btn-warning w-100 mt-3 btnMostrarQr" data-id="<?php echo htmlspecialchars($mesa['idMesa']); ?>" data-numero="<?php echo htmlspecialchars($mesa['numero']); ?>">
-                                        <i class="bi bi-qr-code"></i> Ver QR
+                                    <button class="btn btn-success w-100 mt-3 btnLiberarQr" data-id="<?php echo htmlspecialchars($mesa['idMesa']); ?>" data-numero="<?php echo htmlspecialchars($mesa['numero']); ?>">
+                                        <i class="bi bi-caret-right"></i>Liberar    
                                     </button>
                                 </div>
                             </div>
@@ -117,6 +117,7 @@ $mysql->desconectar();
     
     
     <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/generarQr.js"></script>
     
 </body>
