@@ -1,4 +1,5 @@
 <!-- Header -->
+ <?php require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeelbuensabor/functions/rutas.php'; ?>
 <header class="header">
     <div class="header-content">
         <button class="mobile-menu-btn" onclick="toggleSidebar()">
@@ -16,7 +17,7 @@
                 <div class="dropdown-arrow">▼</div>
             </div>
             <div class="profile-menu" id="profileMenu">
-                <div class="menu-item" onclick="window.location.href='/views/perfil.php'">
+                <div class="menu-item" onclick="window.location.href= <?php echo BASE_URL ?>'/views/perfil.php'">
                     <span class="menu-icon">👤</span>
                     <span class="menu-text">Mi Perfil</span>
                 </div>

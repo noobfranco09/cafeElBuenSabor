@@ -1,25 +1,29 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeelbuensabor/functions/rutas.php';
 session_start();
 
-$errores = $_SESSION["errores"]??[];
-$old = $_SESSION["old"]??[];
+// Incluye las constantes de rutas antes de usar
+// include 'ruta/a/tu/archivo/rutas.php'; 
+// (Asegúrate de incluir el archivo donde defines BASE_URL y BASE_PATH)
 
-unset($_SESSION["old"],$_SESSION["errores"]);
-if(isset($_SESSION["id"])){
-    header("location:./dashboard.php");
+$errores = $_SESSION["errores"] ?? [];
+$old = $_SESSION["old"] ?? [];
+
+unset($_SESSION["old"], $_SESSION["errores"]);
+
+if (isset($_SESSION["id"])) {
+    header("Location: ./dashboard.php");
     exit;
-}   
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/login.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/login.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
     <title>Coffee Login</title>
 </head>
 <body>
@@ -39,59 +43,48 @@ if(isset($_SESSION["id"])){
             <p class="login-subtitle">Inicia sesión para continuar</p>
         </div>
 
-        <form class="login-form" method="POST" action="../controller/admin/login.php">
+        <form class="login-form" method="POST" action="<?= BASE_URL ?>controller/admin/login.php">
             <div class="form-group">
 
-                <input 
-                    type="email" 
+                <input
+                    type="email"
                     class="form-input"
                     name="correo"
-                    <?php if(isset($old["correo"]) && !empty($old["correo"])):  ?>
-                    value="<?php echo $old["correo"]; ?>"
-                    <?php endif;  ?>
                     placeholder="Correo electrónico"
                     required
                     id="email"
-                >
+                    value="<?= isset($old["correo"]) ? htmlspecialchars($old["correo"], ENT_QUOTES, 'UTF-8') : '' ?>"
+                />
                
-                <?php if(isset($errores["errorCorreo"]) && !empty($errores["errorCorreo"])):  ?>
-                    <p class="text-start text-danger"><?php echo $errores["errorCorreo"]; ?></p>
-                    <?php endif;  ?>
-                    
-                    <?php if(isset($errores["correoNoExiste"]) && !empty($errores["correoNoExiste"])):  ?>
-                    <p class="text-start text-danger"><?php echo $errores["correoNoExiste"]; ?></p>
-                    <?php endif;  ?>
+                <?php if (!empty($errores["errorCorreo"])): ?>
+                    <p class="text-start text-danger"><?= htmlspecialchars($errores["errorCorreo"]) ?></p>
+                <?php endif; ?>
 
-                    <?php if(isset($errores["usuarioInactivo"]) && !empty($errores["usuarioInactivo"])):  ?>
-                    <p class="text-start text-danger"><?php echo $errores["usuarioInactivo"]; ?></p>
-                    <?php endif;  ?>
+                <?php if (!empty($errores["correoNoExiste"])): ?>
+                    <p class="text-start text-danger"><?= htmlspecialchars($errores["correoNoExiste"]) ?></p>
+                <?php endif; ?>
+
+                <?php if (!empty($errores["usuarioInactivo"])): ?>
+                    <p class="text-start text-danger"><?= htmlspecialchars($errores["usuarioInactivo"]) ?></p>
+                <?php endif; ?>
             </div>
-             <!-- Aca se puede ver el error del correo -->
-            
 
             <div class="form-group">
-                <input 
-                    type="password" 
+                <input
+                    type="password"
                     class="form-input"
                     name="contraseña"
-                    <?php if(isset($old["contraseña"]) && !empty($old["contraseña"])):  ?>
-                    value="<?php echo htmlspecialchars($old["contraseña"]); ?>"
-                    <?php endif;  ?>
                     placeholder="Contraseña"
                     required
                     id="password"
-                >
-                <?php if(isset($errores["contraseñaIncorrecta"]) && !empty($errores["contraseñaIncorrecta"])):  ?>
-                    <p class="text-start text-danger"><?php echo $errores["contraseñaIncorrecta"]; ?></p>
-                    <?php endif;  ?>
-                <button type="button" class="password-toggle" onclick="togglePassword()">
-                    🙈
-                </button>
+                />
+                <?php if (!empty($errores["contraseñaIncorrecta"])): ?>
+                    <p class="text-start text-danger"><?= htmlspecialchars($errores["contraseñaIncorrecta"]) ?></p>
+                <?php endif; ?>
+                <button type="button" class="password-toggle" onclick="togglePassword()">🙈</button>
             </div>
 
-            <button type="submit" class="login-btn">
-                Iniciar Sesión
-            </button>
+            <button type="submit" class="login-btn">Iniciar Sesión</button>
         </form>
 
         <div class="login-links">
@@ -99,7 +92,6 @@ if(isset($_SESSION["id"])){
         </div>
     </div>
 
-    <script src="/cafeElBuenSabor/assets/js/login.js"></script>
-
+    <script src="<?= BASE_URL ?>assets/js/login.js"></script>
 </body>
 </html>

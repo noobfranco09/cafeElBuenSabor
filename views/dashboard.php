@@ -1,19 +1,22 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeelbuensabor/functions/rutas.php';
 session_start();
-if (!isset($_SESSION["id"])){
-    header("Location: ./login.php");
-    exit();
-    }
-    if ($_SESSION["estado"]=="Inactivo"){
-    header("Location: ./login.php");
+
+if (!isset($_SESSION["id"])) {
+    header("Location: " . BASE_URL . "login.php");
     exit();
 }
 
-    $nombre = $_SESSION["nombre"]??"Desconocido";
-    $rol = $_SESSION["rol"]??"Desconocido";
-    $icono = str_split($nombre)??"?";
+if ($_SESSION["estado"] == "Inactivo") {
+    header("Location: " . BASE_URL . "login.php");
+    exit();
+}
 
-require_once '../models/mySql.php';
+$nombre = $_SESSION["nombre"] ?? "Desconocido";
+$rol = $_SESSION["rol"] ?? "Desconocido";
+$icono = str_split($nombre) ?? "?";
+
+require_once BASE_PATH . 'models/mySql.php';
 
 $mysql = new MySQL();
 $mysql->conectar();
@@ -23,17 +26,16 @@ $cantidadUsuarios = $conexion->query("SELECT count(*) As contarUsuarios FROM usu
 $cantidadUsuario = $cantidadUsuarios->fetch(PDO::FETCH_ASSOC);
 
 $mysql->desconectar();
-
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/dashboard.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/boostrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/dashboard.css" />
     <title>Coffee Dashboard</title>
 </head>
 <body>
@@ -45,14 +47,14 @@ $mysql->desconectar();
     <!-- Overlay para cerrar sidebar en móvil -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <?php include './components/navbar.php'; ?>
+    <?php include BASE_PATH . 'components/navbar.php'; ?>
 
     <?php 
         $activePage = 'dashboard';
-        include './components/sidebar.php'; 
+        include BASE_PATH . 'components/sidebar.php'; 
     ?>
 
-    <?php include './components/logoutModal.php'; ?>
+    <?php include BASE_PATH . 'components/logoutModal.php'; ?>
 
     <!-- Layout principal -->
     <div class="dashboard-layout">
@@ -106,7 +108,7 @@ $mysql->desconectar();
                 <div class="content-header">
                     <h2 class="content-title">Análisis de Negocio</h2>
                 </div>
-                
+
                 <!-- Grid de gráficos -->
                 <div class="charts-grid">
                     <!-- Gráfico de Recaudo Mensual -->
@@ -116,7 +118,7 @@ $mysql->desconectar();
                         </div>
                         <div class="chart-body" id="monthlyRevenueChart">
                             <!-- Aquí irá el gráfico de recaudo mensual -->
-                             <canvas id="recaudoMensual" width="600" height="400"></canvas>
+                            <canvas id="recaudoMensual" width="600" height="400"></canvas>
                         </div>
                     </div>
 
@@ -138,7 +140,7 @@ $mysql->desconectar();
                         </div>
                         <div class="chart-body" id="tablesServedChart">
                             <!-- Aquí irá el gráfico de mesas atendidas -->
-                             <canvas id="mesasPorMesero" width="600" height="400"></canvas>
+                            <canvas id="mesasPorMesero" width="600" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -148,12 +150,12 @@ $mysql->desconectar();
 
     <!-- Agregar Chart.js para las visualizaciones -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
-    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script src="../libraries/Char.js/dist/chart.umd.min.js"></script>
-    <script src="../assets/js/graficoProductoMasVendido.js"></script>
-    <script src="../assets/js/graficoMesasPorMesero.js"></script>
-    <script src="../assets/js/graficoRecaudoMensual.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/dashboard.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>libraries/Char.js/dist/chart.umd.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/graficoProductoMasVendido.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/graficoMesasPorMesero.js"></script>
+    <script src="<?php echo BASE_URL; ?>assets/js/graficoRecaudoMensual.js"></script>
 
 </body>
 </html>

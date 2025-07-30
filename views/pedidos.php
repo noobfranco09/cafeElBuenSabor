@@ -1,26 +1,28 @@
 <?php
 session_start();
-if (!isset($_SESSION["id"])){
-    header("Location: ./login.php");
+require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeElBuenSabor/functions/rutas.php';
+
+if (!isset($_SESSION["id"])) {
+    header("Location: " . BASE_URL . "views/login.php");
     exit();
 }
-if ($_SESSION["estado"]=="Inactivo"){
-    header("Location: ./login.php");
+if ($_SESSION["estado"] == "Inactivo") {
+    header("Location: " . BASE_URL . "views/login.php");
     exit();
 }
 
-$nombre = $_SESSION["nombre"]??"Desconocido";
-$rol = $_SESSION["rol"]??"Desconocido";
-$icono = str_split($nombre)??"?";
+$nombre = $_SESSION["nombre"] ?? "Desconocido";
+$rol = $_SESSION["rol"] ?? "Desconocido";
+$icono = str_split($nombre) ?? ["?"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/dashboard.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css" />
     <title>Pedidos - CoffeeShop Pro</title>
 </head>
 <body>
@@ -32,14 +34,14 @@ $icono = str_split($nombre)??"?";
     <!-- Overlay para cerrar sidebar en móvil -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <?php include './components/navbar.php'; ?>
+    <?php include BASE_PATH . 'views/components/navbar.php'; ?>
 
     <?php 
         $activePage = 'pedidos';
-        include './components/sidebar.php'; 
+        include BASE_PATH . 'views/components/sidebar.php'; 
     ?>
 
-    <?php include './components/logoutModal.php'; ?>
+    <?php include BASE_PATH . 'views/components/logoutModal.php'; ?>
 
     <!-- Layout principal -->
     <div class="dashboard-layout">
@@ -87,11 +89,11 @@ $icono = str_split($nombre)??"?";
                     </div>
                     <div class="filter-group">
                         <label for="dateFilter">Fecha:</label>
-                        <input type="date" id="dateFilter" class="filter-input">
+                        <input type="date" id="dateFilter" class="filter-input" />
                     </div>
                     <div class="filter-group">
                         <label for="searchFilter">Buscar:</label>
-                        <input type="text" id="searchFilter" class="filter-input" placeholder="Número de pedido, mesa...">
+                        <input type="text" id="searchFilter" class="filter-input" placeholder="Número de pedido, mesa..." />
                     </div>
                     <div class="filter-actions">
                         <button class="apply-filters-btn" onclick="applyFilters()">Aplicar</button>
@@ -119,7 +121,7 @@ $icono = str_split($nombre)??"?";
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="section-content" id="activeOrdersContent">
                         <div class="orders-grid" id="activeOrdersGrid">
                             <!-- Los pedidos activos se cargarán dinámicamente aquí -->
@@ -175,7 +177,7 @@ $icono = str_split($nombre)??"?";
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="section-content" id="preparationOrdersContent">
                         <div class="orders-grid" id="preparationOrdersGrid">
                             <!-- Los pedidos en preparación se cargarán dinámicamente aquí -->
@@ -204,7 +206,7 @@ $icono = str_split($nombre)??"?";
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="section-content collapsed" id="completedOrdersContent">
                         <div class="orders-grid" id="completedOrdersGrid">
                             <!-- Los pedidos completados se cargarán dinámicamente aquí -->
@@ -215,7 +217,7 @@ $icono = str_split($nombre)??"?";
         </main>
     </div>
 
-    <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
-    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
+    <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

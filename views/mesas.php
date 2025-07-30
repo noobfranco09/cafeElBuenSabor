@@ -1,19 +1,21 @@
 <?php
 session_start();
+require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeElBuenSabor/functions/rutas.php';
+
 if (!isset($_SESSION["id"])){
-    header("Location: ./login.php");
+    header("Location: " . BASE_URL . "views/login.php");
     exit();
 }
-if ($_SESSION["estado"]=="Inactivo"){
-    header("Location: ./login.php");
+if ($_SESSION["estado"] == "Inactivo"){
+    header("Location: " . BASE_URL . "views/login.php");
     exit();
 }
 
-$nombre = $_SESSION["nombre"]??"Desconocido";
-$rol = $_SESSION["rol"]??"Desconocido";
-$icono = str_split($nombre)??"?";
+$nombre = $_SESSION["nombre"] ?? "Desconocido";
+$rol = $_SESSION["rol"] ?? "Desconocido";
+$icono = str_split($nombre)[0] ?? "?";
 
-require_once '../models/mySql.php';
+require_once BASE_PATH . 'models/mySql.php';
 
 $mysql = new MySQL();
 $mysql->conectar();
@@ -28,13 +30,13 @@ $mysql->desconectar();
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/dashboard.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
     <title>Mesas</title>
 </head>
 <body>
@@ -42,15 +44,15 @@ $mysql->desconectar();
     <div class="coffee-circle circle-2"></div>
     <div class="coffee-circle circle-3"></div>
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    
-    <?php include './components/navbar.php'; ?>
+
+    <?php include BASE_PATH . 'views/components/navbar.php'; ?>
 
     <?php 
         $activePage = 'mesas';
-        include './components/sidebar.php'; 
+        include BASE_PATH . 'views/components/sidebar.php'; 
     ?>
 
-    <?php include './components/logoutModal.php'; ?>
+    <?php include BASE_PATH . 'views/components/logoutModal.php'; ?>
 
     <div class="dashboard-layout">
         <main class="main-content">
@@ -82,19 +84,19 @@ $mysql->desconectar();
                           <?php while($mostrarMesas = $obtenerMesas->fetch(PDO::FETCH_ASSOC)) :   ?>
 
                           <tr>
-                            <td><?php echo $mostrarMesas["numero"] ?></td>
-                            <td><?php echo $mostrarMesas["estado"] ?></td>
+                            <td><?php echo htmlspecialchars($mostrarMesas["numero"]) ?></td>
+                            <td><?php echo htmlspecialchars($mostrarMesas["estado"]) ?></td>
 
                             <td>
-
                                 <button type="button" class="btn btn-warning btn-sm btnEditar" 
-                                data-bs-toggle="modal" data-bs-target="#ModalEditarMesa" data-id="<?php echo $mostrarMesas["idMesa"]?>"
-                                data-numero="<?php echo $mostrarMesas["numero"]?>"
-                                data-estado="<?php echo $mostrarMesas["estado"]?>"><i class="bi bi-pencil-square "></i></button>
+                                data-bs-toggle="modal" data-bs-target="#ModalEditarMesa" 
+                                data-id="<?php echo htmlspecialchars($mostrarMesas["idMesa"]) ?>"
+                                data-numero="<?php echo htmlspecialchars($mostrarMesas["numero"]) ?>"
+                                data-estado="<?php echo htmlspecialchars($mostrarMesas["estado"]) ?>"><i class="bi bi-pencil-square"></i></button>
 
-                                <button type="button" class="btn btn-danger btn-sm btnDesactivar" data-id="<?php echo $mostrarMesas["idMesa"]?> " 
-                                data-numero="<?php echo $mostrarMesas["numero"]?>"><i class="bi bi-trash "></i></button></a>
-                                      
+                                <button type="button" class="btn btn-danger btn-sm btnDesactivar" 
+                                data-id="<?php echo htmlspecialchars($mostrarMesas["idMesa"]) ?>" 
+                                data-numero="<?php echo htmlspecialchars($mostrarMesas["numero"]) ?>"><i class="bi bi-trash"></i></button>
                             </td>
                           </tr>
 
@@ -116,13 +118,13 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../controller/agregarMesa.php" method="POST">
+          <form action="<?php echo BASE_URL ?>controller/agregarMesa.php" method="POST">
             <div class="mb-3">
               <label for="numeroMesa" class="form-label">Número de Mesa</label>
               <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Ingrese el número de mesa" required>
             </div>
             <div class="mb-3">
-              <label for="capacidadMesa" class="form-label">Estado</label>
+              <label for="estadoMesa" class="form-label">Estado</label>
               <select name="estadoMesa" id="estadoMesa" class="form-control" required>
                 <option value="">Seleccione un estado...</option>
                 <option value="Activa">Activa</option>
@@ -149,7 +151,7 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../controller/editarMesa.php" method="POST" >
+          <form action="<?php echo BASE_URL ?>controller/editarMesa.php" method="POST" >
             <input type="hidden" name="idMesaEditar" id="idMesaEditar">
             <div class="mb-3">
               <label for="numeroMesaEditar" class="form-label">Número de Mesa</label>
@@ -174,22 +176,22 @@ $mysql->desconectar();
     </div>
   </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
-    <script src="../assets/js/mesas.js"></script>
-    <script src="../assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#tablaMesas').DataTable({
-                responsive: true,
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-                }
-            });
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
+  <script src="<?php echo BASE_URL ?>assets/js/mesas.js"></script>
+  <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('#tablaMesas').DataTable({
+            responsive: true,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+            }
         });
-    </script>
+    });
+  </script>
 </body>
-</html> 
+</html>
