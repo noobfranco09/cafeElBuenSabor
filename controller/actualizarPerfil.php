@@ -1,7 +1,8 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     session_start();
-    require_once '../functions/Validaciones.php';
+    require_once BASE_PATH . 'functions/validaciones.php';
     $validaciones = new Validaciones($_POST);
 
     $errores =$validaciones->vldActualizarPerfil();

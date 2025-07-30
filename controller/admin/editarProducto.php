@@ -1,6 +1,9 @@
 <?php
-require "../../functions/funcionSanitizar.php";
-require "../../models/mySql.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
+require_once BASE_PATH . 'functions/funcionSanitizar.php';
+require_once BASE_PATH . 'models/mySql.php';
+
+
 
 $db = new MySQL();
 $db->conectar();

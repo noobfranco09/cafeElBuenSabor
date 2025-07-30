@@ -1,4 +1,5 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
 session_start();
 require_once './models/mySql.php';
 require_once './functions/leerQr.php';
@@ -196,8 +197,7 @@ $mysql->desconectar();
         </div>
     </section>
 
-
-    <script src="/cafeElBuenSabor/assets/js/index.js"></script>
+<script src="<?php echo BASE_URL.'assets/js/index.js' ?>"></script>
 
 </body>
 </html>
