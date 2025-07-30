@@ -22,5 +22,4 @@ require_once '../models/mySql.php';
     echo json_encode($resultado);
 
 
-
 ?>
