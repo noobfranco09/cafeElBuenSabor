@@ -8,6 +8,7 @@ if ($_SESSION["estado"]=="Inactivo"){
     header("Location: ./login.php");
     exit();
 }
+require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeelbuensabor/functions/rutas.php';
 
 $nombre = $_SESSION["nombre"]??"Desconocido";
 $rol = $_SESSION["rol"]??"Desconocido";
@@ -27,7 +28,7 @@ Editar"],$_SESSION["usrActualizado"]);
 
 //Para traer los datos de la BD
 
-require_once '../models/mySql.php';
+require_once BASE_PATH.'models/mySql.php';
 $mysql = new MySQL;
 $mysql->conectar();
 $consulta = "SELECT usuario.idUsuario,usuario.nombre,usuario.fechaIngreso,usuario.telefono,usuario.correo,usuario.estado,roles.nombre AS nombreRol FROM usuario
@@ -46,11 +47,11 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/dashboard.css">
+    <link rel="stylesheet" href=" <?php echo BASE_URL.'assets/css/dashboard.css' ?>">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/cafeElBuenSabor/assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>">
     <title>Empleados</title>
 </head>
 <body>
@@ -59,14 +60,14 @@ $mysql->desconectar();
     <div class="coffee-circle circle-3"></div>
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     
-    <?php include './components/navbar.php'; ?>
+    <?php include BASE_PATH. 'views/components/navbar.php'; ?>
 
     <?php 
         $activePage = 'empleados';
-        include './components/sidebar.php'; 
+        include BASE_PATH. 'views/components/sidebar.php'; 
     ?>
 
-    <?php include './components/logoutModal.php'; ?>
+    <?php include BASE_PATH. 'views/components/logoutModal.php'; ?>
 
     <div class="dashboard-layout">
         <main class="main-content">
@@ -354,9 +355,9 @@ $mysql->desconectar();
     
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-    <script src="/cafeElBuenSabor/assets/js/dashboard.js"></script>
-    <script defer src="/cafeElBuenSabor/assets/js/empleados.js"></script>
-    <script src="/cafeElBuenSabor/assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>/"></script>
+    <script defer src="<?php echo BASE_URL.'assets/js/empleados.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js' ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {

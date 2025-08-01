@@ -20,9 +20,9 @@ $icono = str_split($nombre) ?? ["?"];
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css' ?>" />
     <title>Pedidos - CoffeeShop Pro</title>
 </head>
 <body>
@@ -217,7 +217,7 @@ $icono = str_split($nombre) ?? ["?"];
         </main>
     </div>
 
-    <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>"></script>
+    <script src="<?php echo BASE_URL .'assets/js/boostrap/bootstrap.bundle.min.js'?>"></script>
 </body>
 </html>

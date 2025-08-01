@@ -2,12 +2,12 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . '/cafeelbuensabor/functions/rutas.php';
 session_start();
 if (!isset($_SESSION["id"])){
-    header("Location: " . BASE_URL . "login.php");
+    header("Location: " . BASE_URL . "views/login.php");
     exit();
 }
 
 if ($_SESSION["estado"]=="Inactivo"){
-    header("Location: " . BASE_URL . "login.php");
+    header("Location: " . BASE_URL . "views/login.php");
     exit();
 }
 
@@ -32,11 +32,11 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/dashboard.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css' ?>" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/boostrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>" />
     <title>Categorías</title>
 </head>
 <body>
@@ -45,14 +45,14 @@ $mysql->desconectar();
     <div class="coffee-circle circle-3"></div>
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     
-    <?php include BASE_PATH . 'components/navbar.php'; ?>
+    <?php include BASE_PATH . 'views/components/navbar.php'; ?>
 
     <?php 
         $activePage = 'categorias';
-        include BASE_PATH . 'components/sidebar.php'; 
+        include BASE_PATH . 'views/components/sidebar.php'; 
     ?>
 
-    <?php include BASE_PATH . 'components/logoutModal.php'; ?>
+    <?php include BASE_PATH . 'views/components/logoutModal.php'; ?>
 
     <div class="dashboard-layout">
         <main class="main-content">
@@ -123,7 +123,7 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="<?php echo BASE_URL; ?>controller/agregarCategoria.php" method="POST" >
+          <form action="<?php echo BASE_URL.'controller/agregarCategoria.php' ?>" method="POST" >
             <div class="mb-3">
               <label for="nombreCategoria" class="form-label">Nombre de la Categoría</label>
               <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria" placeholder="Ingrese el nombre de la categoría" required />
@@ -152,7 +152,7 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="formEditarCategoria" action="<?php echo BASE_URL; ?>controller/editarCategoria.php" method="POST" >
+          <form id="formEditarCategoria" action="<?php echo BASE_URL.'controller/editarCategoria.php' ?>" method="POST" >
             <input type="hidden" name="idCategoriaEditar" id="idCategoriaEditar" />
             <div class="mb-3">
               <label for="nombreCategoriaEditar" class="form-label">Nombre de la Categoría</label>
@@ -185,9 +185,9 @@ $mysql->desconectar();
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="<?php echo BASE_URL; ?>assets/js/dashboard.js"></script>
-  <script src="<?php echo BASE_URL; ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
-  <script src="<?php echo BASE_URL; ?>assets/js/categorias.js"></script>
+  <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>"></script>
+  <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js' ?>"></script>
+  <script src="<?php echo BASE_URL.'assets/js/categorias.js' ?>"></script>
 
   <script>
       $(document).ready(function() {

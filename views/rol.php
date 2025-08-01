@@ -31,11 +31,11 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css'?>">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css'?>">
     <title>Roles</title>
 </head>
 <body>
@@ -116,7 +116,7 @@ $mysql->desconectar();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo BASE_URL ?>controller/agregarRol.php" method="POST">
+                    <form action="<?php echo BASE_URL.'controller/agregarRol.php'?>" method="POST">
                         <div class="mb-3">
                             <label for="nombreRol" class="form-label">Nombre del Rol</label>
                             <input type="text" class="form-control" id="nombreRol" name="nomb

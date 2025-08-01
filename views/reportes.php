@@ -20,9 +20,9 @@ $icono = str_split($nombre) ?? "?";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css'?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css'?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css'?>">
     <title>Reportes - CoffeeShop Pro</title>
 </head>
 <body>
@@ -64,13 +64,13 @@ $icono = str_split($nombre) ?? "?";
                         <div class="reporte-icon">👤</div>
                         <div class="reporte-title">Reporte de Empleados</div>
                         <div class="reporte-desc">Descarga un PDF con el listado completo de empleados.</div>
-                        <a class="reporte-btn" href="<?php echo BASE_URL ?>controller/generarPDFDesempeñoEmpleado.php">Ver empleados</a>
+                        <a class="reporte-btn" href="<?php echo BASE_URL.'controller/generarPDFDesempeñoEmpleado.php'?>">Ver empleados</a>
                     </div>
                     <div class="reporte-card">
                         <div class="reporte-icon">📦</div>
                         <div class="reporte-title">Estado del Inventario</div>
                         <div class="reporte-desc">Descarga un PDF con el estado actual del inventario.</div>
-                        <a class="reporte-btn" href="<?php echo BASE_URL ?>controller/generarPDFEstadoInventario.php">Ver inventario</a>
+                        <a class="reporte-btn" href="<?php echo BASE_URL.'controller/generarPDFEstadoInventario.php'?>">Ver inventario</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@ $icono = str_split($nombre) ?? "?";
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo BASE_URL ?>controller/generarPDFBalanceGeneralVentas.php" method="POST">
+                    <form action="<?php echo BASE_URL.'controller/generarPDFBalanceGeneralVentas.php' ?>" method="POST">
                         <div class="mb-3">
                             <label for="fechaInicial" class="form-label">Fecha Inicial</label>
                             <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" required>
@@ -106,7 +106,7 @@ $icono = str_split($nombre) ?? "?";
     </div>
 
     <!-- Scripts -->
-    <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js' ?>"></script>
 </body>
 </html>

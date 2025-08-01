@@ -1,12 +1,12 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/cafeelbuensabor/functions/rutas.php';
 session_start();
-require_once './models/mySql.php';
-require_once './functions/leerQr.php';
+require_once BASE_PATH.'models/mySql.php';
+require_once BASE_PATH.'functions/leerQr.php';
 
 
 if(!isset($_GET["qr"])){
-    include './views/components/404.php';
+    include BASE_PATH.'views/components/404.php';
     exit();
 }
 
@@ -26,13 +26,13 @@ $Qrs = $stmt->fetch(PDO::FETCH_ASSOC);
 $cntQr = $stmt->rowCount();
 
 if($cntQr==0){
-    include './views/components/qrFail.php';
+    include BASE_PATH.'views/components/qrFail.php';
     exit();
 }
 
 
 if(!verificarQr($_GET["qr"])){
-    include './views/components/qrFail.php';
+    include BASE_PATH.'views/components/qrFail.php';
     exit();
 }
     

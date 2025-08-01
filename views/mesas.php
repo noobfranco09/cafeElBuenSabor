@@ -32,11 +32,11 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css' ?>" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>" />
     <title>Mesas</title>
 </head>
 <body>
@@ -118,7 +118,7 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="<?php echo BASE_URL ?>controller/agregarMesa.php" method="POST">
+          <form action="<?php echo BASE_URL.'controller/agregarMesa.php' ?>" method="POST">
             <div class="mb-3">
               <label for="numeroMesa" class="form-label">Número de Mesa</label>
               <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Ingrese el número de mesa" required>
@@ -151,7 +151,7 @@ $mysql->desconectar();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="<?php echo BASE_URL ?>controller/editarMesa.php" method="POST" >
+          <form action="<?php echo BASE_URL.'controller/editarMesa.php' ?>" method="POST" >
             <input type="hidden" name="idMesaEditar" id="idMesaEditar">
             <div class="mb-3">
               <label for="numeroMesaEditar" class="form-label">Número de Mesa</label>
@@ -180,9 +180,9 @@ $mysql->desconectar();
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
-  <script src="<?php echo BASE_URL ?>assets/js/mesas.js"></script>
-  <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>"></script>
+  <script src="<?php echo BASE_URL.'assets/js/mesas.js' ?>"></script>
+  <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js' ?>"></script>
   <script>
     $(document).ready(function() {
         $('#tablaMesas').DataTable({

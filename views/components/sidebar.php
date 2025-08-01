@@ -24,7 +24,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/dashboard.php" class="sidebar-link <?php echo ($activePage === 'dashboard') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/dashboard.php' ?>" class="sidebar-link <?php echo ($activePage === 'dashboard') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-bar-chart-line"></i></span>
                         Dashboard
                     </a>
@@ -33,7 +33,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/empleados.php" class="sidebar-link <?php echo ($activePage === 'empleados') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/empleados.php' ?>" class="sidebar-link <?php echo ($activePage === 'empleados') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-people"></i></span>
                         Empleados
                     </a>
@@ -42,7 +42,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/mesas.php" class="sidebar-link <?php echo (
+                    <a href="<?php echo BASE_URL.'views/mesas.php'?>" class="sidebar-link <?php echo (
                         $activePage === 'mesas') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-table"></i></span>
                         Mesas
@@ -52,7 +52,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/rol.php" class="sidebar-link <?php echo (
+                    <a href="<?php echo BASE_URL.'views/rol.php' ?>" class="sidebar-link <?php echo (
                         $activePage === 'rol') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-shield-lock"></i></span>
                         Roles
@@ -62,7 +62,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/categorias.php" class="sidebar-link <?php echo ($activePage === 'categorias') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/categorias.php' ?>" class="sidebar-link <?php echo ($activePage === 'categorias') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-folder"></i></span>
                         Categorías
                     </a>
@@ -71,7 +71,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/productos.php" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/productos.php' ?>" class="sidebar-link <?php echo ($activePage === 'productos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span>
                         Productos
                     </a>
@@ -79,14 +79,14 @@
                 <?php endif; ?>
 
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/generarQr.php" class="sidebar-link <?php echo ($activePage === 'generarQr') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/generarQr.php' ?>" class="sidebar-link <?php echo ($activePage === 'generarQr') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-qr-code"></i></span>
                         Generar QR
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/pedidos.php" class="sidebar-link <?php echo ($activePage === 'pedidos') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/pedidos.php' ?>" class="sidebar-link <?php echo ($activePage === 'pedidos') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-cart"></i></span>
                         Pedidos
                     </a>
@@ -94,7 +94,7 @@
 
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/ventas.php" class="sidebar-link <?php echo ($activePage === 'ventas') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'/views/ventas.php' ?>" class="sidebar-link <?php echo ($activePage === 'ventas') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-cash-coin"></i></span>
                         Ventas
                     </a>
@@ -103,7 +103,7 @@
                
                 <?php if($_SESSION['rol'] == "admin" || $_SESSION['rol'] == "Admin"): ?>
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/reportes.php" class="sidebar-link <?php echo ($activePage === 'reportes') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/reportes.php' ?>" class="sidebar-link <?php echo ($activePage === 'reportes') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-clipboard-data"></i></span>
                         Reportes
                     </a>
@@ -116,7 +116,7 @@
             <h3 class="sidebar-title">Cuenta</h3>
             <ul class="sidebar-menu">
                 <li class="sidebar-item">
-                    <a href="<?php echo BASE_URL ?>/views/perfil.php" class="sidebar-link <?php echo ($activePage === 'perfil') ? 'active' : ''; ?>">
+                    <a href="<?php echo BASE_URL.'views/perfil.php' ?>" class="sidebar-link <?php echo ($activePage === 'perfil') ? 'active' : ''; ?>">
                         <span class="sidebar-icon"><i class="bi bi-person"></i></span>
                         Perfil
                     </a>

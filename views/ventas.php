@@ -30,9 +30,9 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css'?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css' ?>">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     <title>Ventas</title>
@@ -163,13 +163,13 @@ $mysql->desconectar();
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo BASE_URL ?>libraries/Char.js/dist/chart.umd.min.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/graficoIngresosPorMesas.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/graficoIngresosPorFecha.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/graficoIngresoPorEmpleado.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/vistaVentaConPedido.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js'?>"></script>
+    <script src="<?php echo BASE_URL.'libraries/Char.js/dist/chart.umd.min.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/graficoIngresosPorMesas.js'?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/graficoIngresosPorFecha.js'?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/graficoIngresoPorEmpleado.js'?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/vistaVentaConPedido.js'?>"></script>
     <script>
         $(document).ready(function() {
             $('#tablaVentas').DataTable({

@@ -33,9 +33,9 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/boostrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/bootstrap-icons/bootstrap-icons.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/dashboard.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css' ?>" />
     <title>Coffee Dashboard</title>
 </head>
 <body>
@@ -47,14 +47,14 @@ $mysql->desconectar();
     <!-- Overlay para cerrar sidebar en móvil -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-    <?php include BASE_PATH . 'components/navbar.php'; ?>
+    <?php include BASE_PATH . 'views/components/navbar.php'; ?>
 
     <?php 
         $activePage = 'dashboard';
-        include BASE_PATH . 'components/sidebar.php'; 
+        include BASE_PATH . 'views/components/sidebar.php'; 
     ?>
 
-    <?php include BASE_PATH . 'components/logoutModal.php'; ?>
+    <?php include BASE_PATH . 'views/components/logoutModal.php'; ?>
 
     <!-- Layout principal -->
     <div class="dashboard-layout">
@@ -150,12 +150,12 @@ $mysql->desconectar();
 
     <!-- Agregar Chart.js para las visualizaciones -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/dashboard.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>libraries/Char.js/dist/chart.umd.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/graficoProductoMasVendido.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/graficoMesasPorMesero.js"></script>
-    <script src="<?php echo BASE_URL; ?>assets/js/graficoRecaudoMensual.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/dashboard.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'libraries/Char.js/dist/chart.umd.min.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/graficoProductoMasVendido.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/graficoMesasPorMesero.js' ?>"></script>
+    <script src="<?php echo BASE_URL.'assets/js/graficoRecaudoMensual.js' ?>"></script>
 
 </body>
 </html>

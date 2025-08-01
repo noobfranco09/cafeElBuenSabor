@@ -30,10 +30,10 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/dashboard.css" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/qr.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/qr.css' ?>" />
     <title>Generar QR - CoffeeShop Pro</title>
 </head>
 <body>
@@ -113,8 +113,8 @@ $mysql->desconectar();
         </div>
     </div>
 
-    <script src="<?= BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/boostrap/bootstrap.bundle.min.js' ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?= BASE_URL ?>assets/js/generarQr.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/generarQr.js' ?>"></script>
 </body>
 </html>

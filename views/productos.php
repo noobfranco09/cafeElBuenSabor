@@ -38,9 +38,9 @@ $mysql->desconectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/boostrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?php echo BASE_URL ?>assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/dashboard.css'?>">
     <title>Productos - CoffeeShop Pro</title>
 </head>
 <body>
@@ -185,7 +185,7 @@ $mysql->desconectar();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3" action="<?php echo BASE_URL ?>controller/admin/editarProducto.php" method="POST" enctype="multipart/form-data">
+                    <form class="row g-3" action="<?php echo BASE_URL.'controller/admin/editarProducto.php' ?>" method="POST" enctype="multipart/form-data">
                         <input type="hidden" id="editarIdProducto" name="editarIdProducto" required readonly>
                         <div class="col-12">
                             <label for="editarNombre" class="form-label">Nombre</label>
@@ -223,8 +223,8 @@ $mysql->desconectar();
         </div>
     </div>
 
-    <script src="<?php echo BASE_URL ?>assets/js/editarProducto.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/boostrap/bootstrap.bundle.min.js"></script>
-    <script src="<?php echo BASE_URL ?>assets/js/dashboard.js"></script>
+    <script src="<?php echo BASE_URL .'assets/js/editarProducto.js'?>"></script>
+    <script src="<?php echo BASE_URL .'assets/js/boostrap/bootstrap.bundle.min.js'?>"></script>
+    <script src="<?php echo BASE_URL .'assets/js/dashboard.js'?>"></script>
 </body>
 </html>

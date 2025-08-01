@@ -17,7 +17,7 @@
                 <div class="dropdown-arrow">▼</div>
             </div>
             <div class="profile-menu" id="profileMenu">
-                <div class="menu-item" onclick="window.location.href= <?php echo BASE_URL ?>'/views/perfil.php'">
+                <div class="menu-item" onclick="window.location.href= <?php echo BASE_URL.'views/perfil.php' ?>">
                     <span class="menu-icon">👤</span>
                     <span class="menu-text">Mi Perfil</span>
                 </div>

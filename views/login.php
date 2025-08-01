@@ -21,9 +21,9 @@ if (isset($_SESSION["id"])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/login.css" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/boostrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL .'assets/css/login.css'?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/css/boostrap/bootstrap.min.css' ?>" />
+    <link rel="stylesheet" href="<?php echo BASE_URL.'assets/bootstrap-icons/bootstrap-icons.css'?>" />
     <title>Coffee Login</title>
 </head>
 <body>
@@ -43,7 +43,7 @@ if (isset($_SESSION["id"])) {
             <p class="login-subtitle">Inicia sesión para continuar</p>
         </div>
 
-        <form class="login-form" method="POST" action="<?= BASE_URL ?>controller/admin/login.php">
+        <form class="login-form" method="POST" action="<?php echo BASE_URL.'controller/admin/login.php' ?>">
             <div class="form-group">
 
                 <input
@@ -92,6 +92,6 @@ if (isset($_SESSION["id"])) {
         </div>
     </div>
 
-    <script src="<?= BASE_URL ?>assets/js/login.js"></script>
+    <script src="<?php echo BASE_URL.'assets/js/login.js' ?>"></script>
 </body>
 </html>
