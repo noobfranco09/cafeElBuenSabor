@@ -107,16 +107,81 @@ $mysql->desconectar();
         </main>
     </div>
 
-    <!-- Modal Agregar Rol -->
-    <div class="modal fade" id="ModalAgregarRol" tabindex="-1" aria-labelledby="ModalAgregarRolLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="ModalAgregarRolLabel">Agregar Rol</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo BASE_URL.'controller/agregarRol.php'?>" method="POST">
-                        <div class="mb-3">
-                            <label for="nombreRol" class="form-label">Nombre del Rol</label>
-                            <input type="text" class="form-control" id="nombreRol" name="nomb
+   <!-- Modal Agregar Rol -->
+  <div class="modal fade" id="ModalAgregarRol" tabindex="-1" aria-labelledby="ModalAgregarRolLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalAgregarRolLabel">Agregar Rol</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="../controller/agregarRol.php" method="POST" >
+            <div class="mb-3">
+              <label for="nombreRol" class="form-label">Nombre del Rol</label>
+              <input type="text" class="form-control" id="nombreRol" name="nombreRol" placeholder="Ingrese el nombre del rol" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcionRol" class="form-label">Descripción</label>
+              <input type="text" class="form-control" id="descripcionRol" name="descripcionRol" placeholder="Ingrese una descripción" required>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-warning">Agregar Rol</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Editar Rol -->
+  <div class="modal fade" id="ModalEditarRol" tabindex="-1" aria-labelledby="ModalEditarRolLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ModalEditarRolLabel">Editar Rol</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formEditarRol" action="../controller/editarRol.php" method="POST" >
+            <input type="hidden" name="idRolEditar" id="idRolEditar">
+            <div class="mb-3">
+              <label for="nombreRolEditar" class="form-label">Nombre del Rol</label>
+              <input type="text" class="form-control" id="nombreRolEditar" name="nombreRolEditar" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcionRolEditar" class="form-label">Descripción</label>
+              <input type="text" class="form-control" id="descripcionRolEditar" name="descripcionRolEditar" required>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-warning" form="formEditarRol">Actualizar Rol</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+                        
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?php echo BASE_URL.'/assets/js/dashboard.js'?>"></script>
+    <script src="<?php echo BASE_URL.'/assets/js/boostrap/bootstrap.bundle.min.js'?>"></script>
+    <script src="<?php echo BASE_URL.'/assets/js/roles.js'?>"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tablaRoles').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
